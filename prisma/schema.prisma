@@ -37,6 +37,13 @@ model Category {
   name String @unique
   courses Course[]
 }
+model User {
+  id String @id @default(uuid())
+  userid String 
+  fname String 
+  lname String
+  role Int
+}
 
 model Attachment {
   id String @id @default(uuid())
