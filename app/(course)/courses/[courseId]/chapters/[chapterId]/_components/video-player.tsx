@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import MuxPlayer from "@mux/mux-player-react";
+// import MuxPlayer from "@mux/mux-player-react";
 import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -66,8 +66,7 @@ export const VideoPlayer = ({
       toast.error("Something went wrong");
     }
   };
-  let videosrc =
-    "https://utfs.io/f/daa13d7b-6ea8-420b-96d4-148b849d2fc8-h0jf9b.mp4";
+
   return (
     <div className="relative aspect-video">
       {/* {!isReady && !isLocked && (
@@ -92,8 +91,8 @@ export const VideoPlayer = ({
             light={false}
             // picture in picture
             pip={true}
-            playing={true}
             onEnded={onEnd}
+            playing={true}
           />
         </div>
         // <MuxPlayer
