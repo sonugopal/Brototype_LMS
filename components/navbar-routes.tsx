@@ -36,14 +36,12 @@ export const NavbarRoutes = () => {
         ) : isTeacher(userId) ? (
           <Link href="/teacher/courses">
             <Button size="sm" variant="ghost">
-              Teacher mode
+              Admin mode
             </Button>
           </Link>
         ) : null}
-        <UserButton
-          afterSignOutUrl="/"
-        />
+        <UserButton afterSignOutUrl="/" />
       </div>
     </>
-  )
-}
+  );
+};
