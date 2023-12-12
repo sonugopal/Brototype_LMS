@@ -2,11 +2,12 @@
 
 import axios from "axios";
 import MuxPlayer from "@mux/mux-player-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Loader2, Lock } from "lucide-react";
 
+import ReactPlayer from "react-player";
 import { cn } from "@/lib/utils";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
 
@@ -18,7 +19,8 @@ interface VideoPlayerProps {
   isLocked: boolean;
   completeOnEnd: boolean;
   title: string;
-};
+  videoUrl: string | null;
+}
 
 export const VideoPlayer = ({
   playbackId,
@@ -28,17 +30,26 @@ export const VideoPlayer = ({
   isLocked,
   completeOnEnd,
   title,
+  videoUrl,
 }: VideoPlayerProps) => {
   const [isReady, setIsReady] = useState(false);
   const router = useRouter();
   const confetti = useConfettiStore();
+  const [domLoaded, setDomLoaded] = useState(false);
+
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
 
   const onEnd = async () => {
     try {
       if (completeOnEnd) {
-        await axios.put(`/api/courses/${courseId}/chapters/${chapterId}/progress`, {
-          isCompleted: true,
-        });
+        await axios.put(
+          `/api/courses/${courseId}/chapters/${chapterId}/progress`,
+          {
+            isCompleted: true,
+          }
+        );
 
         if (!nextChapterId) {
           confetti.onOpen();
@@ -48,41 +59,52 @@ export const VideoPlayer = ({
         router.refresh();
 
         if (nextChapterId) {
-          router.push(`/courses/${courseId}/chapters/${nextChapterId}`)
+          router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
         }
       }
     } catch {
       toast.error("Something went wrong");
     }
-  }
-
+  };
+  let videosrc =
+    "https://utfs.io/f/daa13d7b-6ea8-420b-96d4-148b849d2fc8-h0jf9b.mp4";
   return (
     <div className="relative aspect-video">
-      {!isReady && !isLocked && (
+      {/* {!isReady && !isLocked && (
         <div className="absolute inset-0 flex items-center justify-center bg-slate-800">
           <Loader2 className="h-8 w-8 animate-spin text-secondary" />
         </div>
-      )}
+      )} */}
       {isLocked && (
         <div className="absolute inset-0 flex items-center justify-center bg-slate-800 flex-col gap-y-2 text-secondary">
           <Lock className="h-8 w-8" />
-          <p className="text-sm">
-            This chapter is locked
-          </p>
+          <p className="text-sm">This chapter is locked</p>
         </div>
       )}
-      {!isLocked && (
-        <MuxPlayer
-          title={title}
-          className={cn(
-            !isReady && "hidden"
-          )}
-          onCanPlay={() => setIsReady(true)}
-          onEnded={onEnd}
-          autoPlay
-          playbackId={playbackId}
-        />
+      {!isLocked && domLoaded && (
+        <div>
+          <ReactPlayer
+            url={videoUrl}
+            controls={true}
+            width="100%"
+            height="100%"
+            // light is usefull incase of dark mode
+            light={false}
+            // picture in picture
+            pip={true}
+            playing={true}
+            onEnded={onEnd}
+          />
+        </div>
+        // <MuxPlayer
+        //   title={title}
+        //   className={cn(!isReady && "hidden")}
+        //   onCanPlay={() => setIsReady(true)}
+        //   onEnded={onEnd}
+        //   autoPlay
+        //   playbackId={playbackId}
+        // />
       )}
     </div>
-  )
-}
+  );
+};
