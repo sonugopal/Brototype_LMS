@@ -83,7 +83,7 @@ export const VideoPlayer = ({
       {!isLocked && domLoaded && (
         <div>
           <ReactPlayer
-            url={videoUrl}
+            url={videoUrl as string}
             controls={true}
             width="100%"
             height="100%"

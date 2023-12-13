@@ -40,9 +40,9 @@ model Category {
 model User {
   id String @id @default(uuid())
   userid String 
-  firstname String 
-  lastname String
-  phone String
+  firstName String 
+  lastName String
+  phoneNumber String
   createdAt DateTime @default(now()) 
   role Int
 }
