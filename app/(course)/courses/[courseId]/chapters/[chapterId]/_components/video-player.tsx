@@ -92,7 +92,7 @@ export const VideoPlayer = ({
             // picture in picture
             pip={true}
             onEnded={onEnd}
-            playing={true}
+            playing={false}
           />
         </div>
         // <MuxPlayer
