@@ -21,8 +21,8 @@ export default async function Dashboard() {
   await db.user.create({
     data: {
       userid: userId,
-      firstName,
-      lastName,
+      firstName: firstName as string,
+      lastName: lastName as string,
       phoneNumber,
       role: 0,
     },
