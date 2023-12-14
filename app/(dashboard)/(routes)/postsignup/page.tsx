@@ -9,7 +9,7 @@ import { db } from "@/lib/db";
 //   phoneNumber: string;
 //   role: number;
 // }
-export default async function Dashboard() {
+export default async function PostSignup() {
   const { userId } = auth();
   if (!userId) {
     return redirect("/");

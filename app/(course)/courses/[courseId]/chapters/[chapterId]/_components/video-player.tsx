@@ -93,6 +93,14 @@ export const VideoPlayer = ({
             pip={true}
             onEnded={onEnd}
             playing={false}
+            config={{
+              file: {
+                attributes: {
+                  controlsList: "nodownload",
+                  onContextMenu: (e: any) => e.preventDefault(),
+                },
+              },
+            }}
           />
         </div>
         // <MuxPlayer
