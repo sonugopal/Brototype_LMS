@@ -2,26 +2,21 @@
 
 import * as z from "zod";
 import axios from "axios";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+// import MuxPlayer from "@mux/mux-player-react";
+
+import ReactPlayer from "react-player";
 import { Pencil, PlusCircle, Video } from "lucide-react";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Chapter } from "@prisma/client";
-import Vimeo from "@u-wave/react-vimeo";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Chapter, MuxData } from "@prisma/client";
+import Image from "next/image";
+
 import { Button } from "@/components/ui/button";
+import { FileUpload } from "@/components/file-upload";
 
 interface ChapterVideoFormProps {
-  initialData: Chapter;
+  initialData: Chapter & { muxData?: MuxData | null };
   courseId: string;
   chapterId: string;
 }
@@ -36,7 +31,6 @@ export const ChapterVideoForm = ({
   chapterId,
 }: ChapterVideoFormProps) => {
   const [domLoaded, setDomLoaded] = useState(false);
-
   useEffect(() => {
     setDomLoaded(true);
   }, []);
@@ -45,15 +39,6 @@ export const ChapterVideoForm = ({
   const toggleEdit = () => setIsEditing((current) => !current);
 
   const router = useRouter();
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      videoUrl: initialData?.videoUrl || "",
-    },
-  });
-
-  const { isSubmitting, isValid } = form.formState;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -74,9 +59,14 @@ export const ChapterVideoForm = ({
       <div className="font-medium flex items-center justify-between">
         Chapter video
         <Button onClick={toggleEdit} variant="ghost">
-          {isEditing ? (
-            <>Cancel</>
-          ) : (
+          {isEditing && <>Cancel</>}
+          {!isEditing && !initialData.videoUrl && (
+            <>
+              <PlusCircle className="h-4 w-4 mr-2" />
+              Add a video
+            </>
+          )}
+          {!isEditing && initialData.videoUrl && (
             <>
               <Pencil className="h-4 w-4 mr-2" />
               Edit video
@@ -84,7 +74,6 @@ export const ChapterVideoForm = ({
           )}
         </Button>
       </div>
-      {!isEditing && <p className="text-sm mt-2">{initialData.videoUrl}</p>}
       {!isEditing &&
         (!initialData.videoUrl ? (
           <div className="flex items-center justify-center h-60 bg-slate-200 rounded-md">
@@ -96,40 +85,41 @@ export const ChapterVideoForm = ({
               playbackId={initialData?.muxData?.playbackId || ""}
             /> */}
             {domLoaded && (
-              <div className="vimeoPlayer h-full w-full">
-                <Vimeo
-                  video={initialData.videoUrl as string}
-                  className="h-full w-full"
+              <div>
+                <ReactPlayer
+                  url={initialData.videoUrl}
+                  controls={true}
+                  width="100%"
+                  height="100%"
+                  // light is usefull incase of dark mode
+                  light={false}
+                  // picture in picture
+                  pip={true}
                 />
               </div>
             )}
           </div>
         ))}
       {isEditing && (
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 mt-4"
-          >
-            <FormField
-              control={form.control}
-              name="videoUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input disabled={isSubmitting} {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex items-center gap-x-2">
-              <Button disabled={!isValid || isSubmitting} type="submit">
-                Save
-              </Button>
-            </div>
-          </form>
-        </Form>
+        <div>
+          <FileUpload
+            endpoint="chapterVideo"
+            onChange={(url) => {
+              if (url) {
+                onSubmit({ videoUrl: url });
+              }
+            }}
+          />
+          <div className="text-xs text-muted-foreground mt-4">
+            Upload this chapter&apos;s video
+          </div>
+        </div>
+      )}
+      {initialData.videoUrl && !isEditing && (
+        <div className="text-xs text-muted-foreground mt-2">
+          Videos can take a few minutes to process. Refresh the page if video
+          does not appear.
+        </div>
       )}
     </div>
   );

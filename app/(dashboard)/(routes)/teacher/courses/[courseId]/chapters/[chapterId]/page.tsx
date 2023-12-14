@@ -14,9 +14,9 @@ import { ChapterVideoForm } from "./_components/chapter-video-form";
 import { ChapterActions } from "./_components/chapter-actions";
 
 const ChapterIdPage = async ({
-  params
+  params,
 }: {
-  params: { courseId: string; chapterId: string }
+  params: { courseId: string; chapterId: string };
 }) => {
   const { userId } = auth();
 
@@ -27,22 +27,15 @@ const ChapterIdPage = async ({
   const chapter = await db.chapter.findUnique({
     where: {
       id: params.chapterId,
-      courseId: params.courseId
-    },
-    include: {
-      muxData: true,
+      courseId: params.courseId,
     },
   });
 
   if (!chapter) {
-    return redirect("/")
+    return redirect("/");
   }
 
-  const requiredFields = [
-    chapter.title,
-    chapter.description,
-    chapter.videoUrl,
-  ];
+  const requiredFields = [chapter.title, chapter.description, chapter.videoUrl];
 
   const totalFields = requiredFields.length;
   const completedFields = requiredFields.filter(Boolean).length;
@@ -71,9 +64,7 @@ const ChapterIdPage = async ({
             </Link>
             <div className="flex items-center justify-between w-full">
               <div className="flex flex-col gap-y-2">
-                <h1 className="text-2xl font-medium">
-                  Chapter Creation
-                </h1>
+                <h1 className="text-2xl font-medium">Chapter Creation</h1>
                 <span className="text-sm text-slate-700">
                   Complete all fields {completionText}
                 </span>
@@ -92,9 +83,7 @@ const ChapterIdPage = async ({
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={LayoutDashboard} />
-                <h2 className="text-xl">
-                  Customize your chapter
-                </h2>
+                <h2 className="text-xl">Customize your chapter</h2>
               </div>
               <ChapterTitleForm
                 initialData={chapter}
@@ -110,9 +99,7 @@ const ChapterIdPage = async ({
             <div>
               <div className="flex items-center gap-x-2">
                 <IconBadge icon={Eye} />
-                <h2 className="text-xl">
-                  Access Settings
-                </h2>
+                <h2 className="text-xl">Access Settings</h2>
               </div>
               <ChapterAccessForm
                 initialData={chapter}
@@ -124,9 +111,7 @@ const ChapterIdPage = async ({
           <div>
             <div className="flex items-center gap-x-2">
               <IconBadge icon={Video} />
-              <h2 className="text-xl">
-                Add a video
-              </h2>
+              <h2 className="text-xl">Add a video</h2>
             </div>
             <ChapterVideoForm
               initialData={chapter}
@@ -137,7 +122,7 @@ const ChapterIdPage = async ({
         </div>
       </div>
     </>
-   );
-}
- 
+  );
+};
+
 export default ChapterIdPage;

@@ -84,27 +84,11 @@ export const VideoPlayer = ({
       {!isLocked && domLoaded && (
         <div className="vimeoPlayer h-full w-full">
           {
-            <Vimeo video="894441871" className="h-full w-full" />
-            /* <ReactPlayer
-            url={videoUrl as string}
-            controls={true}
-            width="100%"
-            height="100%"
-            // light is usefull incase of dark mode
-            light={false}
-            // picture in picture
-            pip={true}
-            onEnded={onEnd}
-            playing={false}
-            config={{
-              file: {
-                attributes: {
-                  controlsList: "nodownload",
-                  onContextMenu: (e: any) => e.preventDefault(),
-                },
-              },
-            }}
-          /> */
+            <Vimeo
+              video={videoUrl as string}
+              onEnd={onEnd}
+              className="h-full w-full"
+            />
           }
         </div>
         // <MuxPlayer
