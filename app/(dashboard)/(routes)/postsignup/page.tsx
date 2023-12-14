@@ -14,18 +14,26 @@ export default async function PostSignup() {
   if (!userId) {
     return redirect("/");
   }
-  const { createdAt, firstName, lastName, phoneNumbers } =
-    await clerkClient.users.getUser(userId);
 
-  const phoneNumber = phoneNumbers[0].phoneNumber;
-  await db.user.create({
-    data: {
-      userid: userId,
-      firstName: firstName as string,
-      lastName: lastName as string,
-      phoneNumber,
-      role: 0,
+  const existingUser = await db.user.findFirst({
+    where: {
+      userid: userId as string,
     },
   });
+  if (!existingUser) {
+    const { createdAt, firstName, lastName, phoneNumbers } =
+      await clerkClient.users.getUser(userId);
+
+    const phoneNumber = phoneNumbers[0].phoneNumber;
+    await db.user.create({
+      data: {
+        userid: userId,
+        firstName: firstName as string,
+        lastName: lastName as string,
+        phoneNumber,
+        role: 0,
+      },
+    });
+  }
   return redirect("/");
 }

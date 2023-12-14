@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 
 export const columns: ColumnDef<User>[] = [
   {
-    accessorKey: "firstname",
+    accessorKey: "firstName",
     header: ({ column }) => {
       return (
         <Button
@@ -31,7 +31,7 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
-    accessorKey: "lastname",
+    accessorKey: "lastName",
     header: ({ column }) => {
       return (
         <Button
@@ -45,7 +45,7 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
-    accessorKey: "phone",
+    accessorKey: "phoneNumber",
     header: ({ column }) => {
       return (
         <Button
