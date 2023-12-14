@@ -33,7 +33,7 @@ export const getDashboardCourses = async (userId: string): Promise<DashboardCour
         }
       }
     });
-
+   
     const courses = purchasedCourses.map((purchase) => purchase.course) as CourseWithProgressWithCategory[];
 
     for (let course of courses) {
