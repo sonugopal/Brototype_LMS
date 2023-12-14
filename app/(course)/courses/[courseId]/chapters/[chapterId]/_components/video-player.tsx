@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { Loader2, Lock } from "lucide-react";
 
 import ReactPlayer from "react-player";
+import Vimeo from "@u-wave/react-vimeo";
 import { cn } from "@/lib/utils";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
 
@@ -81,8 +82,10 @@ export const VideoPlayer = ({
         </div>
       )}
       {!isLocked && domLoaded && (
-        <div>
-          <ReactPlayer
+        <div className="vimeoPlayer h-full w-full">
+          {
+            <Vimeo video="894441871" className="h-full w-full" />
+            /* <ReactPlayer
             url={videoUrl as string}
             controls={true}
             width="100%"
@@ -101,7 +104,8 @@ export const VideoPlayer = ({
                 },
               },
             }}
-          />
+          /> */
+          }
         </div>
         // <MuxPlayer
         //   title={title}

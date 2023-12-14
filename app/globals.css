@@ -84,5 +84,8 @@ body,
 .ql-container {
   font-size: 16px !important;
 }
-
+.vimeoPlayer div iframe{
+  height: 100% !important;
+  width: 100% !important;
+}
 @import "~@uploadthing/react/styles.css"
