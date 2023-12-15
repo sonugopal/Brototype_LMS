@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Chapter } from "@prisma/client";
-import Vimeo from "@u-wave/react-vimeo";
+import ReactPlayer from "react-player";
 import {
   Form,
   FormControl,
@@ -96,11 +96,15 @@ export const ChapterVideoForm = ({
               playbackId={initialData?.muxData?.playbackId || ""}
             /> */}
             {domLoaded && (
-              <div className="vimeoPlayer h-full w-full">
-                <Vimeo
-                  video={initialData.videoUrl as string}
-                  className="h-full w-full"
-                />
+              <div>
+                {
+                  <ReactPlayer
+                    url={initialData.videoUrl}
+                    width="100%"
+                    height="100%"
+                    controls
+                  />
+                }
               </div>
             )}
           </div>

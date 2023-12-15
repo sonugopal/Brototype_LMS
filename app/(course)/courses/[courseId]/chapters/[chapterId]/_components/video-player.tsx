@@ -2,12 +2,14 @@
 
 import axios from "axios";
 // import MuxPlayer from "@mux/mux-player-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import React from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Loader2, Lock } from "lucide-react";
 
 import ReactPlayer from "react-player";
+import ReactHlsPlayer from "react-hls-player";
 import Vimeo from "@u-wave/react-vimeo";
 import { cn } from "@/lib/utils";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
@@ -80,12 +82,14 @@ export const VideoPlayer = ({
         </div>
       )}
       {!isLocked && domLoaded && (
-        <div className="vimeoPlayer h-full w-full">
+        <div>
           {
-            <Vimeo
-              video={videoUrl as string}
-              onEnd={onEnd}
-              className="h-full w-full"
+            <ReactPlayer
+              url={videoUrl as string}
+              width="100%"
+              height="100%"
+              controls
+              onEnded={onEnd}
             />
           }
         </div>
