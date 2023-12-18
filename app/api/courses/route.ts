@@ -2,8 +2,8 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 import { db } from "@/lib/db";
-import { isTeacher } from "@/lib/teacher";
-
+// import { isTeacher } from "@/lib/teacher";
+import { isTeacher } from "@/actions/get-isteacher";
 export async function POST(
   req: Request,
 ) {
