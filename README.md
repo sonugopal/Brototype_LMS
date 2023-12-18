@@ -1,27 +1,27 @@
-# Build an LMS Platform: Next.js 13,  React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2023
+# Build an LMS Platform: Next.js 13, React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2023
 
 ![Copy of Copy of Copy of Copy of Fullstack Twitter Clone (9)](https://github.com/AntonioErdeljac/next13-lms-platform/assets/23248726/fa077fca-bb74-419a-84de-54ac103bb026)
 
-
-This is a repository for Build an LMS Platform: Next.js 13,  React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2023
+This is a repository for Build an LMS Platform: Next.js 13, React, Stripe, Mux, Prisma, Tailwind, MySQL | Full Course 2023
 
 [VIDEO TUTORIAL](https://www.youtube.com/watch?v=Big_aFLmekI)
 
 Key Features:
 
 - Browse & Filter Courses
-- Purchase Courses using Stripe
+- Enroll Course
 - Mark Chapters as Completed or Uncompleted
 - Progress Calculation of each Course
 - Student Dashboard
-- Teacher mode
+- Teacher mode (Based on user role in DB)
 - Create new Courses
 - Create new Chapters
 - Easily reorder chapter position with drag n’ drop
 - Upload thumbnails, attachments and videos using UploadThing
-- Video processing using Mux
-- HLS Video player using Mux
+- Video processing using Bunny.net HLS
+- HLS Video player using ReactPlayer
 - Rich text editor for chapter description
+- User Management
 - Authentication using Clerk
 - ORM using Prisma
 - MySQL database using Planetscale
@@ -32,10 +32,6 @@ Key Features:
 
 ### Cloning the repository
 
-```shell
-git clone https://github.com/AntonioErdeljac/next13-lms-platform.git
-```
-
 ### Install packages
 
 ```shell
@@ -43,7 +39,6 @@ npm i
 ```
 
 ### Setup .env file
-
 
 ```js
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
@@ -58,14 +53,9 @@ DATABASE_URL=
 UPLOADTHING_SECRET=
 UPLOADTHING_APP_ID=
 
-MUX_TOKEN_ID=
-MUX_TOKEN_SECRET=
-
 STRIPE_API_KEY=
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-STRIPE_WEBHOOK_SECRET=
 
-NEXT_PUBLIC_TEACHER_ID=
 ```
 
 ### Setup Prisma
@@ -88,6 +78,6 @@ npm run dev
 
 Running commands with npm `npm run [command]`
 
-| command         | description                              |
-| :-------------- | :--------------------------------------- |
-| `dev`           | Starts a development instance of the app |
+| command | description                              |
+| :------ | :--------------------------------------- |
+| `dev`   | Starts a development instance of the app |
