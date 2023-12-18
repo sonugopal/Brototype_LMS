@@ -1,23 +1,28 @@
 "use client";
-
 import { UserButton, useAuth } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
-
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { isTeacher } from "@/lib/teacher";
-
 import { SearchInput } from "./search-input";
+import { isTeacher } from "@/lib/teacher";
 
 export const NavbarRoutes = () => {
   const { userId } = useAuth();
   const pathname = usePathname();
+  const [teacher, setTeacher] = useState<any>(null);
+
+  useEffect(() => {
+    isTeacher(userId).then((data: any) => {
+      setTeacher(data);
+    });
+  });
 
   const isTeacherPage = pathname?.startsWith("/teacher");
   const isCoursePage = pathname?.includes("/courses");
   const isSearchPage = pathname === "/search";
-
+  // const isTeacher = getIsteacher(userId as string);
   return (
     <>
       {isSearchPage && (
@@ -33,7 +38,7 @@ export const NavbarRoutes = () => {
               Exit
             </Button>
           </Link>
-        ) : isTeacher(userId) ? (
+        ) : teacher ? (
           <Link href="/teacher/courses">
             <Button size="sm" variant="ghost">
               Admin mode

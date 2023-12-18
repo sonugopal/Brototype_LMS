@@ -9,8 +9,6 @@ import { useRouter } from "next/navigation";
 import { Loader2, Lock } from "lucide-react";
 
 import ReactPlayer from "react-player";
-import ReactHlsPlayer from "react-hls-player";
-import Vimeo from "@u-wave/react-vimeo";
 import { cn } from "@/lib/utils";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
 
