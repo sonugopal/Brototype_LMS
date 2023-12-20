@@ -16,8 +16,7 @@ export async function PATCH(
 
     const course = await db.course.findUnique({
       where: {
-        id: params.courseId,
-        userId,
+        id: params.courseId
       },
     });
 
