@@ -26,8 +26,7 @@ export async function PATCH(
 
     const unpublishedCourse = await db.course.update({
       where: {
-        id: params.courseId,
-        userId,
+        id: params.courseId
       },
       data: {
         isPublished: false,
