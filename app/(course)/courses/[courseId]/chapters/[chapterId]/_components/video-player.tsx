@@ -9,8 +9,10 @@ import { useRouter } from "next/navigation";
 import { Loader2, Lock } from "lucide-react";
 
 import ReactPlayer from "react-player";
+import YouTube, { YouTubeProps } from "react-youtube";
 import { cn } from "@/lib/utils";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
+import { headers } from "next/headers";
 
 interface VideoPlayerProps {
   playbackId: string;
@@ -65,7 +67,14 @@ export const VideoPlayer = ({
       toast.error("Something went wrong");
     }
   };
-
+  const opts: YouTubeProps["opts"] = {
+    playerVars: {
+      autoplay: 1,
+      rel: 1,
+    },
+    width: "100%",
+    height: "100%",
+  };
   return (
     <div className="relative aspect-video">
       {/* {!isReady && !isLocked && (
@@ -80,25 +89,9 @@ export const VideoPlayer = ({
         </div>
       )}
       {!isLocked && domLoaded && (
-        <div>
-          {
-            <ReactPlayer
-              url={videoUrl as string}
-              width="100%"
-              height="100%"
-              controls
-              onEnded={onEnd}
-            />
-          }
+        <div className="youtubePlayer w-full h-full">
+          {<YouTube videoId={videoUrl as string} opts={opts} onEnd={onEnd} />}
         </div>
-        // <MuxPlayer
-        //   title={title}
-        //   className={cn(!isReady && "hidden")}
-        //   onCanPlay={() => setIsReady(true)}
-        //   onEnded={onEnd}
-        //   autoPlay
-        //   playbackId={playbackId}
-        // />
       )}
     </div>
   );

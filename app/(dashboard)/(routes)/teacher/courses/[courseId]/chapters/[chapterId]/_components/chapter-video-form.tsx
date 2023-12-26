@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Chapter } from "@prisma/client";
 import ReactPlayer from "react-player";
+import YouTube, { YouTubeProps } from "react-youtube";
 import {
   Form,
   FormControl,
@@ -68,7 +69,14 @@ export const ChapterVideoForm = ({
       toast.error("Something went wrong");
     }
   };
-
+  const opts: YouTubeProps["opts"] = {
+    playerVars: {
+      autoplay: 1,
+      rel: 1,
+    },
+    width: "100%",
+    height: "100%",
+  };
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
@@ -96,15 +104,8 @@ export const ChapterVideoForm = ({
               playbackId={initialData?.muxData?.playbackId || ""}
             /> */}
             {domLoaded && (
-              <div>
-                {
-                  <ReactPlayer
-                    url={initialData.videoUrl}
-                    width="100%"
-                    height="100%"
-                    controls
-                  />
-                }
+              <div className="youtubePlayer w-full h-full">
+                {<YouTube videoId={initialData.videoUrl} opts={opts} />}
               </div>
             )}
           </div>

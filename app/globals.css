@@ -84,7 +84,7 @@ body,
 .ql-container {
   font-size: 16px !important;
 }
-.vimeoPlayer div iframe{
+.youtubePlayer div {
   height: 100% !important;
   width: 100% !important;
 }
