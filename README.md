@@ -16,7 +16,6 @@ Key Features:
 - User Management
 - Authentication using Clerk
 - ORM using Prisma
-- MySQL database using Planetscale
 
 ### Prerequisites
 
