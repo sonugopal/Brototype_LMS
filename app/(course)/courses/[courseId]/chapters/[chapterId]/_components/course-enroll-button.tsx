@@ -22,7 +22,7 @@ export const CourseEnrollButton = ({
     try {
       setIsLoading(true);
 
-      const response = await axios.post(`/api/courses/${courseId}/checkout`)
+      const response = await axios.post(`/api/courses/${courseId}/checkout`);
 
       window.location.assign(response.data.url);
     } catch {
@@ -30,16 +30,16 @@ export const CourseEnrollButton = ({
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   return (
     <Button
       onClick={onClick}
       disabled={isLoading}
       size="sm"
-      className="w-full md:w-auto"
+      className="w-full md:w-auto py-6"
     >
       Enroll for Free
     </Button>
-  )
-}
+  );
+};
