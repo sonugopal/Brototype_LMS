@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>
+       <body className={`${inter.className} scrollbar-thin hover:scrollbar-thumb-[#0075af] scrollbar-thumb-rounded scrollbar-thumb-[#76c8ff]  dark:scrollbar-thumb-[#0284C7]`}>
           <ConfettiProvider />
           <ToastProvider />
           {children}

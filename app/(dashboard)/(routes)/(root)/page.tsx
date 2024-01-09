@@ -7,27 +7,28 @@ import { getCourses } from "@/actions/get-courses";
 import { CoursesList } from "@/components/courses-list";
 
 import { Categories } from "./_components/categories";
+import { categories, card_items as courses } from "@/components/dummy/card-items";
 const createUserEntry = async (userId: any) => {
-  const existingUser = await db.user.findFirst({
-    where: {
-      userid: userId as string,
-    },
-  });
-  if (!existingUser) {
-    const { createdAt, firstName, lastName, phoneNumbers } =
-      await clerkClient.users.getUser(userId);
+  // const existingUser = await db.user.findFirst({
+  //   where: {
+  //     userid: userId as string,
+  //   },
+  // });
+  // if (!existingUser) {
+  //   const { createdAt, firstName, lastName, phoneNumbers } =
+  //     await clerkClient.users.getUser(userId);
 
-    const phoneNumber = phoneNumbers[0].phoneNumber;
-    await db.user.create({
-      data: {
-        userid: userId,
-        firstName: firstName as string,
-        lastName: lastName as string,
-        phoneNumber,
-        role: 0,
-      },
-    });
-  }
+  //   const phoneNumber = phoneNumbers[0].phoneNumber;
+  //   await db.user.create({
+  //     data: {
+  //       userid: userId,
+  //       firstName: firstName as string,
+  //       lastName: lastName as string,
+  //       phoneNumber,
+  //       role: 0,
+  //     },
+  //   });
+  // }
 };
 interface SearchPageProps {
   searchParams: {
@@ -42,17 +43,18 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
   if (!userId) {
     return redirect("/");
   }
-  await createUserEntry(userId);
-  const categories = await db.category.findMany({
-    orderBy: {
-      name: "asc",
-    },
-  });
+  // commented out the createuser entry as i am not fetching these data from the db instead using dummy data
+  // await createUserEntry(userId);
+  // const categories = await db.category.findMany({
+  //   orderBy: {
+  //     name: "asc",
+  //   },
+  // });
 
-  const courses = await getCourses({
-    userId,
-    ...searchParams,
-  });
+  // const courses = await getCourses({
+  //   userId,
+  //   ...searchParams,
+  // });
 
   return (
     <>

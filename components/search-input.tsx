@@ -4,7 +4,6 @@ import qs from "query-string";
 import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/use-debounce";
 
@@ -31,14 +30,14 @@ export const SearchInput = () => {
   }, [debouncedValue, currentCategoryId, router, pathname])
 
   return (
-    <div className="relative">
+    <div className="relative lg:ml-5">
       <Search
         className="h-4 w-4 absolute top-3 left-3 text-slate-600"
       />
       <Input
         onChange={(e) => setValue(e.target.value)}
         value={value}
-        className="w-full md:w-[300px] pl-9 rounded-full bg-slate-100 focus-visible:ring-slate-200"
+        className="lg:min-w-[500px] w-full md:w-[300px] pl-9 rounded-full bg-slate-100 dark:bg-[#020817]"
         placeholder="Search for a course"
       />
     </div>
