@@ -1,10 +1,8 @@
 import { Category, Course } from "@prisma/client";
 
 import { CourseCard } from "@/components/course-card";
-import { StaticImageData } from "next/image";
 
 type CourseWithProgressWithCategory = Course & {
-  imageUrl: StaticImageData;  //added temporarily for static image instead of getting it from the database
   category: Category | null;
   chapters: { id: string }[];
   progress: number | null;
