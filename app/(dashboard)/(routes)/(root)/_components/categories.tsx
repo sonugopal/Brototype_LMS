@@ -34,12 +34,14 @@ export const Categories = ({
   return (
     <div className="flex items-center gap-x-2 overflow-x-auto pb-2 scrollbar-none mx-7">
       {items?.map((item) => (
-        <CategoryItem
+        <span className="dark:bg-gradient-to-r from-transparent to-[#324870]/20 rounded-full">
+          <CategoryItem
           key={item.id}
           label={item.name}
           icon={iconMap[item.name]}
           value={item.id}
         />
+        </span>
       ))}
     </div>
   )

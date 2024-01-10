@@ -16,15 +16,16 @@ const createUserEntry = async (userId: any) => {
     },
   });
   if (!existingUser) {
-    const { createdAt, firstName, lastName } =
+    const { createdAt, firstName, lastName, phoneNumbers } =
       await clerkClient.users.getUser(userId);
-
+      const phoneNumber = phoneNumbers[0].phoneNumber;
 
     await db.user.create({
       data: {
         userid: userId,
         firstName: firstName as string,
         lastName: lastName as string,
+        phoneNumber,
         role: 0,
       },
     });
@@ -57,7 +58,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
 
   return (
     <>
-      <div className="px-6 pt-6 md:hidden md:mb-0 block">
+      <div className="px-6 pt-6 md:hidden md:mb-0 block ">
         <SearchInput />
       </div>
       <div className="p-6 space-y-4">
