@@ -32,14 +32,16 @@ export const Categories = ({
   items,
 }: CategoriesProps) => {
   return (
-    <div className="flex items-center gap-x-2 overflow-x-auto pb-2">
-      {items.map((item) => (
-        <CategoryItem
+    <div className="flex items-center gap-x-2 overflow-x-auto pb-2 scrollbar-none mx-7">
+      {items?.map((item) => (
+        <span className="dark:hover:bg-[#53E59B]/10 hover:bg-[#46A9F5]/10 rounded-full">
+          <CategoryItem
           key={item.id}
           label={item.name}
           icon={iconMap[item.name]}
           value={item.id}
         />
+        </span>
       ))}
     </div>
   )

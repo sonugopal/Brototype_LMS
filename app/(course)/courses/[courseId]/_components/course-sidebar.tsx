@@ -38,9 +38,9 @@ export const CourseSidebar = async ({
   });
 
   return (
-    <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm">
-      <div className="p-8 flex flex-col border-b">
-        <div className="p-6">
+    <div className="h-full border-r scrollbar-none flex flex-col overflow-y-auto shadow-sm dark:bg-gradient-to-r from-transparent to-[#393838]/25">
+      <div className="p-8 flex flex-col border-b sticky top-0 dark:bg-[#12100F] bg-white">
+        <div className="p-x-6 pb-3">
           <Link href={"/"}>
             <Logo />
           </Link>

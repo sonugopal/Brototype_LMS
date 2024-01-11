@@ -39,8 +39,8 @@ model Category {
 model User {
   id String @id @default(uuid())
   userid String 
-  firstName String 
-  lastName String
+  firstName String?
+  lastName String?
   phoneNumber String
   createdAt DateTime @default(now()) 
   role Int

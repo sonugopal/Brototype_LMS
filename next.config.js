@@ -2,8 +2,10 @@
 const nextConfig = {
   images: {
     domains: [
-      "utfs.io"
-    ]
+      "utfs.io",
+      'via.placeholder.com',
+      'cdn.pixabay.com'
+    ],
   }
 }
 

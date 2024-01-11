@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { SearchInput } from "./search-input";
 import { isTeacher } from "@/lib/teacher";
+import { ModeToggle } from "./ui/toggle-theme";
 
 export const NavbarRoutes = () => {
   const { userId } = useAuth();
@@ -25,11 +26,9 @@ export const NavbarRoutes = () => {
   // const isTeacher = getIsteacher(userId as string);
   return (
     <>
-      {isSearchPage && (
         <div className="hidden md:block">
           <SearchInput />
         </div>
-      )}
       <div className="flex gap-x-2 ml-auto">
         {isTeacherPage || isCoursePage ? (
           <Link href="/">
@@ -45,6 +44,7 @@ export const NavbarRoutes = () => {
             </Button>
           </Link>
         ) : null}
+        <ModeToggle />
         <UserButton afterSignOutUrl="/" />
       </div>
     </>

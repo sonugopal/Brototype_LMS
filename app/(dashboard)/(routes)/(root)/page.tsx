@@ -7,6 +7,8 @@ import { getCourses } from "@/actions/get-courses";
 import { CoursesList } from "@/components/courses-list";
 
 import { Categories } from "./_components/categories";
+
+
 const createUserEntry = async (userId: any) => {
   const existingUser = await db.user.findFirst({
     where: {
@@ -16,8 +18,8 @@ const createUserEntry = async (userId: any) => {
   if (!existingUser) {
     const { createdAt, firstName, lastName, phoneNumbers } =
       await clerkClient.users.getUser(userId);
+      const phoneNumber = phoneNumbers[0].phoneNumber;
 
-    const phoneNumber = phoneNumbers[0].phoneNumber;
     await db.user.create({
       data: {
         userid: userId,
@@ -56,7 +58,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
 
   return (
     <>
-      <div className="px-6 pt-6 md:hidden md:mb-0 block">
+      <div className="px-6 pt-6 md:hidden md:mb-0 block ">
         <SearchInput />
       </div>
       <div className="p-6 space-y-4">

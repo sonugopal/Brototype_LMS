@@ -35,19 +35,19 @@ export const CourseSidebarItem = ({
       onClick={onClick}
       type="button"
       className={cn(
-        "flex items-center gap-x-2 text-slate-500  font-[500] pl-6 text-sm transition-all hover:text-slate-600 hover:bg-slate-300/20 text-left",
+        "flex items-center gap-x-2 text-slate-500 dark:text-white/50 dark:hover:bg-[#3F3F3F]/20 font-[500] pl-6 text-sm transition-all text-left",
         isActive &&
-          "text-slate-700 bg-slate-200/20 hover:bg-slate-200/20 hover:text-slate-700",
+          "dark:text-white/80 text-sky-700 bg-sky-300/20 dark:bg-[#3F3F3F]/40 dark:hover:bg-[#3F3F3F]/60 dark:hover:text-white",
         isCompleted && "text-emerald-700 hover:text-emerald-700",
-        isCompleted && isActive && "bg-emerald-200/20"
+        isCompleted && isActive && "bg-emerald-200/20 "
       )}
     >
       <div className="flex items-center gap-x-2 py-4">
         <Icon
           size={22}
           className={cn(
-            "text-slate-500 shrink-0",
-            isActive && "text-slate-700",
+            "text-slate-500 dark:text-white/50 shrink-0",
+            isActive && "dark:text-white/80 text-sky-700",
             isCompleted && "text-emerald-700"
           )}
         />
@@ -56,7 +56,7 @@ export const CourseSidebarItem = ({
       <div
         className={cn(
           "ml-auto opacity-0 border-2 border-slate-700 h-full transition-all",
-          isActive && "opacity-100",
+          isActive && "opacity-100 border-sky-700 dark:border-green-800",
           isCompleted && "border-emerald-700"
         )}
       />

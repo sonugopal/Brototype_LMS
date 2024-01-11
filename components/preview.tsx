@@ -1,19 +1,17 @@
-"use client";
-
+import { removeHtmlTags } from "@/lib/tagremover";
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
-
-import "react-quill/dist/quill.bubble.css";
 
 interface PreviewProps {
   value: string;
 }
 
 export const Preview = ({ value }: PreviewProps) => {
-  const ReactQuill = useMemo(
-    () => dynamic(() => import("react-quill"), { ssr: false }),
-    []
-  );
+  const memoizedValue = useMemo(() => removeHtmlTags(value), [value]);
 
-  return <ReactQuill theme="bubble" value={value} readOnly />;
+  return (
+    <div className="my-2 mx-2">
+      <p>{memoizedValue}</p>
+    </div>
+  );
 };
