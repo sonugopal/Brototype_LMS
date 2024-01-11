@@ -3,7 +3,8 @@ const nextConfig = {
   images: {
     domains: [
       "utfs.io",
-      'via.placeholder.com'
+      'via.placeholder.com',
+      'cdn.pixabay.com'
     ],
   }
 }
