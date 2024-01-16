@@ -20,10 +20,9 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 
 
-
 export const NavbarRoutes = () => {
 
-  const {data: session} = useSession()
+  const {data: session} : any = useSession()
 
   const userId = session?.user.userid;
   const pathname = usePathname();
@@ -61,7 +60,7 @@ export const NavbarRoutes = () => {
         ) : null}
         <ModeToggle />
         <DropdownMenu>
-          <DropdownMenuTrigger>
+          <DropdownMenuTrigger className="outline-none">
             <Avatar className="h-10">
               <AvatarImage
                 className="h-10 rounded-full"
@@ -70,9 +69,9 @@ export const NavbarRoutes = () => {
               <AvatarFallback>CN</AvatarFallback>
 
               <DropdownMenuContent>
-                <DropdownMenuLabel>{session?.user.firstName}</DropdownMenuLabel>
+                <DropdownMenuLabel>{session?.user ? session?.user.firstName : 'Please Login'}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => session?.user ? signOut() : signIn()} className="text-red-500">{session?.user ? 'Logout' : 'Login'}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => session?.user ? signOut() : signIn()} className="text-red-500">{session?.user ? 'Log-out' : 'Login'}</DropdownMenuItem>
               </DropdownMenuContent>
             </Avatar>
           </DropdownMenuTrigger>

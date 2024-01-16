@@ -33,7 +33,7 @@ export const CourseCard = ({
   const {data: session} = useSession()
 
   return (
-    <Link href={session?.user ? `/courses/${id}`: '/api/auth/signin'}>
+    <Link href={session?.user ? `/courses/${id}`: '/sign-in'}>
       <div className="group  overflow-hidden rounded-lg p-3 h-full transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 ">
         <div className="relative w-full aspect-video rounded-md overflow-hidden">
           <Image onLoad={(e) => setTimeout(() => (e.target as HTMLElement).classList.remove('blur'), 1000)} fill className="object-cover blur transition duration-500" alt={title} src={imageUrl} />

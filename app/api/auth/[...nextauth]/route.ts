@@ -26,6 +26,10 @@ export const authOption: NextAuthOptions = {
       }
     })
   ],
+  pages:{
+    signIn: '/sign-in',
+    error: '/sign-in'
+  },
   callbacks: {
     async jwt({ token, user }: any) {
       if (user) {
