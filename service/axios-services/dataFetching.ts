@@ -88,5 +88,16 @@ const ForgotPassword = async (phoneNumber: string) => {
     }
 }
 
+const ValidatePhoneNumber = async (phoneNumber: string) => {
+    try{
+        const response = await apiService.post('api/user/validate-phone', {phoneNumber: phoneNumber})
+        console.log("This is the response: ", response)
+        return response
+    }catch(error){
+        console.log(error)
+        throw error
+    }
+}
 
-export { login, CreateUser, Sendotp, VerifyOtp, UpdatePassword, ForgotPassword };
+
+export { login, CreateUser, Sendotp, VerifyOtp, UpdatePassword, ForgotPassword, ValidatePhoneNumber };

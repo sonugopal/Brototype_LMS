@@ -1,10 +1,9 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
-import apiService from "@/service/apiService";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 

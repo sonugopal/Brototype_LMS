@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import ResetPasswordForm from "./reset-pass-form";
 import Link from "next/link";
 import { useCustomToast } from "@/components/custom/custom-toast";
-import { ForgotPassword } from "@/service/axios-services/dataFetching";
+import { ForgotPassword, ValidatePhoneNumber } from "@/service/axios-services/dataFetching";
 
 
 const ForgotPasswordForm = () => {
@@ -25,17 +25,22 @@ const ForgotPasswordForm = () => {
             e.preventDefault()
             let new_number = '+91' + mobile
             const verify = mobileRegex.test(new_number)
-            if (verify) {
-                console.log("It is verified!!")
-                const request = await ForgotPassword(mobile)
-                if (request.status == 200) {
-                    setToggle(true)
+            console.log('reaching here!!')
+            const request = await ValidatePhoneNumber(mobile)
+            if (request.status == 200){
+                if (verify) {
+                    const request = await ForgotPassword(mobile)
+                    if (request.status == 200) {
+                        setToggle(true)
+                    }
+                } else {
+                    customToast({ message: 'There is something wrong with your mobile number!!! Please check again' })
                 }
-            } else {
-                customToast({ message: 'There is something wrong with your mobile number!!! Please check again' })
+            }else{
+                customToast({ message: 'A user with this mobile number does not exist' })
             }
         } catch (error) {
-            customToast({ message: 'There is something wrong with your request!!! Please check again' })
+            customToast({ message: 'There is no user with the given phone Number please check the number and try     again!!' })
         }
     }
 

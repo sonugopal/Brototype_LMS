@@ -47,7 +47,6 @@ export const SingUpForm = () => {
             try {
                 const request = await Sendotp({ phoneNumber: `+91${phoneNumber}` })
                 if (request.status == 200) {
-                    console.log("This is the firstname: ", firstName)
                     verify && setToggle(!toggle)
                 } else {
                     toast({ message: "The otp service is down for the moment" })
