@@ -1,4 +1,3 @@
-import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
@@ -6,6 +5,9 @@ import { getProgress } from "@/actions/get-progress";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { CourseSidebar } from "./_components/course-sidebar";
 import { CourseNavbar } from "./_components/course-navbar";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { Userid } from "@/interfaces/UserInterface";
 
 const CourseLayout = async ({
   children,
@@ -14,7 +16,10 @@ const CourseLayout = async ({
   children: React.ReactNode;
   params: { courseId: string };
 }) => {
-  const { userId } = auth();
+
+  const session: Userid | null = await getServerSession(authOption)
+
+  const userId = await session?.user?.userid;
 
   if (!userId) {
     return redirect("/")

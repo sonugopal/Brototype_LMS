@@ -1,4 +1,3 @@
-import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import {
   CircleDollarSign,
@@ -19,9 +18,15 @@ import { PriceForm } from "./_components/price-form";
 import { AttachmentForm } from "./_components/attachment-form";
 import { ChaptersForm } from "./_components/chapters-form";
 import { Actions } from "./_components/actions";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { Userid } from "@/interfaces/UserInterface";
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
-  const { userId } = auth();
+
+  const session: Userid | null = await getServerSession(authOption)
+
+  const userId = session?.user.userid
 
   if (!userId) {
     return redirect("/");

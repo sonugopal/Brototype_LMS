@@ -1,7 +1,9 @@
-import { auth, clerkClient } from "@clerk/nextjs";
-import { signedInAuthObject } from "@clerk/nextjs/server";
+
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { Userid } from "@/interfaces/UserInterface";
 // interface userCreateInput {
 //   userid: string;
 //   firstName: string;
@@ -9,8 +11,12 @@ import { db } from "@/lib/db";
 //   phoneNumber: string;
 //   role: number;
 // }
+
 export default async function PostSignup() {
-  const { userId } = auth();
+
+  const session: Userid | null = await getServerSession(authOption)
+
+  const userId = session?.user.userid
   if (!userId) {
     return redirect("/");
   }
@@ -20,20 +26,5 @@ export default async function PostSignup() {
       userid: userId as string,
     },
   });
-  if (!existingUser) {
-    const { createdAt, firstName, lastName, phoneNumbers } =
-      await clerkClient.users.getUser(userId);
-
-    const phoneNumber = phoneNumbers[0].phoneNumber;
-    await db.user.create({
-      data: {
-        userid: userId,
-        firstName: firstName as string,
-        lastName: lastName as string,
-        phoneNumber,
-        role: 0,
-      },
-    });
-  }
   return redirect("/");
 }

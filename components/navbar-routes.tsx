@@ -1,16 +1,31 @@
 "use client";
-import { UserButton, useAuth } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { LogOut } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { SearchInput } from "./search-input";
 import { isTeacher } from "@/lib/teacher";
 import { ModeToggle } from "./ui/toggle-theme";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { signIn, signOut, useSession } from "next-auth/react";
+
+
+
 
 export const NavbarRoutes = () => {
-  const { userId } = useAuth();
+
+  const {data: session} = useSession()
+
+  const userId = session?.user.userid;
   const pathname = usePathname();
   const [teacher, setTeacher] = useState<any>(null);
 
@@ -26,9 +41,9 @@ export const NavbarRoutes = () => {
   // const isTeacher = getIsteacher(userId as string);
   return (
     <>
-        <div className="hidden md:block">
-          <SearchInput />
-        </div>
+      <div className="hidden md:block">
+        <SearchInput />
+      </div>
       <div className="flex gap-x-2 ml-auto">
         {isTeacherPage || isCoursePage ? (
           <Link href="/">
@@ -45,7 +60,23 @@ export const NavbarRoutes = () => {
           </Link>
         ) : null}
         <ModeToggle />
-        <UserButton afterSignOutUrl="/" />
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Avatar className="h-10">
+              <AvatarImage
+                className="h-10 rounded-full"
+                src="https://github.com/shadcn.png"
+              />
+              <AvatarFallback>CN</AvatarFallback>
+
+              <DropdownMenuContent>
+                <DropdownMenuLabel>{session?.user.firstName}</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => session?.user ? signOut() : signIn()} className="text-red-500">{session?.user ? 'Logout' : 'Login'}</DropdownMenuItem>
+              </DropdownMenuContent>
+            </Avatar>
+          </DropdownMenuTrigger>
+        </DropdownMenu>
       </div>
     </>
   );

@@ -1,0 +1,12 @@
+import { Session } from "next-auth";
+
+export interface Userid extends Session {
+    user: {
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      userid: string | null
+      firstName: string | null
+      lastName: string | null
+    };
+  }

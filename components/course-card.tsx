@@ -8,6 +8,7 @@ import { IconBadge } from "@/components/icon-badge";
 import { formatPrice } from "@/lib/format";
 import { CourseProgress } from "@/components/course-progress";
 import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 interface CourseCardProps {
   id: string;
@@ -28,8 +29,11 @@ export const CourseCard = ({
   progress,
   category,
 }: CourseCardProps) => {
+
+  const {data: session} = useSession()
+
   return (
-    <Link href={`/courses/${id}`}>
+    <Link href={session?.user ? `/courses/${id}`: '/api/auth/signin'}>
       <div className="group  overflow-hidden rounded-lg p-3 h-full transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 ">
         <div className="relative w-full aspect-video rounded-md overflow-hidden">
           <Image onLoad={(e) => setTimeout(() => (e.target as HTMLElement).classList.remove('blur'), 1000)} fill className="object-cover blur transition duration-500" alt={title} src={imageUrl} />

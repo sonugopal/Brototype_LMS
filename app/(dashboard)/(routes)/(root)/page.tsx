@@ -1,68 +1,35 @@
-import { auth, clerkClient } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-
 import { db } from "@/lib/db";
 import { SearchInput } from "@/components/search-input";
 import { getCourses } from "@/actions/get-courses";
 import { CoursesList } from "@/components/courses-list";
-
 import { Categories } from "./_components/categories";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { Userid } from '@/interfaces/UserInterface'
 
-
-const createUserEntry = async (userId: any) => {
-  const existingUser = await db.user.findFirst({
-    where: {
-      userid: userId as string,
-    },
-  });
-  if (!existingUser) {
-    const { createdAt, firstName, lastName, phoneNumbers } =
-      await clerkClient.users.getUser(userId);
-      const phoneNumber = phoneNumbers[0].phoneNumber;
-
-    await db.user.create({
-      data: {
-        userid: userId,
-        firstName: firstName as string,
-        lastName: lastName as string,
-        phoneNumber,
-        role: 0,
-      },
-    });
-  }
-};
 interface SearchPageProps {
   searchParams: {
     title: string;
     categoryId: string;
   };
+  session: any; // Add session data as a prop
 }
 
+
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
-  const { userId } = auth();
-
-  if (!userId) {
-    return redirect("/");
-  }
-  await createUserEntry(userId);
-  const categories = await db.category.findMany({
-    orderBy: {
-      name: "asc",
-    },
-  });
-
-  const courses = await getCourses({
-    userId,
-    ...searchParams,
-  });
+  const session: Userid | null = await getServerSession(authOption);
+  const userId = await session?.user.userid;
+  console.log("This is the userId: ", userId)
+  const courses = await getCourses({ userId, ...searchParams });
 
   return (
     <>
-      <div className="px-6 pt-6 md:hidden md:mb-0 block ">
+      <div className="px-6 pt-6 md:hidden md:mb-0 block">
         <SearchInput />
       </div>
       <div className="p-6 space-y-4">
-        <Categories items={categories} />
+      {/* <Categories items={categories} />  */}
         <CoursesList items={courses} />
       </div>
     </>

@@ -1,18 +1,20 @@
 import Stripe from "stripe";
-import { currentUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from 'uuid';
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { Userid } from '@/interfaces/UserInterface'
 
 export async function POST(
   req: Request,
   { params }: { params: { courseId: string } }
 ) {
   try {
-    const user = await currentUser();
+    const session: Userid | null = await getServerSession(authOption);
 
-    if (!user || !user.id ) {
+    if (!session?.user || !session?.user.userid ) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
@@ -26,7 +28,7 @@ export async function POST(
     const purchase = await db.purchase.findUnique({
       where: {
         userId_courseId: {
-          userId: user.id,
+          userId: session?.user.userid,
           courseId: params.courseId
         }
       }
@@ -42,7 +44,7 @@ export async function POST(
     await db.purchase.create({
       data: {
         id: uuidv4(),
-        userId: user.id,
+        userId: session?.user?.userid,
         courseId: params.courseId
       }
     }); 

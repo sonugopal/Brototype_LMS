@@ -41,7 +41,8 @@ model User {
   userid String 
   firstName String?
   lastName String?
-  phoneNumber String
+  phoneNumber String @unique
+  password String
   createdAt DateTime @default(now()) 
   role Int
 }
