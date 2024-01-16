@@ -8,6 +8,8 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { phoneNumber, firstName, lastName, password, role } = body;
 
+    console.log("This is the firstName,", firstName)
+
     // check if phone number already exist
     const existingUserByMobile = await db.user.findUnique({
       where: { phoneNumber: phoneNumber },
@@ -24,6 +26,7 @@ export async function POST(req: Request) {
     }
 
     // changed to argon hashing
+    console.log("its being called from the register page")
     const salt = Buffer.from("this_is_static_salt");
     const hashedPassword = await argon2.hash(password, { salt });
 

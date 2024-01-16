@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { OtpForm } from "./otp-form";
 import Link from "next/link";
-import { useTheme } from "next-themes";
+import { Sendotp } from "@/service/axios-services/dataFetching";
+import { useCustomToast } from "@/components/custom/custom-toast";
 
 
 
@@ -17,11 +18,45 @@ export const SingUpForm = () => {
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>('')
 
-
-    const theme = useTheme();
+    const toast = useCustomToast()
 
     const [toggle, setToggle] = useState(false)
 
+    const handleInputFields = () => {
+        const mobileRegex = /^\+91\d{10}$/; // corrected here
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if ((firstName && phoneNumber) && password === confirmPassword) {
+            let new_number = '+91' + phoneNumber
+            if (mobileRegex.test(new_number)) { // corrected here
+                if (passwordRegex.test(password)) {
+                    return true
+                } else {
+                    toast({ message: 'Your password does not follow the pattern required, it should have a capital, small, a number and a special character' })
+                }
+            } else {
+                toast({ message: 'There seem to be something wrong with your mobile number please check again' })
+            }
+        } else {
+            toast({ message: 'either the passwords are not matching or the username field and mobile fields are empty' })
+        }
+    }
+
+    const handleSendOTP = async (e: any) => {
+        const verify = handleInputFields()
+        if (verify) {
+            try {
+                const request = await Sendotp({ phoneNumber: `+91${phoneNumber}` })
+                if (request.status == 200) {
+                    console.log("This is the firstname: ", firstName)
+                    verify && setToggle(!toggle)
+                } else {
+                    toast({ message: "The otp service is down for the moment" })
+                }
+                }catch(error){
+                    console.log("ERror: ", error)
+                }
+            }
+        }
 
     return (
         <>
@@ -40,7 +75,7 @@ export const SingUpForm = () => {
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium leading-5  text-gray-700 dark:text-white">First Name</label>
                                 <div className="mt-1 relative rounded-md shadow-sm">
-                                    <input onChange={(e) => setFirstName(e.target.value)} id="name" name="name" placeholder="John Doe" type="text" className="appearance-none focus:border-blue-300 block w-full px-3 py-2 border  rounded-md  focus:outline-none focus:shadow-outline-blue  dark:bg-[#020817] transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    <input onChange={(e) => setFirstName(e.target.value)} placeholder="John Doe" type="text" className="appearance-none focus:border-blue-300 block w-full px-3 py-2 border  rounded-md  focus:outline-none focus:shadow-outline-blue  dark:bg-[#020817] transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                     <div className="hidden absolute inset-y-0 right-0 pr-3  items-center pointer-events-none">
                                         <svg className="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                                             <path fillRule="evenodd"
@@ -97,7 +132,7 @@ export const SingUpForm = () => {
 
                             <div className="mt-6">
                                 <span className="block w-full rounded-md shadow-sm">
-                                    <Button className="w-full bg-blue-500 hover:bg-blue-600 dark:bg-[#0369A1] dark:hover:bg-[#00264D] dark:text-white">
+                                    <Button onClick={handleSendOTP} className="w-full bg-blue-500 hover:bg-blue-600 dark:bg-[#0369A1] dark:hover:bg-[#00264D] dark:text-white">
                                         Send Otp
                                     </Button>
                                 </span>
@@ -115,12 +150,12 @@ export const SingUpForm = () => {
                     </div>
                 </div>
             </div>
-            {/* {
+            {
                 toggle &&
                 <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
                     <OtpForm phoneNumber={phoneNumber} firstName={firstName} lastName={lastName} password={password} role={0} />
                 </div>
-            } */}
+            }
         </>
     )
 }

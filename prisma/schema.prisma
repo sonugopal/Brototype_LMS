@@ -44,7 +44,7 @@ model User {
   phoneNumber String @unique
   password String
   createdAt DateTime @default(now()) 
-  role Int
+  role Int @default(0)
 }
 
 model Attachment {

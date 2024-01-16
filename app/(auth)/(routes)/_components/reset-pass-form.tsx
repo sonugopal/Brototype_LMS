@@ -9,11 +9,11 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 interface ResetPasswrodProps {
-    mobile: string
+    phoneNumber: string
 }
 
 const ResetPasswordForm = ({
-    mobile,
+    phoneNumber,
 }: ResetPasswrodProps) => {
 
     const theme = useTheme()
@@ -23,18 +23,18 @@ const ResetPasswordForm = ({
 
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>('')
-    const [code, setCode] = useState<string>('')
+    const [otp, setOtp] = useState<string>('')
 
     const handlePasswordReset = async (e: any) => {
         e.preventDefault()
-        const otpRegex = /^\d{6}$/;
+        const otpRegex = /^\d{4}$/;
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         if (password === confirmPassword) {
             if (passwordRegex.test(password)) {
-                if (code && otpRegex.test(code)) {
-                    const verify_otp = await VerifyOtp(`+91${mobile}`, code)
+                if (otp && otpRegex.test(otp)) {
+                    const verify_otp = await VerifyOtp(`91${phoneNumber}`, otp)
                     if (verify_otp.status == 200) {
-                        const update_password = await UpdatePassword(mobile, password)
+                        const update_password = await UpdatePassword(phoneNumber, password)
                         if (update_password.status == 200) {
                             await toast.success('Your Password has been reset!!', {
                                 position: 'top-right',
@@ -81,7 +81,7 @@ const ResetPasswordForm = ({
                                 <label className="block text-sm font-medium leading-5 text-gray-700 dark:text-white">
                                     Enter OTP
                                 </label>
-                                <input onChange={(e) => setCode(e.target.value)} placeholder="6 Digits OTP here" type="number" className="appearance-none block w-full px-3 py-2 border dark:bg-[#020817] rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                <input onChange={(e) => setOtp(e.target.value)} placeholder="6 Digits OTP here" type="number" className="appearance-none block w-full px-3 py-2 border dark:bg-[#020817] rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
 
                                 <span className="block w-full rounded-md shadow-sm">
                                     <Button onClick={(e) => handlePasswordReset(e)} className="w-full dark:text-white bg-blue-500 hover:bg-blue-600 dark:bg-[#0369A1] dark:hover:bg-[#00264D]">
