@@ -1,5 +1,5 @@
 export function validateMobile(mobile: string) {
-    const mobileRegex = /^\+91\d{10}$/;
+    const mobileRegex = /^\d{12}$/;
     return mobileRegex.test(mobile);
 }
 

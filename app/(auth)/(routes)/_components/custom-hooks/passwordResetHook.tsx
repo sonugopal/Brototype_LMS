@@ -1,36 +1,38 @@
-import { validateOtp, validatePassword } from '@/components/validations';
-import { VerifyOtp, UpdatePassword } from '@/service/axios-services/dataFetching';
+// Import necessary functions and services
+import { validatePassword } from '@/components/validations';
+import { UpdatePassword } from '@/service/axios-services/dataFetching';
 
-const usePasswordReset = (password: string, confirmPassword: string, otp: string, phoneNumber: string, success: any, failed: any, push: any, e:any) => {
+// Define the usePasswordReset function
+const usePasswordReset = (password: string, phoneNumber: string, confirmPassword: string, success: any, failed: any, push: any, e:any) => {
+    // Define the handlePasswordReset function
+    console.log("passwords: ", password, confirmPassword)
     const handlePasswordReset = async (e:any) => {
-        e.preventDefault()
+        e.preventDefault();  // Prevent the default form submission behavior
+
+        // Check if the password and confirmPassword are the same
         if (password === confirmPassword) {
+            // Validate the password
             if (validatePassword(password)) {
-                if (otp && validateOtp(otp)) { 
-                    const response = await VerifyOtp(`+91${phoneNumber}`, otp)
-                    if (response.status == 200) {
-                        const update_password = await UpdatePassword(phoneNumber, password)
-                        if (update_password.status == 200) {
-                            await success({message: 'Your Password has been reset!!'})
-                            push('sign-in')
-                        }
-                    } else {
-                        failed({ message: "The otp provided is Invalid" })
-                    }
-                } else {
-                    failed({ message: "The otp provided are wrong please try again" })
+                // Update the password
+                const update_password = await UpdatePassword(phoneNumber, password);
+
+                // If the password is updated successfully
+                if (update_password.status == 200) {
+                    await success({message: 'Your Password has been reset!!'});
+                    await push('sign-in');
+                    return;
                 }
             } else {
-                failed({ message: "The password should atleast contain one uppercase one lower case 1 number and 1 special character" })
+                failed({ message: "The password should contain at least one uppercase letter, one lowercase letter, one number, and one special character." });
             }
         } else {
-            failed({ message: 'The passwords does not match one another please check' })
+            failed({ message: 'The passwords do not match. Please check.' });
         }
     }
 
-    handlePasswordReset(e)
-
-    return {  };
+    // Call the handlePasswordReset function
+    handlePasswordReset(e);
 };
 
+// Export the usePasswordReset function
 export default usePasswordReset;

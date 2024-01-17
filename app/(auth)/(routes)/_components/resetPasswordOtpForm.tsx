@@ -1,49 +1,23 @@
-"use client"
-
-import Link from "next/link"
-import { useRef, useState } from "react"
-import { useRouter } from "next/navigation"
+import { useCustomToast } from "@/components/custom/custom-toast";
+import { useSuccessToast } from "@/components/custom/success-toast";
+import Link from "next/link";
 import { Otptimer } from "otp-timer-ts";
-import { useCustomToast } from "@/components/custom/custom-toast"
-import { useSuccessToast } from "@/components/custom/success-toast"
-import useVerifyOtp from "./custom-hooks/verifyOtp"
-import useResendOtp from "./custom-hooks/resendOtp"
+import { useRef, useState } from "react";
+import OtpVerifyHook from "./custom-hooks/forgot-pass-form/otpVerifyHook";
 
-interface OtpInterface {
-    phoneNumber: string
-    firstName: string
-    lastName: string
-    password: string
-    role: number
-}
-
-export const OtpForm = ({
-    phoneNumber,
-    firstName,
-    lastName,
-    password,
-}: OtpInterface) => {
-
-    // new 
+const ResetPasswordOtpForm = ({phoneNumber, setToggle}: any) => {
+    console.log("From the reset pass form: ", phoneNumber)
     const [state, setState] = useState(Array(4).fill(''));
     const inputRefs = Array.from({ length: 4 }).map(() => useRef<HTMLInputElement | null>(null));
 
-    const router = useRouter()
     const success = useSuccessToast();
     const failed = useCustomToast();
 
     // for otp verification and resending
-    const handleSubmit = async (e: any) => {
-        e.preventDefault()
-        await useVerifyOtp(state, phoneNumber, firstName, lastName, password, success, failed, router)
+    const handleSubmit = async () => {
+        await OtpVerifyHook(state, phoneNumber, success, failed, setToggle)
+
     }
-
-
-    const handleResendToken = async () => {
-        await useResendOtp(phoneNumber, firstName, lastName, password, success, failed)
-    }
-
-
 
     const handleChange = (e: any, i: any) => {
         const value = e.target.value;
@@ -98,7 +72,7 @@ export const OtpForm = ({
                                     </div>
 
                                     <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                                        <p>Didn't recieve code?</p><Otptimer text="" onResend={handleResendToken} seconds={60} />
+                                        <p>Didn't recieve code?</p><Otptimer text="" onResend={handleSubmit} seconds={60} />
                                     </div>
                                     <div className="flex items-center justify-center">
                                         <Link href={`sign-in`}>
@@ -112,5 +86,6 @@ export const OtpForm = ({
                 </div>
             </div>
         </div>
-    )
-}
+)}
+ 
+export default ResetPasswordOtpForm;

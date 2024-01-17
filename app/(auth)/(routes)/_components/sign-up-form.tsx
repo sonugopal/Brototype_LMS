@@ -4,16 +4,12 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { OtpForm } from "./otp-form";
 import Link from "next/link";
-import { Sendotp } from "@/service/axios-services/dataFetching";
 import { useCustomToast } from "@/components/custom/custom-toast";
 import { FormLogo } from "@/components/ui/logo";
 import useSendOtp from "./custom-hooks/sign-up-form/sendOtpHook";
 import { useSuccessToast } from "@/components/custom/success-toast";
-
-
-
-
-
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 export const SingUpForm = () => {
 
@@ -30,6 +26,7 @@ export const SingUpForm = () => {
 
     const handleSendOTP = async (e: any) => {
         e.preventDefault()
+        console.log("phone number: ", phoneNumber)
         await useSendOtp(firstName, lastName, phoneNumber, password, confirmPassword, successToast, toast, toggle, setToggle)
     }
 
@@ -77,11 +74,12 @@ export const SingUpForm = () => {
                             <div className="mt-6">
                                 <label htmlFor="username" className="block text-sm font-medium leading-5 text-gray-700 dark:text-white">Mobile Number</label>
                                 <div className="mt-1 flex rounded-md shadow-sm">
-
-                                    <span className="inline-flex h-10 items-center px-3 rounded-l-md border border-r-0  dark:bg-[#141e36]  bg-gray-50 dark:text-white  text-gray-500 sm:text-sm">
-                                        +91
-                                    </span>
-                                    <input maxLength={10} onChange={(e) => setPhoneNumber(e.target.value)} placeholder="Mobile Number" type="text" className="flex-1 border-2 focus:outline-none focus:border-blue-300 dark:bg-[#020817] form-input pl-3 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    <PhoneInput
+                                    inputClass="min-w-[367px] py-5 dark:bg-[#020817] w-full px-3 border  rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                    country={'in'}
+                                    value={phoneNumber}
+                                    onChange={phoneNumber => setPhoneNumber(phoneNumber)}
+                                    />
                                 </div>
                             </div>
 

@@ -5,8 +5,7 @@ const useVerifyOtp = (state: string[], phoneNumber: string, firstName: string, l
     const verifyOtp = async () => {
         try {
             const otp = state.join('')
-            console.log(phoneNumber, 'from the verify otp')
-            const response = await VerifyOtp(`91${phoneNumber}`, otp)
+            const response = await VerifyOtp(phoneNumber, otp)
             if (response.status == 200) {
                 const createUser = await CreateUser({ phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, password: password, role: 0 })
                 if (createUser.status == 201){
@@ -35,10 +34,7 @@ const useVerifyOtp = (state: string[], phoneNumber: string, firstName: string, l
             customToast({ message: 'Some field of the OTP seems to be missing' })
         }
     }
-
     handleVerifyToken()
-
-    return {  };
 };
 
 export default useVerifyOtp;

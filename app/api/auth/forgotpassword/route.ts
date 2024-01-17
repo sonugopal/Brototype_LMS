@@ -20,10 +20,8 @@ export async function POST(req: Request) {
             }, { status: 401 })
         }
 
-        console.log("Its reaching up until here!!!", '+91' + phoneNumber)
 
-        const request = await axios.post('http://localhost:3000/api/auth/send-otp', { phoneNumber: `+91${phoneNumber}` })
-
+        const request = await axios.post('http://localhost:3000/api/auth/send-otp', { phoneNumber: phoneNumber})
         if (request.status == 200) {
             return NextResponse.json({
                 user: checkExistingUser.firstName,

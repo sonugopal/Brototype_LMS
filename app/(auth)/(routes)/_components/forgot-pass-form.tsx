@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useCustomToast } from "@/components/custom/custom-toast";
 import { useSuccessToast } from "@/components/custom/success-toast";
 import useSendToMobile from "./custom-hooks/forgot-pass-form/otpResetPassHook";
+import PhoneInput from "react-phone-input-2";
+import 'react-phone-input-2/lib/style.css'
 
 
 const ForgotPasswordForm = () => {
@@ -39,13 +41,14 @@ const ForgotPasswordForm = () => {
                                         <div className="grid gap-y-4">
                                             <div>
                                                 <label className="block text-sm font-bold ml-1 mb-2  dark:text-white">Mobile Number</label>
-                                                <div className="my-3 flex rounded-md shadow-sm">
-
-                                                    <span className="inline-flex h-10 items-center px-3 rounded-l-md border border-r-0  dark:bg-[#141e36]  bg-gray-50 dark:text-white  text-gray-500 sm:text-sm">
-                                                        +91
-                                                    </span>
-                                                    <input maxLength={10} onChange={(e) => setMobile(e.target.value)} placeholder="Enter Your Mobile Number" type="text" className="flex-1 border-2 focus:outline-none focus:border-blue-300 dark:bg-[#020817] form-input pl-3 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
-                                                </div>
+                                                <div className="mt-1 flex rounded-md shadow-sm">
+                                                <PhoneInput
+                                                inputClass="min-w-full py-5 dark:bg-[#020817] w-full px-3 border  rounded-md focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                                                country={'in'}
+                                                value={mobile}
+                                                onChange={mobile => setMobile(mobile)}
+                                                />
+                                            </div>
                                             </div>
                                             <span className="block w-full rounded-md shadow-sm">
                                                 <Button onClick={(e) => handleSendToMobile(e)} className="w-full dark:text-white bg-blue-500 hover:bg-blue-600 dark:bg-[#0369A1] dark:hover:bg-[#00264D]">
