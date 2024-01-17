@@ -5,6 +5,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { FormLogo } from "@/components/ui/logo";
 
 
 type Props = {
@@ -37,18 +38,8 @@ export const SingInForm = (props: Props) => {
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md shadow-lg dark:shadow-md dark:border-2 dark:border-[#0369A1] dark:shadow-[#0369A1]  rounded-lg  flex flex-col">
                     <div className="sm:mx-auto sm:w-full sm:max-w-md mt-3 pt-5">
-
-                        <img className="mx-auto h-10 w-auto" src="https://www.svgrepo.com/show/301692/login.svg" alt="Workflow" />
-
-
-                        <h2 className="mt-6 text-center text-2xl leading-9 font-extrabold text-gray-900 dark:text-white">
-                            Welcome, We've missed you
-                        </h2>
-                        <div className="mt-2 text-center text-sm leading-5 text-gray-500 max-w">
-                            <p
-                                className="font-medium text-blue-600 hover:text-blue-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                                There is a lot of catching up to do...
-                            </p>
+                        <div className="flex items-center justify-center w-full h-full">
+                        <FormLogo/>
                         </div>
                         <div className="flex justify-center items-center">
                             {!!props.error && <p className="text-xs text-red-500">Invalid Credentials</p>}

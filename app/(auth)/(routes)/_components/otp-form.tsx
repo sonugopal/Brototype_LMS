@@ -2,13 +2,15 @@
 
 import Link from "next/link"
 import { useRef, useState } from "react"
-import axios from 'axios'
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { useTheme } from "next-themes";
 import { Otptimer } from "otp-timer-ts";
 import { useCustomToast } from "@/components/custom/custom-toast"
 import { CreateUser, Sendotp, VerifyOtp } from "@/service/axios-services/dataFetching"
+import { useSuccessToast } from "@/components/custom/success-toast"
+import useVerifyOtp from "./custom-hooks/verifyOtp"
+import useResendOtp from "./custom-hooks/resendOtp"
 
 interface OtpInterface {
     phoneNumber: string
@@ -23,80 +25,32 @@ export const OtpForm = ({
     firstName,
     lastName,
     password,
-    role,
 }: OtpInterface) => {
 
     // new 
     const [state, setState] = useState(Array(4).fill(''));
     const inputRefs = Array.from({ length: 4 }).map(() => useRef<HTMLInputElement | null>(null));
 
-    const [message, setMessage] = useState<string>('');
     const router = useRouter()
     const theme = useTheme();
 
     const customToast = useCustomToast()
 
-    const handleVerifyToken = async () => {
-        const final_otp = state.join('')
-        if (final_otp.length == 4) {
-            const verify = await verifyOtp()
-            console.log(verify)
-            if (verify) {
-                router.push('sign-in')
-            }
-        } else {
-            customToast({ message: 'Some field of the OTP seems to be missing' })
-        }
+
+
+    const success = useSuccessToast();
+    const failed = useCustomToast();
+
+    // for otp verification and resending
+    const handleSubmit = async (e: any) => {
+        e.preventDefault()
+        await useVerifyOtp(state, phoneNumber, firstName, lastName, password, success, failed, router)
     }
 
-    // to verify the otp send
-    const verifyOtp = async () => {
-        try {
-            const otp = state.join('')
-            const response = await VerifyOtp(`91${phoneNumber}`, otp)
-            console.log(response)
-            if (response.status == 200){
-                const createUser = await CreateUser({ phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, password: password, role: 0 })
-                console.log(createUser, "from the create user status")
-                if (createUser.status == 201) {
-                    await toast.success('Your OTP has been verified', {
-                        position: 'top-right',
-                        className: 'dark:bg-[#141E36]  rounded-lg',
-                        style: {
-                            color: theme.theme == 'dark' ? '#fff' : '#000'
-                        }
-                    });
-                }
-                return true
-            }else{
-                await customToast({ message: 'Invalid OTP please try again!!' })
-                return false
-            }
-        } catch (error: any) {
-            await customToast({ message: 'Invalid OTP please try again!!' })
-        }
-    };
 
     const handleResendToken = async () => {
-        try {
-            const request = await Sendotp({phoneNumber: `91${phoneNumber}`})
-            if (request.status == 200) {
-                const createUser = await CreateUser({ phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, password: password, role: 0 })
-                if (createUser.status == 201) {
-                    await toast.success('Your OTP has been verified', {
-                        position: 'top-right',
-                        className: 'dark:bg-[#141E36]  rounded-lg',
-                        style: {
-                            color: theme.theme == 'dark' ? '#fff' : '#000'
-                        }
-                    });
-                }
-            }
-        } catch (error) {
-            customToast({message: "Your otp couldn't be send due to some technial issue please try later!!"})
-        }
+        await useResendOtp(phoneNumber, firstName, lastName, password, success, failed)
     }
-
 
 
 
@@ -147,7 +101,7 @@ export const OtpForm = ({
 
                                 <div className="flex flex-col space-y-5">
                                     <div>
-                                        <button onClick={handleVerifyToken} className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
+                                        <button onClick={handleSubmit} className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
                                             Verify Account
                                         </button>
                                     </div>

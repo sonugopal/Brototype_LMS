@@ -16,6 +16,7 @@ import { SearchInput } from "./search-input";
 import { isTeacher } from "@/lib/teacher";
 import { ModeToggle } from "./ui/toggle-theme";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { LogIn } from 'lucide-react'
 import { signIn, signOut, useSession } from "next-auth/react";
 
 
@@ -43,7 +44,7 @@ export const NavbarRoutes = () => {
       <div className="hidden md:block">
         <SearchInput />
       </div>
-      <div className="flex gap-x-2 ml-auto">
+      <div className="flex gap-x-2 items-center ml-auto">
         {isTeacherPage || isCoursePage ? (
           <Link href="/">
             <Button size="sm" variant="ghost">
@@ -59,7 +60,9 @@ export const NavbarRoutes = () => {
           </Link>
         ) : null}
         <ModeToggle />
-        <DropdownMenu>
+        {
+          session?.user ?
+          <DropdownMenu>
           <DropdownMenuTrigger className="outline-none">
             <Avatar className="h-10">
               <AvatarImage
@@ -75,7 +78,8 @@ export const NavbarRoutes = () => {
               </DropdownMenuContent>
             </Avatar>
           </DropdownMenuTrigger>
-        </DropdownMenu>
+        </DropdownMenu> : <LogIn onClick={() => signIn()} className='h-5 w-4 cursor-pointer mr-2 hover:text-red-400'/>
+        }
       </div>
     </>
   );

@@ -6,6 +6,11 @@ import { OtpForm } from "./otp-form";
 import Link from "next/link";
 import { Sendotp } from "@/service/axios-services/dataFetching";
 import { useCustomToast } from "@/components/custom/custom-toast";
+import { FormLogo } from "@/components/ui/logo";
+import useSendOtp from "./custom-hooks/sign-up-form/sendOtpHook";
+import { useSuccessToast } from "@/components/custom/success-toast";
+
+
 
 
 
@@ -19,57 +24,26 @@ export const SingUpForm = () => {
     const [confirmPassword, setConfirmPassword] = useState<string>('')
 
     const toast = useCustomToast()
+    const successToast = useSuccessToast()
 
     const [toggle, setToggle] = useState(false)
 
-    const handleInputFields = () => {
-        const mobileRegex = /^\+91\d{10}$/; // corrected here
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-        if ((firstName && phoneNumber) && password === confirmPassword) {
-            let new_number = '+91' + phoneNumber
-            if (mobileRegex.test(new_number)) { // corrected here
-                if (passwordRegex.test(password)) {
-                    return true
-                } else {
-                    toast({ message: 'Your password does not follow the pattern required, it should have a capital, small, a number and a special character' })
-                }
-            } else {
-                toast({ message: 'There seem to be something wrong with your mobile number please check again' })
-            }
-        } else {
-            toast({ message: 'either the passwords are not matching or the username field and mobile fields are empty' })
-        }
-    }
-
     const handleSendOTP = async (e: any) => {
-        const verify = handleInputFields()
-        if (verify) {
-            try {
-                const request = await Sendotp({ phoneNumber: `+91${phoneNumber}` })
-                if (request.status == 200) {
-                    verify && setToggle(!toggle)
-                } else {
-                    toast({ message: "The otp service is down for the moment" })
-                }
-                }catch(error){
-                    console.log("ERror: ", error)
-                }
-            }
-        }
+        e.preventDefault()
+        await useSendOtp(firstName, lastName, phoneNumber, password, confirmPassword, successToast, toast, toggle, setToggle)
+    }
 
     return (
         <>
             <div className="min-h-screen w-[100vw] max-w-screen  bg-gray-50 dark:bg-[#020817] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md dark:shadow-md shadow-lg rounded-lg dark:border-2 dark:shadow-[#0369A1] dark:border-[#0369A1] ">
-                    <div className="sm:mx-auto sm:w-full sm:max-w-md pt-3">
-                        <img className="mx-auto h-10 w-auto" src="https://www.svgrepo.com/show/301692/login.svg" alt="Workflow" />
-                        <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900 dark:text-white">
-                            Create a new account
-                        </h2>
-
-                    </div>
                     <div className="bg-white dark:bg-[#020817] py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                    <div className="sm:mx-auto sm:w-full sm:max-w-md pt-3">
+                        <div className="flex items-center justify-center h-full w-full mb-5">
+                            <FormLogo/>
+                        </div>
+                    </div>
                         <form method="POST" action="#">
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium leading-5  text-gray-700 dark:text-white">First Name</label>

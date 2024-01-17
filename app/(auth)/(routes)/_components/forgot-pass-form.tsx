@@ -1,14 +1,12 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import axios from "axios";
-import { useTheme } from "next-themes";
 import { useState } from "react";
-import toast from "react-hot-toast";
 import ResetPasswordForm from "./reset-pass-form";
 import Link from "next/link";
 import { useCustomToast } from "@/components/custom/custom-toast";
-import { ForgotPassword, ValidatePhoneNumber } from "@/service/axios-services/dataFetching";
+import { useSuccessToast } from "@/components/custom/success-toast";
+import useSendToMobile from "./custom-hooks/forgot-pass-form/otpResetPassHook";
 
 
 const ForgotPasswordForm = () => {
@@ -17,31 +15,11 @@ const ForgotPasswordForm = () => {
     const [toggle, setToggle] = useState<boolean>(false)
 
     const customToast = useCustomToast()
+    const successToast = useSuccessToast()
 
-    const mobileRegex = /^\+91\d{10}$/; // corrected here
-
-    const handleSendMobile = async (e: any) => {
-        try {
-            e.preventDefault()
-            let new_number = '+91' + mobile
-            const verify = mobileRegex.test(new_number)
-            console.log('reaching here!!')
-            const request = await ValidatePhoneNumber(mobile)
-            if (request.status == 200){
-                if (verify) {
-                    const request = await ForgotPassword(mobile)
-                    if (request.status == 200) {
-                        setToggle(true)
-                    }
-                } else {
-                    customToast({ message: 'There is something wrong with your mobile number!!! Please check again' })
-                }
-            }else{
-                customToast({ message: 'A user with this mobile number does not exist' })
-            }
-        } catch (error) {
-            customToast({ message: 'There is no user with the given phone Number please check the number and try     again!!' })
-        }
+    const handleSendToMobile = async (e: any) => {
+        e.preventDefault()
+        await useSendToMobile(mobile, successToast, customToast, setToggle)
     }
 
     return (
@@ -70,7 +48,7 @@ const ForgotPasswordForm = () => {
                                                 </div>
                                             </div>
                                             <span className="block w-full rounded-md shadow-sm">
-                                                <Button onClick={(e) => handleSendMobile(e)} className="w-full dark:text-white bg-blue-500 hover:bg-blue-600 dark:bg-[#0369A1] dark:hover:bg-[#00264D]">
+                                                <Button onClick={(e) => handleSendToMobile(e)} className="w-full dark:text-white bg-blue-500 hover:bg-blue-600 dark:bg-[#0369A1] dark:hover:bg-[#00264D]">
                                                     Reset Password
                                                 </Button>
                                             </span>

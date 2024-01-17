@@ -28,7 +28,7 @@ interface createUserProps {
 // for creating a new user
 const CreateUser = async ({ phoneNumber, firstName, lastName, password, role }: createUserProps) => {
     try {
-        const response = await apiService.post('api/user/register', { phoneNumber: phoneNumber, fristName: firstName, lastName:lastName, password: password, role:role })
+        const response = await apiService.post('api/user/register', { phoneNumber: phoneNumber, firstName: firstName, lastName:lastName, password: password, role:role })
         console.log(response, "from the create user")
         return response
     } catch (error) {

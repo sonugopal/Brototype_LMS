@@ -20,8 +20,16 @@ interface SearchPageProps {
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
   const session: Userid | null = await getServerSession(authOption);
   const userId = await session?.user.userid;
-  console.log("This is the userId: ", userId)
+  if (!userId) {
+    return redirect("/sign-in");
+  }
+
   const courses = await getCourses({ userId, ...searchParams });
+  const categories = await db.category.findMany({
+    orderBy: {
+      name: "asc"
+    }
+  });
 
   return (
     <>
@@ -29,7 +37,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
         <SearchInput />
       </div>
       <div className="p-6 space-y-4">
-      {/* <Categories items={categories} />  */}
+        <Categories items={categories} />
         <CoursesList items={courses} />
       </div>
     </>
