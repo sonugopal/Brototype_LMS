@@ -13,7 +13,6 @@ interface SearchPageProps {
     title: string;
     categoryId: string;
   };
-  session: any; // Add session data as a prop
 }
 
 
