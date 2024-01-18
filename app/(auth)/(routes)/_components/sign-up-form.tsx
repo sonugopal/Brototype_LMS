@@ -34,7 +34,7 @@ export const SingUpForm = () => {
         <>
             <div className="min-h-screen w-[100vw] max-w-screen  bg-gray-50 dark:bg-[#020817] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 
-                <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md dark:shadow-md shadow-lg rounded-lg dark:border-2 dark:shadow-[#0369A1] dark:border-[#0369A1] ">
+                <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md dark:shadow-md  rounded-lg dark:border-2 dark:shadow-[#0369A1] dark:border-[#0369A1] ">
                     <div className="bg-white dark:bg-[#020817] py-8 px-4 shadow sm:rounded-lg sm:px-10">
                     <div className="sm:mx-auto sm:w-full sm:max-w-md pt-3">
                         <div className="flex items-center justify-center h-full w-full mb-5">
