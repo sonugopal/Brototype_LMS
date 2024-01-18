@@ -26,7 +26,6 @@ export const SingUpForm = () => {
 
     const handleSendOTP = async (e: any) => {
         e.preventDefault()
-        console.log("phone number: ", phoneNumber)
         await SendOtp(firstName, lastName, phoneNumber, password, confirmPassword, successToast, toast, toggle, setToggle)
     }
 

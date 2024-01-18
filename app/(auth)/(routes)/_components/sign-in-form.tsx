@@ -45,7 +45,6 @@ export const SingInForm = (props: Props) => {
                     <div className="bg-white dark:bg-[#020817] py-8 px-4  sm:rounded-lg sm:px-10">
                         <form  >
 
-
                             <div className="mt-6">
                                 <label htmlFor="username" className="block text-sm font-medium leading-5 text-gray-700 dark:text-white">Mobile Number</label>
                                 <div className="mt-1 flex rounded-md shadow-sm">

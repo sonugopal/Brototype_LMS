@@ -29,7 +29,6 @@ interface createUserProps {
 const CreateUser = async ({ phoneNumber, firstName, lastName, password, role }: createUserProps) => {
     try {
         const response = await apiService.post('api/user/register', { phoneNumber: phoneNumber, firstName: firstName, lastName:lastName, password: password, role:role })
-        console.log(response, "from the create user")
         return response
     } catch (error) {
         console.error(error);
@@ -57,7 +56,6 @@ const Sendotp = async ({ phoneNumber }: sendOtpProps) => {
 const VerifyOtp = async (phoneNumber: string, otp: string) => {
     try {
         const response = await apiService.post('api/auth/verify-otp', { phoneNumber: phoneNumber, otp: otp })
-        console.log("This is the respoinse from verify otp: ", await response)
         return response
     } catch (error) {
         console.log(error)
@@ -91,7 +89,6 @@ const ForgotPassword = async (phoneNumber: string) => {
 const ValidatePhoneNumber = async (phoneNumber: string) => {
     try{
         const response = await apiService.post('api/user/validate-phone', {phoneNumber: phoneNumber})
-        console.log("This is the response: ", response)
         return response
     }catch(error){
         console.log(error)

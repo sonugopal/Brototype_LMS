@@ -5,7 +5,6 @@ import { UpdatePassword } from '@/service/axios-services/dataFetching';
 // Define the PasswordReset function
 const PasswordReset = (password: string, phoneNumber: string, confirmPassword: string, success: any, failed: any, push: any, e:any) => {
     // Define the handlePasswordReset function
-    console.log("passwords: ", password, confirmPassword)
     const handlePasswordReset = async (e:any) => {
         e.preventDefault();  // Prevent the default form submission behavior
 

@@ -34,12 +34,6 @@ export async function DELETE(
       return new NextResponse("Not found", { status: 404 });
     }
 
-    // for (const chapter of course.chapters) {
-    //   if (chapter.muxData?.assetId) {
-    //     await Video.Assets.del(chapter.muxData.assetId);
-    //   }
-    // }
-
     const deletedCourse = await db.course.delete({
       where: {
         id: params.courseId,
@@ -58,7 +52,8 @@ export async function PATCH(
   { params }: { params: { courseId: string } }
 ) {
   try {
-    const { userId } = auth();
+    const session: Userid | null = await getServerSession(authOption);
+    const userId = await session?.user.userid;
     const { courseId } = params;
     const values = await req.json();
 
