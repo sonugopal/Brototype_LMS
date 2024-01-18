@@ -1,13 +1,13 @@
 "use client"
 
-import Link from "next/link"
-import { useRef, useState } from "react"
-import { useRouter } from "next/navigation"
+import Link from "next/link";
+import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Otptimer } from "otp-timer-ts";
-import { useCustomToast } from "@/components/custom/custom-toast"
-import { useSuccessToast } from "@/components/custom/success-toast"
-import useVerifyOtp from "./custom-hooks/verifyOtp"
-import useResendOtp from "./custom-hooks/resendOtp"
+import { useCustomToast } from "@/components/custom/custom-toast";
+import { useSuccessToast } from "@/components/custom/success-toast";
+import useVerifyOtp from "./custom-hooks/verifyOtp";
+import useResendOtp from "./custom-hooks/resendOtp";
 
 interface OtpInterface {
     phoneNumber: string

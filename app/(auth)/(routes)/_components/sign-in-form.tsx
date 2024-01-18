@@ -6,7 +6,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { FormLogo } from "@/components/ui/logo";
 import PhoneInput from "react-phone-input-2";
-import 'react-phone-input-2/lib/style.css'
+import 'react-phone-input-2/lib/style.css';
 
 type Props = {
     className?: string

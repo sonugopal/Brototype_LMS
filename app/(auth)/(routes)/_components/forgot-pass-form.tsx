@@ -8,7 +8,7 @@ import { useCustomToast } from "@/components/custom/custom-toast";
 import { useSuccessToast } from "@/components/custom/success-toast";
 import useSendToMobile from "./custom-hooks/forgot-pass-form/otpResetPassHook";
 import PhoneInput from "react-phone-input-2";
-import 'react-phone-input-2/lib/style.css'
+import 'react-phone-input-2/lib/style.css';
 
 
 const ForgotPasswordForm = () => {

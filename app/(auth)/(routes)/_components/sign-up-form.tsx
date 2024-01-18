@@ -8,8 +8,8 @@ import { useCustomToast } from "@/components/custom/custom-toast";
 import { FormLogo } from "@/components/ui/logo";
 import useSendOtp from "./custom-hooks/sign-up-form/sendOtpHook";
 import { useSuccessToast } from "@/components/custom/success-toast";
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 export const SingUpForm = () => {
 
