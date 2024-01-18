@@ -1,6 +1,6 @@
 import { CreateUser, VerifyOtp } from '@/service/axios-services/dataFetching';
 
-const useVerifyOtp = (state: string[], phoneNumber: string, firstName: string, lastName: string, password: string, successToast: any, customToast: any, router: any) => {
+const VerifyOtpFunction = (state: string[], phoneNumber: string, firstName: string, lastName: string, password: string, successToast: any, customToast: any, router: any) => {
 
     const verifyOtp = async () => {
         try {
@@ -37,4 +37,4 @@ const useVerifyOtp = (state: string[], phoneNumber: string, firstName: string, l
     handleVerifyToken()
 };
 
-export default useVerifyOtp;
+export default VerifyOtpFunction;

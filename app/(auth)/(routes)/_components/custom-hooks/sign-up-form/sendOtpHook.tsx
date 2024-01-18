@@ -1,7 +1,7 @@
 import {Sendotp } from '@/service/axios-services/dataFetching';
 import userInputValidation from './input-validation';
 
-const useSendOtp = (firstName: string, lastName: string, phoneNumber: string, password: string, confirmPassword: string, success: any, failed: any, toggle: boolean, setToggle: any) => {
+const SendOtp = (firstName: string, lastName: string, phoneNumber: string, password: string, confirmPassword: string, success: any, failed: any, toggle: boolean, setToggle: any) => {
     const handleSendOTP = async () => {
         const verify = await userInputValidation(firstName, phoneNumber, password, confirmPassword, failed)
         if (verify) {
@@ -22,4 +22,4 @@ const useSendOtp = (firstName: string, lastName: string, phoneNumber: string, pa
     handleSendOTP()
 };
 
-export default useSendOtp;
+export default SendOtp;

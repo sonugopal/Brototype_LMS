@@ -8,8 +8,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { phoneNumber, firstName, lastName, password, role } = body;
 
-    console.log("This is the firstName from resiter page:,", firstName)
-
     // check if phone number already exist
     const existingUserByMobile = await db.user.findUnique({
       where: { phoneNumber: phoneNumber },

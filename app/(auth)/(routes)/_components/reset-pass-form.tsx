@@ -1,11 +1,11 @@
 "use client"
 
-import { useCustomToast } from "@/components/custom/custom-toast";
+import { CustomToast } from "@/components/custom/custom-toast";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import usePasswordReset from "./custom-hooks/passwordResetHook";
-import { useSuccessToast } from "@/components/custom/success-toast";
+import PasswordReset from "./custom-hooks/passwordResetHook";
+import { SuccessToast } from "@/components/custom/success-toast";
 import ResetPasswordOtpForm from "./resetPasswordOtpForm";
 
 interface ResetPasswrodProps {
@@ -20,15 +20,16 @@ const ResetPasswordForm = ({
 
 
     // for toasts
-    const customToast = useCustomToast()
-    const successToast = useSuccessToast()
+    const customToast = CustomToast()
+    const successToast = SuccessToast()
 
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>('')
     const [toggle, setToggle] = useState<boolean>(false)
 
     const handlePasswordReset = async (e: any) => {
-        await usePasswordReset(password, phoneNumber, confirmPassword , successToast, customToast, push, e)
+        e.preventDefault()
+        await PasswordReset(password, phoneNumber, confirmPassword , successToast, customToast, push, e)
     }
 
     return (

@@ -5,7 +5,7 @@ interface ToastMessageProp {
     message: string
 }
 
-export function useCustomToast() {
+export function CustomToast() {
     const { theme } = useTheme();
 
     function showToast({ message }: ToastMessageProp) {

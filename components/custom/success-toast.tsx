@@ -5,7 +5,7 @@ interface ToastMessageProp {
     message: string
 }
 
-export function useSuccessToast() {
+export function SuccessToast() {
     const { theme } = useTheme();
 
     function showSuccessToast({ message }: ToastMessageProp) {
