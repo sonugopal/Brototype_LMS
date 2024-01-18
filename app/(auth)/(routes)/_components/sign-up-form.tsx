@@ -44,7 +44,7 @@ export const SingUpForm = () => {
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium leading-5  text-gray-700 dark:text-white">First Name</label>
                                 <div className="mt-1 relative rounded-md shadow-sm">
-                                    <input onChange={(e) => setFirstName(e.target.value)} placeholder="John Doe" type="text" className="appearance-none focus:border-blue-300 block w-full px-3 py-2 border  rounded-md  focus:outline-none focus:shadow-outline-blue  dark:bg-[#020817] transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    <input onChange={(e) => setFirstName(e.target.value)} placeholder="John" type="text" className="appearance-none focus:border-blue-300 block w-full px-3 py-2 border  rounded-md  focus:outline-none focus:shadow-outline-blue  dark:bg-[#020817] transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                     <div className="hidden absolute inset-y-0 right-0 pr-3  items-center pointer-events-none">
                                         <svg className="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                                             <path fillRule="evenodd"
@@ -58,7 +58,7 @@ export const SingUpForm = () => {
                             <div className="my-5">
                                 <label htmlFor="email" className="block text-sm font-medium leading-5 text-gray-700 dark:text-white">Last Name</label>
                                 <div className="mt-1 relative rounded-md shadow-sm">
-                                    <input onChange={(e) => setLastName(e.target.value)} id="last-name" name="last-name" placeholder="John Doe" type="text" className="appearance-none focus:border-blue-300 block w-full px-3 py-2 border  rounded-md  focus:outline-none focus:shadow-outline-blue  dark:bg-[#020817] transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    <input onChange={(e) => setLastName(e.target.value)} id="last-name" name="last-name" placeholder="Doe" type="text" className="appearance-none focus:border-blue-300 block w-full px-3 py-2 border  rounded-md  focus:outline-none focus:shadow-outline-blue  dark:bg-[#020817] transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                     <div className="hidden absolute inset-y-0 right-0 pr-3  items-center pointer-events-none">
                                         <svg className="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                                             <path fillRule="evenodd"

@@ -1,8 +1,6 @@
-import Stripe from "stripe";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from 'uuid';
 import { db } from "@/lib/db";
-import { stripe } from "@/lib/stripe";
 import { getServerSession } from "next-auth";
 import { authOption } from "@/app/api/auth/[...nextauth]/route";
 import { Userid } from '@/interfaces/UserInterface'
@@ -49,7 +47,7 @@ export async function POST(
       }
     }); 
 
-    return NextResponse.json({ url: `${process.env.NEXT_PUBLIC_APP_URL}/courses/${course.id}?success=1` });
+    return NextResponse.json({ url: `${process.env.BASE_URL}/courses/${course.id}?success=1` });
   } catch (error) {
     console.log("[COURSE_ID_CHECKOUT]", error);
     return new NextResponse("Internal Error", { status: 500 })
