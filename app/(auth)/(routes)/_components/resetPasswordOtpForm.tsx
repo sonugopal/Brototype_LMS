@@ -13,7 +13,11 @@ const ResetPasswordOtpForm = ({phoneNumber, setToggle}: any) => {
     const failed = CustomToast();
 
     // for otp verification and resending
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: any) => {
+        e.preventDefault()
+        await OtpVerifyHook(state, phoneNumber, success, failed, setToggle)
+    }
+    const handleReset = async () => {
         await OtpVerifyHook(state, phoneNumber, success, failed, setToggle)
     }
 
@@ -48,29 +52,29 @@ const ResetPasswordOtpForm = ({phoneNumber, setToggle}: any) => {
                         <form>
                             <div className="flex flex-col space-y-16 ">
                                 <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
-                                    {state.map((s, i) => (
-                                        <div key={i} className="w-16 h-16 mx-2">
-                                            <input
-                                                ref={inputRefs[i]}
-                                                maxLength={1}
-                                                value={s}
-                                                onChange={(e) => handleChange(e, i)}
-                                                className="w-full h-full flex flex-col items-center justify-center text-center outline-none rounded-xl border border-gray-200 text-lg bg-white dark:bg-[#020817]  focus:bg-gray-50 focus:ring-1 ring-blue-700"
-                                                type="text"
-                                            />
-                                        </div>
-                                    ))}
+                                {state.map((s, i) => (
+                                    <div key={i} className="w-16 h-16 mx-2">
+                                        <input
+                                            ref={ref => inputRefs[i] = { current: ref }}// Assign the ref to the corresponding property in the object
+                                            maxLength={1}
+                                            value={s}
+                                            onChange={(e) => handleChange(e, i)}
+                                            className="w-full h-full flex flex-col items-center justify-center text-center outline-none rounded-xl border border-gray-200 text-lg bg-white dark:bg-[#020817]  focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                                            type="text"
+                                        />
+                                    </div>
+                                ))}
                                 </div>
 
                                 <div className="flex flex-col space-y-5">
                                     <div>
-                                        <button onClick={handleSubmit} className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
+                                        <button onClick={(e) => handleSubmit(e)} className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
                                             Verify Account
                                         </button>
                                     </div>
 
                                     <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                                        <p>Didn&apos;t recieve code?</p><Otptimer text="" onResend={handleSubmit} seconds={60} />
+                                        <p>Didn&apos;t recieve code?</p><Otptimer text="" onResend={handleReset} seconds={60} />
                                     </div>
                                     <div className="flex items-center justify-center">
                                         <Link href={`sign-in`}>

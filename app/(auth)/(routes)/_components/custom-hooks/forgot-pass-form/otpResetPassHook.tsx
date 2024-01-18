@@ -4,6 +4,7 @@ import { ForgotPassword, ValidatePhoneNumber } from '@/service/axios-services/da
 const SendToMobile = (mobile: string, success: any, failed: any, setToggle: any) => {
     const handleSendMobile = async () => {
         try {
+            console.log("This is from the sendto mobile: ", mobile)
             if (validateMobile(mobile)) {
                 const checkPhone = await ValidatePhoneNumber(mobile)
                 if (checkPhone.status == 200){

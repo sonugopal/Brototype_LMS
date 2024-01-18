@@ -74,18 +74,18 @@ export const OtpForm = ({
                         <form action="" method="post">
                             <div className="flex flex-col space-y-16 ">
                                 <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
-                                    {state.map((s, i) => (
-                                        <div key={i} className="w-16 h-16 mx-2">
-                                            <input
-                                                ref={inputRefs[i]}
-                                                maxLength={1}
-                                                value={s}
-                                                onChange={(e) => handleChange(e, i)}
-                                                className="w-full h-full flex flex-col items-center justify-center text-center outline-none rounded-xl border border-gray-200 text-lg bg-white dark:bg-[#020817]  focus:bg-gray-50 focus:ring-1 ring-blue-700"
-                                                type="text"
-                                            />
-                                        </div>
-                                    ))}
+                                {state.map((s, i) => (
+                                    <div key={i} className="w-16 h-16 mx-2">
+                                        <input
+                                            ref={ref => inputRefs[i] = { current: ref }}
+                                            maxLength={1}
+                                            value={s}
+                                            onChange={(e) => handleChange(e, i)}
+                                            className="w-full h-full flex flex-col items-center justify-center text-center outline-none rounded-xl border border-gray-200 text-lg bg-white dark:bg-[#020817]  focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                                            type="text"
+                                        />
+                                    </div>
+                                ))}
                                 </div>
 
                                 <div className="flex flex-col space-y-5">

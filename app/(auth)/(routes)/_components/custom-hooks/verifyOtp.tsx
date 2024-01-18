@@ -5,6 +5,7 @@ const VerifyOtpFunction = (state: string[], phoneNumber: string, firstName: stri
     const verifyOtp = async () => {
         try {
             const otp = state.join('')
+            console.log(state, 'from verify otp')
             const response = await VerifyOtp(phoneNumber, otp)
             if (response.status == 200) {
                 const createUser = await CreateUser({ phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, password: password, role: 0 })

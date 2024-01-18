@@ -3,6 +3,7 @@ import { ValidatePhoneNumber, VerifyOtp } from '@/service/axios-services/dataFet
 
 const OtpVerifyHook = (state:any, phoneNumber: string, success: any, failed: any, setToggle: any) => {
     const handleSendMobile = async () => {
+        console.log("Its reacing here atleast!!, in teh otpverify hook:")
         try {
             if (validateMobile(phoneNumber)) {
                 const checkPhone = await ValidatePhoneNumber(phoneNumber)

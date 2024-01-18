@@ -28,6 +28,7 @@ const ResetPasswordForm = ({
     const [toggle, setToggle] = useState<boolean>(false)
 
     const handlePasswordReset = async (e: any) => {
+        e.preventDefault()
         await PasswordReset(password, phoneNumber, confirmPassword , successToast, customToast, push, e)
     }
 
