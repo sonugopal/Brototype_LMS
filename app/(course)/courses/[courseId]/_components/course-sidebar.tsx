@@ -1,14 +1,14 @@
-import { auth } from "@clerk/nextjs";
 import { Chapter, Course, UserProgress } from "@prisma/client";
 import { redirect } from "next/navigation";
-
 import { db } from "@/lib/db";
 import { CourseProgress } from "@/components/course-progress";
-
 import { CourseSidebarItem } from "./course-sidebar-item";
 import { Logo } from "@/components/ui/logo";
-
 import Link from "next/link";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { Userid } from "@/interfaces/UserInterface";
+
 interface CourseSidebarProps {
   course: Course & {
     chapters: (Chapter & {
@@ -22,7 +22,9 @@ export const CourseSidebar = async ({
   course,
   progressCount,
 }: CourseSidebarProps) => {
-  const { userId } = auth();
+
+  const session: Userid | null = await getServerSession(authOption)
+  const userId = await session?.user?.userid;
 
   if (!userId) {
     return redirect("/");

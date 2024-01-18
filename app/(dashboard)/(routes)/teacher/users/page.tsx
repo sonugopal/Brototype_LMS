@@ -1,13 +1,18 @@
-import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 import { db } from "@/lib/db";
 
 import { DataTable } from "./_components/data-table";
 import { columns } from "./_components/columns";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { Userid } from "@/interfaces/UserInterface";
 
 const UsersPage = async () => {
-  const { userId } = auth();
+
+  const session: Userid | null = await getServerSession(authOption)
+
+  const userId = await session?.user.userid
 
   if (!userId) {
     return redirect("/");

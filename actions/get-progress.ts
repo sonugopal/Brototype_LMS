@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
 
 export const getProgress = async (
-  userId: string,
+  userId: string | null | undefined,
   courseId: string,
 ): Promise<number> => {
   try {
@@ -19,7 +19,7 @@ export const getProgress = async (
 
     const validCompletedChapters = await db.userProgress.count({
       where: {
-        userId: userId,
+        userId: userId!,
         chapterId: {
           in: publishedChapterIds,
         },

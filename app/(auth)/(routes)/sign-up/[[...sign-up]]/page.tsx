@@ -1,5 +1,9 @@
-import { SignUp } from "@clerk/nextjs";
+import { SingUpForm } from "../../_components/sign-up-form";
 
-export default function Page() {
-  return <SignUp afterSignUpUrl="/postsignup" />;
+const SignUpPage = () => {
+    return ( 
+        <SingUpForm/>
+     );
 }
+ 
+export default SignUpPage;

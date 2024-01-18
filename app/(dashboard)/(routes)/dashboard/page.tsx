@@ -1,14 +1,18 @@
-import { auth, clerkClient } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { CheckCircle, Clock } from "lucide-react";
 import { db } from "@/lib/db";
+
 import { getDashboardCourses } from "@/actions/get-dashboard-courses";
 import { CoursesList } from "@/components/courses-list";
 
 import { InfoCard } from "./_components/info-card";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
+import { Userid } from '@/interfaces/UserInterface'
 
 export default async function Dashboard() {
-  const { userId } = auth();
+  const session: Userid | null = await getServerSession(authOption)
+  const userId = await session?.user.userid
 
   if (!userId) {
     return redirect("/");
