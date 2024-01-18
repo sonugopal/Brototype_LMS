@@ -21,7 +21,7 @@ export async function POST(req: Request) {
         }
 
 
-        const request = await axios.post(`${process.env.BASE_URL}/api/auth/send-otp`, { phoneNumber: phoneNumber})
+        const request = await axios.post('http://localhost:3000/api/auth/send-otp', { phoneNumber: phoneNumber})
         if (request.status == 200) {
             return NextResponse.json({
                 user: checkExistingUser.firstName,
