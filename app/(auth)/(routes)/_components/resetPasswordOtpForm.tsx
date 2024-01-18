@@ -1,22 +1,20 @@
-import { useCustomToast } from "@/components/custom/custom-toast";
-import { useSuccessToast } from "@/components/custom/success-toast";
+import { CustomToast } from "@/components/custom/custom-toast";
+import { SuccessToast } from "@/components/custom/success-toast";
 import Link from "next/link";
 import { Otptimer } from "otp-timer-ts";
 import { useRef, useState } from "react";
 import OtpVerifyHook from "./custom-hooks/forgot-pass-form/otpVerifyHook";
 
 const ResetPasswordOtpForm = ({phoneNumber, setToggle}: any) => {
-    console.log("From the reset pass form: ", phoneNumber)
+    const inputRefs: { [key: number]: React.RefObject<HTMLInputElement> } = {};
     const [state, setState] = useState(Array(4).fill(''));
-    const inputRefs = Array.from({ length: 4 }).map(() => useRef<HTMLInputElement | null>(null));
 
-    const success = useSuccessToast();
-    const failed = useCustomToast();
+    const success = SuccessToast();
+    const failed = CustomToast();
 
     // for otp verification and resending
     const handleSubmit = async () => {
         await OtpVerifyHook(state, phoneNumber, success, failed, setToggle)
-
     }
 
     const handleChange = (e: any, i: any) => {
@@ -47,7 +45,7 @@ const ResetPasswordOtpForm = ({phoneNumber, setToggle}: any) => {
                     </div>
 
                     <div>
-                        <form action="" method="post">
+                        <form>
                             <div className="flex flex-col space-y-16 ">
                                 <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                                     {state.map((s, i) => (
@@ -72,7 +70,7 @@ const ResetPasswordOtpForm = ({phoneNumber, setToggle}: any) => {
                                     </div>
 
                                     <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                                        <p>Didn't recieve code?</p><Otptimer text="" onResend={handleSubmit} seconds={60} />
+                                        <p>Didn&apos;t recieve code?</p><Otptimer text="" onResend={handleSubmit} seconds={60} />
                                     </div>
                                     <div className="flex items-center justify-center">
                                         <Link href={`sign-in`}>

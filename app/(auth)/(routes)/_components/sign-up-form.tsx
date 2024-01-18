@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { OtpForm } from "./otp-form";
 import Link from "next/link";
-import { useCustomToast } from "@/components/custom/custom-toast";
+import { CustomToast } from "@/components/custom/custom-toast";
 import { FormLogo } from "@/components/ui/logo";
-import useSendOtp from "./custom-hooks/sign-up-form/sendOtpHook";
-import { useSuccessToast } from "@/components/custom/success-toast";
+import SendOtp from "./custom-hooks/sign-up-form/sendOtpHook";
+import { SuccessToast } from "@/components/custom/success-toast";
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
@@ -19,15 +19,15 @@ export const SingUpForm = () => {
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>('')
 
-    const toast = useCustomToast()
-    const successToast = useSuccessToast()
+    const toast = CustomToast()
+    const successToast = SuccessToast()
 
     const [toggle, setToggle] = useState(false)
 
     const handleSendOTP = async (e: any) => {
         e.preventDefault()
         console.log("phone number: ", phoneNumber)
-        await useSendOtp(firstName, lastName, phoneNumber, password, confirmPassword, successToast, toast, toggle, setToggle)
+        await SendOtp(firstName, lastName, phoneNumber, password, confirmPassword, successToast, toast, toggle, setToggle)
     }
 
     return (

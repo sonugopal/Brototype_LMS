@@ -1,6 +1,6 @@
 import { CreateUser, Sendotp } from '@/service/axios-services/dataFetching';
 
-const useResendOtp = (phoneNumber: string, firstName:string, lastName:string, password:string,  success: any, failed: any) => {
+const ResendOtp = (phoneNumber: string, firstName:string, lastName:string, password:string,  success: any, failed: any) => {
     const handleResendToken = async () => {
         try {
             const request = await Sendotp({ phoneNumber: phoneNumber })
@@ -18,4 +18,4 @@ const useResendOtp = (phoneNumber: string, firstName:string, lastName:string, pa
     handleResendToken()
 };
 
-export default useResendOtp;
+export default ResendOtp;

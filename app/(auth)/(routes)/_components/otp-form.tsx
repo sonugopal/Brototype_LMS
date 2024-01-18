@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Otptimer } from "otp-timer-ts";
-import { useCustomToast } from "@/components/custom/custom-toast";
-import { useSuccessToast } from "@/components/custom/success-toast";
-import useVerifyOtp from "./custom-hooks/verifyOtp";
-import useResendOtp from "./custom-hooks/resendOtp";
+import { CustomToast } from "@/components/custom/custom-toast";
+import { SuccessToast } from "@/components/custom/success-toast";
+import VerifyOtpFunction from "./custom-hooks/verifyOtp";
+import ResendOtp from "./custom-hooks/resendOtp";
 
 interface OtpInterface {
     phoneNumber: string
@@ -24,26 +24,24 @@ export const OtpForm = ({
     password,
 }: OtpInterface) => {
 
-    // new 
+    const inputRefs: { [key: number]: React.RefObject<HTMLInputElement> } = {};
     const [state, setState] = useState(Array(4).fill(''));
-    const inputRefs = Array.from({ length: 4 }).map(() => useRef<HTMLInputElement | null>(null));
+  
 
     const router = useRouter()
-    const success = useSuccessToast();
-    const failed = useCustomToast();
+    const success = SuccessToast();
+    const failed = CustomToast();
 
     // for otp verification and resending
     const handleSubmit = async (e: any) => {
         e.preventDefault()
-        await useVerifyOtp(state, phoneNumber, firstName, lastName, password, success, failed, router)
+        await VerifyOtpFunction(state, phoneNumber, firstName, lastName, password, success, failed, router)
     }
 
 
     const handleResendToken = async () => {
-        await useResendOtp(phoneNumber, firstName, lastName, password, success, failed)
+        await ResendOtp(phoneNumber, firstName, lastName, password, success, failed)
     }
-
-
 
     const handleChange = (e: any, i: any) => {
         const value = e.target.value;
@@ -98,7 +96,7 @@ export const OtpForm = ({
                                     </div>
 
                                     <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
-                                        <p>Didn't recieve code?</p><Otptimer text="" onResend={handleResendToken} seconds={60} />
+                                        <p>Didn&apos;t recieve code?</p><Otptimer text="" onResend={handleResendToken} seconds={60} />
                                     </div>
                                     <div className="flex items-center justify-center">
                                         <Link href={`sign-in`}>

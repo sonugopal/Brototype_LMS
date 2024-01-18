@@ -2,8 +2,8 @@
 import { validatePassword } from '@/components/validations';
 import { UpdatePassword } from '@/service/axios-services/dataFetching';
 
-// Define the usePasswordReset function
-const usePasswordReset = (password: string, phoneNumber: string, confirmPassword: string, success: any, failed: any, push: any, e:any) => {
+// Define the PasswordReset function
+const PasswordReset = (password: string, phoneNumber: string, confirmPassword: string, success: any, failed: any, push: any, e:any) => {
     // Define the handlePasswordReset function
     console.log("passwords: ", password, confirmPassword)
     const handlePasswordReset = async (e:any) => {
@@ -34,5 +34,5 @@ const usePasswordReset = (password: string, phoneNumber: string, confirmPassword
     handlePasswordReset(e);
 };
 
-// Export the usePasswordReset function
-export default usePasswordReset;
+// Export the PasswordReset function
+export default PasswordReset;

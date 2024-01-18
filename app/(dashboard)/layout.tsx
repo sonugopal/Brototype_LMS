@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Navbar } from "./_components/navbar";

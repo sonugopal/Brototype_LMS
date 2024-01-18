@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import ResetPasswordForm from "./reset-pass-form";
 import Link from "next/link";
-import { useCustomToast } from "@/components/custom/custom-toast";
-import { useSuccessToast } from "@/components/custom/success-toast";
-import useSendToMobile from "./custom-hooks/forgot-pass-form/otpResetPassHook";
+import { CustomToast } from "@/components/custom/custom-toast";
+import { SuccessToast } from "@/components/custom/success-toast";
+import SendToMobile from "./custom-hooks/forgot-pass-form/otpResetPassHook";
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/style.css';
 
@@ -16,12 +16,12 @@ const ForgotPasswordForm = () => {
     const [mobile, setMobile] = useState<string>('')
     const [toggle, setToggle] = useState<boolean>(false)
 
-    const customToast = useCustomToast()
-    const successToast = useSuccessToast()
+    const customToast = CustomToast()
+    const successToast = SuccessToast()
 
     const handleSendToMobile = async (e: any) => {
         e.preventDefault()
-        await useSendToMobile(mobile, successToast, customToast, setToggle)
+        await SendToMobile(mobile, successToast, customToast, setToggle)
     }
 
     return (
