@@ -1,20 +1,16 @@
-// import Mux from "@mux/mux-node";
-import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
-
 import { db } from "@/lib/db";
-
-// const { Video } = new Mux(
-//   process.env.MUX_TOKEN_ID!,
-//   process.env.MUX_TOKEN_SECRET!,
-// );
+import { Userid } from "@/interfaces/UserInterface";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
 
 export async function DELETE(
   req: Request,
   { params }: { params: { courseId: string; chapterId: string } }
 ) {
   try {
-    const { userId } = auth();
+    const session: Userid | null = await getServerSession(authOption);
+    const userId = await session?.user.userid;
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });

@@ -1,14 +1,17 @@
-import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 
 import { db } from "@/lib/db";
+import { Userid } from "@/interfaces/UserInterface";
+import { getServerSession } from "next-auth";
+import { authOption } from "@/app/api/auth/[...nextauth]/route";
 
 export async function POST(
   req: Request,
   { params }: { params: { courseId: string } }
 ) {
   try {
-    const { userId } = auth();
+    const session: Userid | null = await getServerSession(authOption);
+    const userId = await session?.user.userid;
     const { url } = await req.json();
 
     if (!userId) {
