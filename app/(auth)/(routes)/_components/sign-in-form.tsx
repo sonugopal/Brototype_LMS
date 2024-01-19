@@ -25,7 +25,7 @@ export const SingInForm = (props: Props) => {
             phoneNumber: phoneNumber,
             password: password,
             redirect: true,
-            callbackUrl: props.callbackUrl ?? process.env.BASE_URL
+            callbackUrl: process.env.BASE_URL
         })
     }
 
