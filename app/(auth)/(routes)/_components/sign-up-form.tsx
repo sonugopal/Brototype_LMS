@@ -112,11 +112,9 @@ export const SingUpForm = () => {
                                         {loading ? 'Please wait' : 'Send OTP'}
                                     </Button>
                                 </span>
-                                <span className="block w-full rounded-md shadow-sm mt-2">
+                                <span className="block w-full text-center rounded-md shadow-sm mt-2">
                                     <Link href={`sign-in`}>
-                                        <Button className="w-full dark:text-white bg-green-500 hover:bg-green-600 dark:dark:bg-gray-600 dark:hover:bg-slate-700">
                                             Already have an account? Login
-                                        </Button>
                                     </Link>
                                 </span>
 
