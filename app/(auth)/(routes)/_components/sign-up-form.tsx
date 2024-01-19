@@ -22,11 +22,17 @@ export const SingUpForm = () => {
     const toast = CustomToast()
     const successToast = SuccessToast()
 
-    const [toggle, setToggle] = useState(false)
+    const [toggle, setToggle] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false)
 
     const handleSendOTP = async (e: any) => {
         e.preventDefault()
-        await SendOtp(firstName, lastName, phoneNumber, password, confirmPassword, successToast, toast, toggle, setToggle)
+        try{
+            setLoading(true)
+            await SendOtp(firstName, lastName, phoneNumber, password, confirmPassword, successToast, toast, toggle, setToggle, setLoading)
+        }catch(error){
+            console.log("Error:", error)
+        }
     }
 
     return (
@@ -103,7 +109,7 @@ export const SingUpForm = () => {
                             <div className="mt-6">
                                 <span className="block w-full rounded-md shadow-sm">
                                     <Button onClick={handleSendOTP} className="w-full bg-blue-500 hover:bg-blue-600 dark:bg-[#0369A1] dark:hover:bg-[#00264D] dark:text-white">
-                                        Send Otp
+                                        {loading ? 'Please wait' : 'Send OTP'}
                                     </Button>
                                 </span>
                                 <span className="block w-full rounded-md shadow-sm mt-2">

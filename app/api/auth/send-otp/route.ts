@@ -4,12 +4,16 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request, res: NextApiResponse) {
 
+    let initialize = false
     const { phoneNumber } = await req.json();
 
-    try {
-        // Initialize MSG91 client
-        msg91.initialize({authKey: process.env.MSG91_AUTH_KEY!});
 
+    try {
+        if (!initialize){
+            msg91.initialize({authKey: process.env.MSG91_AUTH_KEY!});
+            initialize = true
+        }
+        
         // Get the OTP service from MSG91
         let otp = msg91.getOTP(process.env.MSG91_OTP_TEMPLATE_ID!);
 
