@@ -1,4 +1,4 @@
-import {Sendotp, ValidatePhoneNumber } from '@/service/axios-services/dataFetching';
+import {Sendotp, SignUpValidation, ValidatePhoneNumber } from '@/service/axios-services/dataFetching';
 import userInputValidation from './input-validation';
 
 const SendOtp = (firstName: string, lastName: string, phoneNumber: string, password: string, confirmPassword: string, success: any, failed: any, toggle: boolean, setToggle: any, setLoading: any) => {
@@ -6,8 +6,8 @@ const SendOtp = (firstName: string, lastName: string, phoneNumber: string, passw
         const verify = await userInputValidation(firstName, phoneNumber, password, confirmPassword, failed)
         if (verify) {
             try {
-              const userValidation = await ValidatePhoneNumber(phoneNumber)
-              if (userValidation.status == 404){
+              const userValidation = await SignUpValidation(phoneNumber)
+              if (userValidation.status == 200){
                 const request = await Sendotp({ phoneNumber: phoneNumber })
                 if (request.status == 200) {
                     await success({message: 'An otp has been send to your mobile number'})
