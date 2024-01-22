@@ -91,10 +91,18 @@ const ValidatePhoneNumber = async (phoneNumber: string) => {
         const response = await apiService.post('api/user/validate-phone', {phoneNumber: phoneNumber})
         return response
     }catch(error){
-        console.log(error)
+        throw error
+    }
+}
+
+const SignUpValidation = async (phoneNumber: string) => {
+    try{
+        const response = await apiService.post('api/user/signup-validation', {phoneNumber: phoneNumber})
+        return response
+    }catch(error){
         throw error
     }
 }
 
 
-export { login, CreateUser, Sendotp, VerifyOtp, UpdatePassword, ForgotPassword, ValidatePhoneNumber };
+export { login, CreateUser, Sendotp, VerifyOtp, UpdatePassword, ForgotPassword, ValidatePhoneNumber, SignUpValidation };
