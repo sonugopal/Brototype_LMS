@@ -51,11 +51,11 @@ const ResetPasswordForm = ({
                                     <label className="block text-sm font-medium leading-5 text-gray-700 dark:text-white">
                                         Password
                                     </label>
-                                    <input onChange={(e) => setConfirmPassword(e.target.value)} placeholder="New Password" type="text" className="appearance-none block w-full px-3 py-2 border dark:bg-[#020817] rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    <input onChange={(e) => setConfirmPassword(e.target.value)} placeholder="New Password" type="password" className="appearance-none block w-full px-3 py-2 border dark:bg-[#020817] rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                     <label className="block text-sm font-medium leading-5 text-gray-700 dark:text-white">
                                         Confirm Password
                                     </label>
-                                    <input onChange={(e) => setPassword(e.target.value)} placeholder="Confirm Password" type="text" className="appearance-none block w-full px-3 py-2 border dark:bg-[#020817] rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    <input onChange={(e) => setPassword(e.target.value)} placeholder="Confirm Password" type="password" className="appearance-none block w-full px-3 py-2 border dark:bg-[#020817] rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                     <span className="block w-full rounded-md shadow-sm">
                                         <Button onClick={(e) => handlePasswordReset(e)} className="w-full dark:text-white bg-blue-500 hover:bg-blue-600 dark:bg-[#0369A1] dark:hover:bg-[#00264D]">
                                             Confirm Reset Password

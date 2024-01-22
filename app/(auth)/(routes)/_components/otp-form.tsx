@@ -45,17 +45,41 @@ export const OtpForm = ({
 
     const handleChange = (e: any, i: any) => {
         const value = e.target.value;
+    
         setState(prevState => {
             const newState = [...prevState];
             newState[i] = value;
             return newState;
         });
-
+    
         if (value && i < 5 && inputRefs[i + 1] && inputRefs[i + 1].current) {
             inputRefs[i + 1].current!.focus(); // Focus on the next field after entering a value
         }
+    
+        if (!value && i > 0 && inputRefs[i - 1] && inputRefs[i - 1].current) {
+            inputRefs[i - 1].current!.focus(); // Focus on the previous field when deleting
+        }
     };
 
+    const handleKeyDown = (e: any, i: any) => {
+        if ((e.key === 'Backspace' || e.key === 'Delete') && i > 0 && inputRefs[i - 1] && inputRefs[i - 1].current) {
+            if (state[i]) {
+                setState(prevState => {
+                    const newState = [...prevState];
+                    newState[i] = '';
+                    return newState;
+                });
+            }
+            else {
+                setState(prevState => {
+                    const newState = [...prevState];
+                    newState[i - 1] = '';
+                    return newState;
+                });
+                inputRefs[i - 1].current!.focus();
+            }
+        }
+    };
 
     return (
         <div className="relative flex  flex-col justify-center overflow-hidden bg-[#F9FAFB] dark:bg-[#020817]  py-28 px-24">
@@ -81,8 +105,9 @@ export const OtpForm = ({
                                             maxLength={1}
                                             value={s}
                                             onChange={(e) => handleChange(e, i)}
+                                            onKeyDown={(e) => handleKeyDown(e, i)}
                                             className="w-full h-full flex flex-col items-center justify-center text-center outline-none rounded-xl border border-gray-200 text-lg bg-white dark:bg-[#020817]  focus:bg-gray-50 focus:ring-1 ring-blue-700"
-                                            type="text"
+                                            type="tel"
                                         />
                                     </div>
                                 ))}

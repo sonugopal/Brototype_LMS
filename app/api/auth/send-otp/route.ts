@@ -10,7 +10,7 @@ export async function POST(req:Request, res: NextResponse) {
     };
 
     try {
-        const url = `https://control.msg91.com/api/v5/otp?template_id=${template_id}&mobile=${phoneNumber}&otp_length=4&otp_expiry=5`;
+        const url = `${process.env.MSG91_BASEURL!}?template_id=${template_id}&mobile=${phoneNumber}&otp_length=4&otp_expiry=5`;
         const datas = {
             Param1: "Student",
         };

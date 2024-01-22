@@ -9,7 +9,7 @@ export async function POST(req: Request, res: NextResponse) {
     };
 
     try {
-        const url = `https://control.msg91.com/api/v5/otp/verify?mobile=${phoneNumber}&otp=${otp}&authkey=${process.env.MSG91_AUTH_KEY!}`;
+        const url = `${process.env.MSG91_BASEURL!}/verify?mobile=${phoneNumber}&otp=${otp}&authkey=${process.env.MSG91_AUTH_KEY!}`;
         const { data } = await axios.get(url, { headers });
 
         if (data.type === "error") throw new Error(data.message);
