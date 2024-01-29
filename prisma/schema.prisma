@@ -24,6 +24,7 @@ model Course {
   chapters Chapter[]
   attachments Attachment[]
   purchases Purchase[]
+  certificates Certificate[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -43,7 +44,8 @@ model User {
   lastName String?
   phoneNumber String @unique
   password String
-  createdAt DateTime @default(now()) 
+  createdAt DateTime @default(now())
+  certificates Certificate[]
   role Int @default(0)
 }
 
@@ -80,6 +82,33 @@ model Chapter {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  quizzes QuizAndOptions[]
+
+  @@index([courseId])
+}
+
+model QuizAndOptions {
+  id String @id @default(uuid())
+  chapterId String
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  quizzQuestion String
+  option1 String
+  option2 String
+  option3 String
+  option4 String
+  correctOption Int @default(1)
+
+  @@index([chapterId])
+}
+
+model Certificate {
+  id String @id @default(uuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  courseId String
+  course Course @relation(fields: [courseId], references: [id])
+
+  @@index([userId, courseId])
   @@index([courseId])
 }
 
@@ -100,6 +129,7 @@ model UserProgress {
   chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 
   isCompleted Boolean @default(false)
+  quizPassed Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

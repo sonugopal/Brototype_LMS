@@ -14,6 +14,7 @@ import { ChapterActions } from "./_components/chapter-actions";
 import { getServerSession } from "next-auth";
 import { authOption } from "@/app/api/auth/[...nextauth]/route";
 import { Userid } from "@/interfaces/UserInterface";
+import { ChapterQuizForm } from "./_components/chapter-quiz-form";
 
 const ChapterIdPage = async ({
   params,
@@ -96,6 +97,11 @@ const ChapterIdPage = async ({
                 chapterId={params.chapterId}
               />
               <ChapterDescriptionForm
+                initialData={chapter}
+                courseId={params.courseId}
+                chapterId={params.chapterId}
+              />
+              <ChapterQuizForm
                 initialData={chapter}
                 courseId={params.courseId}
                 chapterId={params.chapterId}
