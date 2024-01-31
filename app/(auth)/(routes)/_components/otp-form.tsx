@@ -82,8 +82,8 @@ export const OtpForm = ({
     };
 
     return (
-        <div className="relative flex  flex-col justify-center overflow-hidden bg-[#F9FAFB] dark:bg-[#020817]  py-28 px-24">
-            <div className="relative bg-white dark:bg-[#020817] dark:border-2 dark:shadow-[#0369A1] dark:border-[#0369A1] px-6 pt-10 pb-9 border-1  mx-auto w-full max-w-lg rounded-2xl">
+        <div className="relative flex  flex-col justify-center overflow-hidden bg-black py-28 px-24">
+            <div className="relative bg-black px-6 pt-10 pb-9 border-1  mx-auto w-full max-w-lg rounded-2xl">
                 <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
                     <div className="flex flex-col items-center justify-center text-center space-y-2">
                         <div className="font-semibold text-3xl">
@@ -106,7 +106,7 @@ export const OtpForm = ({
                                             value={s}
                                             onChange={(e) => handleChange(e, i)}
                                             onKeyDown={(e) => handleKeyDown(e, i)}
-                                            className="w-full h-full flex flex-col items-center justify-center text-center outline-none rounded-xl border border-gray-200 text-lg bg-white dark:bg-[#020817]  focus:bg-gray-50 focus:ring-1 ring-blue-700"
+                                            className="w-full h-full flex flex-col items-center justify-center text-center outline-none rounded-xl border border-gray-200 text-lg bg-black  focus:ring-1 ring-blue-700"
                                             type="tel"
                                         />
                                     </div>
@@ -120,7 +120,7 @@ export const OtpForm = ({
                                         </button>
                                     </div>
 
-                                    <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
+                                    <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-white/80">
                                         <p>Didn&apos;t recieve code?</p><Otptimer text="" onResend={handleResendToken} seconds={60} />
                                     </div>
                                     <div className="flex items-center justify-center">

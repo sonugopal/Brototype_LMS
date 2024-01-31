@@ -47,7 +47,7 @@ const ChapterIdPage = async ({
   const completeOnEnd = !!purchase && !userProgress?.isCompleted;
 
   return (
-    <div className="dark:bg-[#151312]">
+    <div className="">
       {userProgress?.isCompleted && (
         <Banner variant="success" label="You already completed this chapter." />
       )}

@@ -1,6 +1,4 @@
 import { db } from "@/lib/db"
-import { request } from "http"
-import { NextApiRequest } from "next"
 import { NextResponse } from "next/server"
 
 export async function POST(req: Request){
@@ -16,7 +14,8 @@ export async function POST(req: Request){
                 option3: await data.option3,
                 option4: await data.option4,
                 correctOption: await data.correctOption,
-                chapterId: await data.chapterId
+                chapterId: await data.chapterId,
+                courseId: await data.courseId
             }
         })
 
@@ -28,17 +27,16 @@ export async function POST(req: Request){
     }
 }
 
-export async function GET(req: Request, {chapterId}: any){
+export async function GET(req: Request){
     try{
-       
+        const { searchParams } = new URL(req.url);
+        const chapterId = searchParams.get("chapterId");
 
         const response = await db.quizAndOptions.findMany({
             where: {
-                chapterId: chapterId
+                chapterId: chapterId!
             }
         })
-
-        console.log(response, 'frome the get function response')
 
         return NextResponse.json({data:response}, {status: 200})
     }catch(error){

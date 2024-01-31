@@ -15,7 +15,7 @@ interface Question {
     options: Option[];
 }
 
-const AddQuiz = ({ chapterId }: any) => {
+const AddQuiz = ({ chapterId, courseId }: any) => {
 
     const [questions, setQuestions] = useState<Question[]>([]);
     const [newQuestion, setNewQuestion] = useState<string>('');
@@ -31,7 +31,7 @@ const AddQuiz = ({ chapterId }: any) => {
             setPublishedQuestions(response.data.data)
         }
         fetchData()
-    })
+    }, [chapterId])
 
 
 
@@ -67,12 +67,14 @@ const AddQuiz = ({ chapterId }: any) => {
                 option2: question.options[1].text,
                 option3: question.options[2].text,
                 option4: question.options[3].text,
+                courseId: courseId,
                 correctOption: question.options.findIndex(option => option.isCorrect),
             };
 
             const response = await apiService.post('/api/courses/quiz', { data })
 
             if (response.status === 201) {
+                setQuestions([])
                 console.log('Success the question has been added!');
             } else {
                 console.log("Something went wrong while doing this operation")
@@ -193,26 +195,26 @@ const AddQuiz = ({ chapterId }: any) => {
 
                         </div>
                     </> :
-                    <div className='flex items-center'>
+                    <div className='flex flex-col'>
                         {publishedQuestion.length > 0 && publishedQuestion.map((question: any, index) => (
                             <div key={index}>
-                                <div className='flex my-2 justify-between'>
+                                <div className='flex flex-col mt-5 justify-between'>
                                     <div className='flex'>
                                         <h1>{index + 1}. </h1>
                                         <h2>{question.quizzQuestion}</h2>
                                     </div>
                                 </div>
-                                <div className='flex w-full h-full space-x-4 '>
+                                <div className='flex flex-col w-full h-full space-x-4 '>
                                     <RadioGroup>
-                                        <div className='flex justify-between my-2 w-[300px]'>
+                                        <div className='flex justify-between w-full'>
                                             <div className="flex flex-col items-center ">
-                                                <div className='flex justify-between my-4 w-[300px]'>
-                                                    <Label className={question.correctOption == '1' ? `text-green-400` : ''}>{question.option1}</Label>
-                                                    <Label className={question.correctOption == '2' ? `text-green-400` : ''}>{question.option2}</Label>
+                                                <div className='flex justify-start gap-x-20 my-4 w-[300px]'>
+                                                    <Label className={question.correctOption == '0' ? `text-green-400 w-full` : 'w-full'}>a) {question.option1}</Label>
+                                                    <Label className={question.correctOption == '1' ? `text-green-400 w-full` : 'w-full'}>b) {question.option2}</Label>
                                                 </div>
-                                                <div className='flex justify-between w-[300px]'>
-                                                    <Label className={question.correctOption == '3' ? `text-green-400` : ''}>{question.option3}</Label>
-                                                    <Label className={question.correctOption == '4' ? `text-green-400` : ''}>{question.option4}</Label>
+                                                <div className='flex justify-start gap-x-20 w-[300px]'>
+                                                    <Label className={question.correctOption == '2' ? `text-green-400 w-full` : 'w-full'}>c) {question.option3}</Label>
+                                                    <Label className={question.correctOption == '3' ? `text-green-400 w-full` : 'w-full'}>d) {question.option4}</Label>
                                                 </div>
                                             </div>
                                         </div>

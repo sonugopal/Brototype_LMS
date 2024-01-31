@@ -8,6 +8,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOption } from "@/app/api/auth/[...nextauth]/route";
 import { Userid } from "@/interfaces/UserInterface";
+import { Button } from "@/components/ui/button";
 
 interface CourseSidebarProps {
   course: Course & {
@@ -39,9 +40,16 @@ export const CourseSidebar = async ({
     },
   });
 
+  const Certificate = await db.certificate.findFirst({
+    where: {
+      courseId: course.id,
+      userId
+    }
+  })
+
   return (
-    <div className="h-full border-r scrollbar-none flex flex-col overflow-y-auto shadow-sm dark:bg-gradient-to-r from-transparent to-[#393838]/25">
-      <div className="p-8 flex flex-col border-b sticky top-0 dark:bg-[#12100F] bg-white">
+    <div className="h-full border-r scrollbar-none flex flex-col overflow-y-auto shadow-sm ">
+      <div className="p-8 flex flex-col border-b sticky top-0 bg-black">
         <div className="p-x-6 pb-3">
           <Link href={"/"}>
             <Logo />
@@ -49,8 +57,13 @@ export const CourseSidebar = async ({
         </div>
         <h1 className="font-semibold">{course.title}</h1>
         {purchase && (
-          <div className="mt-10">
-            <CourseProgress variant="success" value={progressCount} />
+          <div className="flex flex-col">
+            <div className="mt-4">
+              <CourseProgress variant="success" value={progressCount} />
+            </div>
+            <div>
+              {progressCount === 100 && Certificate ? <Button className="h-[30px] relative mt-3">Get Certificate</Button> : (progressCount === 100 ? <Link href={`/courses/quizpage/?courseId=${course.id}`}><Button className="h-[30px] relative mt-3">Take Quiz</Button></Link> : null) }
+            </div>
           </div>
         )}
       </div>

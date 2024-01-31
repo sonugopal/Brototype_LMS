@@ -57,7 +57,7 @@ export const ChapterQuizForm = ({
         </Button>
       </div>
       {isEditing && (
-         <AddQuiz chapterId={chapterId}/>
+         <AddQuiz chapterId={chapterId} courseId={courseId}/>
       )}
     </div>
   )

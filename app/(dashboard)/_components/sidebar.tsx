@@ -3,7 +3,7 @@ import { SidebarRoutes } from "./sidebar-routes";
 import Link from "next/link";
 export const Sidebar = () => {
   return (
-    <div className="h-full border-r flex flex-col overflow-y-auto shadow-sm dark:bg-gradient-to-r from-transparent to-[#393838]/25">
+    <div className="h-full text-white bg-black border-r flex flex-col overflow-y-auto shadow-sm ">
       <div className="p-6">
         <Link href={"/"}>
           <Logo />

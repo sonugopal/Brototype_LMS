@@ -39,7 +39,7 @@ model Category {
 }
 model User {
   id String @id @default(uuid())
-  userid String 
+  userid String @unique
   firstName String?
   lastName String?
   phoneNumber String @unique
@@ -91,6 +91,7 @@ model QuizAndOptions {
   id String @id @default(uuid())
   chapterId String
   chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  courseId String
   quizzQuestion String
   option1 String
   option2 String
@@ -104,7 +105,7 @@ model QuizAndOptions {
 model Certificate {
   id String @id @default(uuid())
   userId String
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [userid])
   courseId String
   course Course @relation(fields: [courseId], references: [id])
 

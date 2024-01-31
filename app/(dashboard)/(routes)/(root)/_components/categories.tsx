@@ -34,7 +34,7 @@ export const Categories = ({
   return (
     <div className="flex items-center gap-x-2 overflow-x-auto pb-2 scrollbar-none mx-7">
       {items?.map((item) => (
-        <span key={item.id} className="dark:hover:bg-[#53E59B]/10 hover:bg-[#46A9F5]/10 rounded-full">
+        <span key={item.id} className="dark:hover:bg-[#53E59B]/10 text-white/80 hover:bg-[#46A9F5]/10 rounded-full">
           <CategoryItem
           key={item.id}
           label={item.name}

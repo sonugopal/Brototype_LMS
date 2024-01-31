@@ -6,6 +6,7 @@ html,
 body,
 :root {
   height: 100%;
+  background-color: black;
 }
 
 ::-webkit-scrollbar {
@@ -23,7 +24,8 @@ body,
 ::-webkit-scrollbar-thumb:hover {
   background: #5e6067;
 }
- 
+
+
 
 
 @layer base {
