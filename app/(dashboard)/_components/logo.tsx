@@ -8,10 +8,10 @@ export const Logo = () => {
   const {theme} = useTheme()
   return (
     <Image
-        height={130}
-        width={130}
+        height={150}
+        width={150}
         alt="logo"
-        src={theme === 'light' ? "/logo.png" : "/logo-dark.png"}
+        src="/logo-dark.png"
       />
   )
 }

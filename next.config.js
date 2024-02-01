@@ -4,7 +4,8 @@ const nextConfig = {
     domains: [
       "utfs.io",
       'via.placeholder.com',
-      'cdn.pixabay.com'
+      'cdn.pixabay.com',
+      'i.postimg.cc'
     ],
   }
 }

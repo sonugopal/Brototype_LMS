@@ -4,7 +4,7 @@ import apiService from "@/service/apiService";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import CourseCertificate from "../[courseId]/_components/course-certificate";
+// import CourseCertificate from "../[courseId]/_components/course-certificate";
 
 const QuizPage = (req: Request) => {
 
@@ -65,7 +65,7 @@ const QuizPage = (req: Request) => {
             {
                 questions && questions.length > 0 ?
                     <>
-                        <CourseCertificate />
+                        {/* <CourseCertificate /> */}
                         <div className="h-full w-full flex flex-col items-center">
                             <div className="flex justify-center w-full">
                                 <h1 className="text-xl font-bold my-5">Certification Quiz</h1>

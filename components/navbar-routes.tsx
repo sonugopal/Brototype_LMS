@@ -59,7 +59,6 @@ export const NavbarRoutes = () => {
             </Button>
           </Link>
         ) : null}
-        <ModeToggle />
         {
           session?.user ?
           <DropdownMenu>
