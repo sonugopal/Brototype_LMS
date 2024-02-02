@@ -47,18 +47,15 @@ const ChapterIdPage = async ({
   const completeOnEnd = !!purchase && !userProgress?.isCompleted;
 
   return (
-    <div className="dark:bg-[#151312]">
-      {userProgress?.isCompleted && (
-        <Banner variant="success" label="You already completed this chapter." />
-      )}
+    <div className="relative z-50">
       {isLocked && (
         <Banner
           variant="warning"
           label="You need to enroll this course to watch this chapter."
         />
       )}
-      <div className="flex flex-col max-w-4xl mx-auto pb-20">
-        <div className="p-4">
+      <div className="flex flex-col max-w-6xl mx-5 pb-20">
+        <div className="p-4 border my-5">
           <VideoPlayer
             chapterId={params.chapterId}
             title={chapter.title}

@@ -54,12 +54,11 @@ export const NavbarRoutes = () => {
           </Link>
         ) : teacher ? (
           <Link href="/teacher/courses">
-            <Button size="sm" variant="ghost">
+            <Button className="text-white/80 hover:bg-none border-1 " size="sm" variant="ghost">
               Admin mode
             </Button>
           </Link>
         ) : null}
-        <ModeToggle />
         {
           session?.user ?
           <DropdownMenu>

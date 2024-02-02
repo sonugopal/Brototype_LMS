@@ -30,16 +30,21 @@ export const SearchInput = () => {
   }, [debouncedValue, currentCategoryId, router, pathname])
 
   return (
-    <div className="relative lg:ml-5">
-      <Search
-        className="h-4 w-4 absolute top-3 left-3 text-slate-600"
-      />
-      <Input
-        onChange={(e) => setValue(e.target.value)}
-        value={value}
-        className="lg:min-w-[500px] w-full md:w-[300px] pl-9 rounded-full focus:border-sky-700 dark:focus:border-green-700"
-        placeholder="Search for a course"
-      />
-    </div>
+    <>
+      {
+        !pathname.includes('/dashboard') ?
+          <div className="relative flex lg:ml-5">
+            <Input
+              onChange={(e) => setValue(e.target.value)}
+              value={value}
+              className="lg:min-w-[400px] w-full text-white md:w-[250px] relative bg-black pl-5 rounded-md  dark:focus:border-[#6100FF]/80"
+              placeholder="Search for a course"
+            />
+            <Search
+              className="h-4 w-4 absolute right-0 items-center m-3 text-white/80"
+            />
+          </div>: null
+      }
+    </>
   )
 }
