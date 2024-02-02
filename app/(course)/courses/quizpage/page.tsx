@@ -4,7 +4,7 @@ import apiService from "@/service/apiService";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logo from '@/public/logo-dark.png'
 // import CourseCertificate from "../[courseId]/_components/course-certificate";
 
@@ -49,16 +49,21 @@ const QuizPage = (req: Request) => {
         }
     };
 
+    const courseIdRef = useRef(courseId);
+
+    useEffect(() => {
+        courseIdRef.current = courseId;
+    }, [courseId]);
+
     useEffect(() => {
         const fetchData = async () => {
-            console.log(courseId, 'from the use efffect')
-            const response = await apiService.get(`/api/courses/quiz/quiz-page/?courseId=${courseId}`)
+            const response = await apiService.get(`/api/courses/quiz/quiz-page/?courseId=${courseIdRef.current}`)
             if (response.status == 200) {
                 setQuestions(response.data.data)
             }
         }
         fetchData()
-    }, [])
+    }, []);
 
 
 
@@ -107,7 +112,12 @@ const QuizPage = (req: Request) => {
                                 <button className="h-[40px] rounded-md my-8 w-[200px] bg-[#6100FF]" onClick={handleSubmit}>Submit</button>
                             </div>
                         </div>
-                    </> : <h1>Generating Quiz....</h1>
+                    </> :
+                    <div className="flex h-screen w-full items-center justify-center">
+                        <div className="flex justify-center items-center">
+                            <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
+                        </div>
+                    </div>
             }
         </div>
 
