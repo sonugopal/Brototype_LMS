@@ -40,42 +40,44 @@ const ForgotPasswordForm = () => {
 
                                 <div className="mt-5 z-50">
                                     <form>
-                                        <div className="grid gap-y-4">
-                                            <div className="relative h-full my-5 flex items-center justify-center w-full">
+                                        <div className="">
+                                            <div className="relative h-full top-0 my-5 flex items-center justify-center w-full">
                                                 <div className="absolute ">
-                                                    <Image className="w-full h-full" src="/Lamp7.svg" alt="Description of Image" width={600} height={200} />
+                                                    <Image src="/Lamp1.svg" alt="Description of Image" width={500} height={120} />
                                                 </div>
                                             </div>
-                                            <div className="sm:mx-auto sm:w-full z-50 sm:max-w-md pt-3">
-                                                <div className="flex z-50 items-center justify-center w-full h-full">
+                                            <div className="sm:mx-auto sm:w-full sm:max-w-md mt-3 z-50 pt-5">
+                                                <div className="flex items-center justify-center w-full h-full">
                                                     <FormLogo />
                                                 </div>
                                             </div>
-                                            <div className="mt-8">
-                                                <label className="block text-sm font-bold ml-1 mb-2 ">Mobile Number</label>
+                                            <div className="mt-6 z-50">
+                                                <label htmlFor="username" className="block text-sm font-medium leading-5 text-white/80">Mobile Number</label>
                                                 <div className="mt-1 flex rounded-md shadow-sm">
                                                     <PhoneInput
-                                                         buttonStyle={{ background: '#000000', color: '#fff' }}
-                                                         inputStyle={{ background: '#000000', color: '#fff' }}
-                                                         inputClass="py-5 min-w-full w-full px-3 border rounded-md ease-in-out sm:text-sm sm:leading-5"
-                                                         country={'in'}
-                                                         value={mobile}
-                                                        onChange={mobile => setMobile(mobile)}
+                                                        buttonStyle={{ background: '#000000', color: '#fff' }}
+                                                        inputStyle={{ background: '#000000', color: '#fff' }}
+                                                        inputClass="py-5 min-w-full w-full px-3 border rounded-md ease-in-out sm:text-sm sm:leading-5"
+                                                        country={'in'}
+                                                        value={mobile}
+                                                        onChange={phoneNumber => setMobile(phoneNumber)}
                                                     />
                                                 </div>
                                             </div>
-                                            <span className="block w-full rounded-md shadow-sm z-50">
-                                                <Button onClick={(e) => handleSendToMobile(e)} className="w-full dark:text-white bg-[#55637B] hover:bg-[#5d6d88] dark:hover:bg-[#00264D]">
-                                                    Reset Password
-                                                </Button>
-                                            </span>
-                                            <span className="w-full flex items-center justify-center rounded-md shadow-sm">
-                                                <Link href='sign-in'>
-                                                    <h1 className="w-full text-xs text-white/80">
-                                                        Back To Login
-                                                    </h1>
-                                                </Link>
-                                            </span>
+                                            <div className="z-50">
+                                                <span className="block w-full my-3 rounded-md shadow-sm z-50">
+                                                    <Button onClick={(e) => handleSendToMobile(e)} className="w-full dark:text-white bg-[#55637B] hover:bg-[#5d6d88] dark:hover:bg-[#00264D]">
+                                                        Reset Password
+                                                    </Button>
+                                                </span>
+                                                <span className="w-full my-3 flex items-center justify-center rounded-md shadow-sm">
+                                                    <Link href='sign-in'>
+                                                        <h1 className="w-full text-xs text-white/80">
+                                                            Back To Login
+                                                        </h1>
+                                                    </Link>
+                                                </span>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

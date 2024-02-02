@@ -37,26 +37,26 @@ export const CourseSidebarItem = ({
       className={cn(
         "flex items-center gap-x-2 text-slate-500 font-[500] pl-6 text-sm transition-all text-left",
         isActive &&
-          "text-sky-700 bg-sky-300/20 ",
-        isCompleted && "text-emerald-700 hover:text-emerald-700",
-        isCompleted && isActive && "bg-emerald-200/20 "
+          "text-sky-700 bg-white/20 ",
+        isCompleted && "text-white/70 hover:text-white",
+        isCompleted && isActive && "bg-[#FFFFFF]/20 "
       )}
     >
-      <div className="flex items-center gap-x-2 py-4">
+      <div className="flex items-center gap-x-2 text-white/70 py-4">
         <Icon
           size={22}
           className={cn(
-            "text-slate-500 dark:text-white/50 shrink-0",
-            isActive && "text-sky-700",
-            isCompleted && "text-emerald-700"
+            "text-white/70  shrink-0",
+            isActive && "text-white",
+            isCompleted && "text-white"
           )}
         />
-        <p>{label}</p>
+        <p className="hover:text-white">{label}</p>
       </div>
       <div
         className={cn(
           "ml-auto opacity-0 border-2 border-slate-700 h-full transition-all",
-          isActive && "opacity-100 border-sky-700 dark:border-green-800",
+          isActive && "opacity-100 border-[#6100FF]",
           isCompleted && "border-emerald-700"
         )}
       />

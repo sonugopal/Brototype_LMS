@@ -42,9 +42,9 @@ export const SingUpForm = () => {
 
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md rounded-lg ">
                     <div className="bg-black py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                        <div className="relative h-full my-5 flex items-center justify-center w-full">
-                            <div className="absolute ">
-                                <Image className="w-full h-full" src="/Lamp7.svg" alt="Description of Image" width={600} height={200} />
+                        <div className="relative top-10 h-full my-5 flex items-center justify-center w-full">
+                            <div className="absolute min-w-[400px]">
+                                <Image className="w-full h-full" src="/Lamp1.svg" alt="Description of Image" width={600} height={200} />
                             </div>
                         </div>
                         <div className="sm:mx-auto sm:w-full z-50 sm:max-w-md pt-3">
@@ -54,8 +54,8 @@ export const SingUpForm = () => {
                         </div>
                         <form className="z-50" method="POST" action="#">
                             <div className="z-50">
-                                <label htmlFor="email" className="block text-sm font-medium leading-5  text-white/80">First Name</label>
                                 <div className="mt-1 relative rounded-md shadow-sm">
+                                    <label htmlFor="email" className="block text-sm my-1 font-medium leading-5  text-white/80">First Name</label>
                                     <input onChange={(e) => setFirstName(e.target.value)} placeholder="John" type="text" className="appearance-none focus:border-blue-300 text-white block w-full px-3 py-2 border bg-black  rounded-md  focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                     <div className="hidden absolute inset-y-0 right-0 pr-3  items-center pointer-events-none">
                                         <svg className="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
@@ -68,8 +68,8 @@ export const SingUpForm = () => {
                                 </div>
                             </div>
                             <div className="my-5">
-                                <label htmlFor="email" className="block text-sm font-medium leading-5 text-white/80">Last Name</label>
                                 <div className="mt-1 relative rounded-md shadow-sm">
+                                    <label htmlFor="email" className="block text-sm my-1 font-medium leading-5 text-white/80">Last Name</label>
                                     <input onChange={(e) => setLastName(e.target.value)} id="last-name" name="last-name" placeholder="Doe" type="text" className="appearance-none bg-black text-white focus:border-blue-300 block w-full px-3 py-2 border  rounded-md  focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                     <div className="hidden absolute inset-y-0 right-0 pr-3  items-center pointer-events-none">
                                         <svg className="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">

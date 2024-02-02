@@ -9,6 +9,7 @@ import { getServerSession } from "next-auth";
 import { authOption } from "@/app/api/auth/[...nextauth]/route";
 import { Userid } from "@/interfaces/UserInterface";
 import { Button } from "@/components/ui/button";
+import { CourseSidebarProgress } from "@/components/course-sidebar-progress";
 
 interface CourseSidebarProps {
   course: Course & {
@@ -59,7 +60,7 @@ export const CourseSidebar = async ({
         {purchase && (
           <div className="flex flex-col">
             <div className="mt-4">
-              <CourseProgress variant="success" value={progressCount} />
+              <CourseSidebarProgress variant="success" value={progressCount} />
             </div>
             <div>
               {progressCount === 100 && Certificate ? <Button className="h-[30px] relative mt-3">Get Certificate</Button> : (progressCount === 100 ? <Link href={`/courses/quizpage/?courseId=${course.id}`}><Button className="h-[30px] relative mt-3">Take Quiz</Button></Link> : null) }

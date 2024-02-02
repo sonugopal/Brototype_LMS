@@ -35,9 +35,9 @@ export const SingInForm = (props: Props) => {
         <>
             <div className="min-h-screen w-[100vw] max-w-screen  bg-black  flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md shadow-lg  rounded-lg  flex flex-col">
-                    <div className="relative h-full top-0 my-5 flex items-center justify-center w-full">
+                    <div className="relative h-full top-10 my-5 flex items-center justify-center w-full">
                         <div className="absolute ">
-                            <Image  src="/Lamp7.svg" alt="Description of Image" width={500} height={120} />
+                            <Image  src="/Lamp1.svg" alt="Description of Image" width={500} height={120} />
                         </div>
                     </div>
                     <div className="sm:mx-auto sm:w-full sm:max-w-md mt-3 z-50 pt-5">

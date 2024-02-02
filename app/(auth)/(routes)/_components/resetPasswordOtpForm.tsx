@@ -69,8 +69,8 @@ const ResetPasswordOtpForm = ({ phoneNumber, setToggle }: any) => {
             <div className="relative bg-black  dark:border-2 px-6 pt-10 pb-9 border-1 shadow-md mx-auto w-full max-w-lg rounded-2xl">
                 <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
                     <div className="relative h-full top-0 my-5 flex items-center justify-center w-full">
-                        <div className="absolute ">
-                            <Image src="/Lamp7.svg" alt="Description of Image" width={500} height={120} />
+                        <div className="absolute min-w-[500px]">
+                            <Image src="/Lamp1.svg" alt="Description of Image" width={500} height={120} />
                         </div>
                     </div>
                     <div className="sm:mx-auto relative top-[-90px] sm:w-full sm:max-w-md  z-50 ">
@@ -88,7 +88,7 @@ const ResetPasswordOtpForm = ({ phoneNumber, setToggle }: any) => {
                     </div>
 
                     <form>
-                        <div className="flex flex-col relative top-[-100px] space-y-8 ">
+                        <div className="flex flex-col relative top-[-110px] space-y-8 ">
                             <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                                 {state.map((s, i) => (
                                     <div key={i} className="w-16 h-16 mx-2">

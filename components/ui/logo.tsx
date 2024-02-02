@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export const Logo = () => {
   const {theme} = useTheme()
-  return <Image height={130} width={130} alt="logo" src={theme === 'light' ? "/logo.png" : (theme === 'dark' ? '/logo-dark.png' : '/logo.png')} />;
+  return <Image height={130} width={130} alt="logo" src={'/logo-dark.png'} />;
 };
 
 
