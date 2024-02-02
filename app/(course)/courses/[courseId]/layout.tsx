@@ -56,12 +56,9 @@ const CourseLayout = async ({
 
   return (
     <ThemeProvider attribute='class' defaultTheme="system">
-      <div className="h-full ">
-        <div className="h-[80px] md:pl-80 fixed inset-y-0 w-full z-50">
-          <CourseNavbar
-            course={course}
-            progressCount={progressCount}
-          />
+      <div className="h-full relative">
+        <div className="h-[50px] flex right-10 justify-end items-center fixed inset-y-0 w-full z-50">
+         <h1>Back to Course</h1>
         </div>
         <div className="hidden md:flex h-full w-80 flex-col fixed inset-y-0 z-50">
           <CourseSidebar
@@ -69,7 +66,7 @@ const CourseLayout = async ({
             progressCount={progressCount}
           />
         </div>
-        <main className="md:pl-80 pt-[80px] h-full">
+        <main className="md:pl-80 pt-[50px] h-full">
           {children}
         </main>
       </div>

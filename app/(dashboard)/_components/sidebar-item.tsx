@@ -55,12 +55,8 @@ export const SidebarItem = ({
       </button>
       <div className="flex flex-col col-span-1 absolute bottom-5 items-start justify-start  w-full">
         <div className="ms-7">
-          <div className="flex cursor-pointer justify-between relative right-3 items-center w-full h-full my-3">
-            <ModeToggle />
-            <h1 className="">Theme</h1>
-          </div>
-          <div onClick={() => session?.user ? signOut() : null} className="flex justify-between cursor-pointer hover:text-red-500 items-center w-full h-full">
-            <LogOut className="h-5"/>
+          <div onClick={() => session?.user ? signOut() : null} className="flex justify-between cursor-pointer hover:text-red-500 items-center w-full my-2 h-full">
+            <LogOut className="h-5 mx-2"/>
             <h1 className="">Logout</h1>
           </div>
         </div>
