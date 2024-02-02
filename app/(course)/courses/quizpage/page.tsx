@@ -75,15 +75,15 @@ const QuizPage = (req: Request) => {
                                 <div className="flex justify-center w-full">
                                     <h1 className="text-[34px] font-bold my-5 sticky top-32">Certification Quiz</h1>
                                 </div>
-                                <div className="mt-10 h-full grid md:grid-cols-2 gap-x-24 gap-y-20 justify-center">
+                                <div className="mt-10 h-full grid md:grid-cols-1 w-[70%] gap-x-24 gap-y-20 justify-center">
                                     {
                                         questions.map((item: any, index) => {
                                             return (
                                                 <div className="flex flex-col items-start" key={item.id}>
-                                                    <div className="h-[40px] px-3 rounded-md flex items-center w-full bg-[#55637B]">
+                                                    <div className="p-2 rounded-md flex items-center w-full bg-[#55637B]">
                                                         <h1>{index + 1}. {item.quizzQuestion}</h1>
                                                     </div>
-                                                    <div className="grid mt-2">
+                                                    <div className="grid mt-2 ms-3">
                                                         {[item.option1, item.option2].map((option, i) => (
                                                             <div className="flex my-1" key={i}>
                                                                 <input className="h-7 text-red-600" type="radio" name={item.id} onChange={() => handleOptionChange(item.id, i)} />
@@ -91,7 +91,7 @@ const QuizPage = (req: Request) => {
                                                             </div>
                                                         ))}
                                                     </div>
-                                                    <div className="grid">
+                                                    <div className="grid ms-3">
                                                         {[item.option3, item.option4].map((option, i) => (
                                                             <div className="flex my-1" key={i + 2}>
                                                                 <input className="h-7 text-red-500" type="radio" name={item.id} onChange={() => handleOptionChange(item.id, i + 2)} />

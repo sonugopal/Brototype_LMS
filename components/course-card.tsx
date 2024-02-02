@@ -5,9 +5,7 @@ import Link from "next/link";
 import { PlayCircle } from "lucide-react";
 
 import { IconBadge } from "@/components/icon-badge";
-import { formatPrice } from "@/lib/format";
 import { CourseProgress } from "@/components/course-progress";
-import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 interface CourseCardProps {
@@ -38,6 +36,10 @@ export const CourseCard = ({
         <div className="relative w-full aspect-video rounded-t-md overflow-hidden">
           <Image onLoad={(e) => setTimeout(() => (e.target as HTMLElement).classList.remove('blur'), 1000)} fill className="object-cover rounded-b-none blur transition duration-500" alt={title} src={imageUrl} />
         </div>
+        {
+          progress !== 100 ?
+            <CourseProgress value={progress!} /> : null
+        }
         <div className="flex items-center gap-x-2 text-sm md:text-xs">
           <div className="flex items-center gap-x-1 rounded-b-md bg-[#42526C] text-white w-full p-2  ">
             <IconBadge size="sm" icon={PlayCircle} />

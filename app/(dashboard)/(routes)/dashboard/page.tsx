@@ -9,6 +9,7 @@ import { InfoCard } from "./_components/info-card";
 import { getServerSession } from "next-auth";
 import { authOption } from "@/app/api/auth/[...nextauth]/route";
 import { Userid } from '@/interfaces/UserInterface'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export default async function Dashboard() {
   const session: Userid | null = await getServerSession(authOption)
@@ -18,26 +19,30 @@ export default async function Dashboard() {
     return redirect("/");
   }
 
-  const { completedCourses, coursesInProgress } = await getDashboardCourses(
+  const { completedCourses, coursesInProgress }: any = await getDashboardCourses(
     userId
   );
 
   return (
     <div className="p-6 space-y-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <InfoCard
-          icon={Clock}
-          label="In Progress"
-          numberOfItems={coursesInProgress.length}
-        />
-        <InfoCard
-          icon={CheckCircle}
-          label="Completed"
-          numberOfItems={completedCourses.length}
-          variant="success"
-        />
+      <div className="grid grid-cols-1  gap-4">
+        <Tabs defaultValue="Enrolled" className="w-full">
+          <TabsList>
+            <TabsTrigger value="Enrolled">Enrolled</TabsTrigger>
+            <TabsTrigger value="In-Progress">In Progress</TabsTrigger>
+            <TabsTrigger value="Completed">Completed</TabsTrigger>
+          </TabsList>
+          <TabsContent className="h-full w-full" value="Enrolled">
+            <CoursesList items={[...coursesInProgress, ...completedCourses]} />
+          </TabsContent>
+          <TabsContent value="In-Progress">
+            <CoursesList items={[...coursesInProgress]} />
+          </TabsContent>
+          <TabsContent value="Completed">
+            <CoursesList items={[...completedCourses]} />
+          </TabsContent>
+        </Tabs>
       </div>
-      <CoursesList items={[...coursesInProgress, ...completedCourses]} />
     </div>
   );
 }

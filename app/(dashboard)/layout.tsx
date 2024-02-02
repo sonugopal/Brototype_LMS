@@ -5,6 +5,7 @@ import { Navbar } from "./_components/navbar";
 import { Sidebar } from "./_components/sidebar";
 import { motion, AnimatePresence } from "framer-motion"
 import Carousel from "./_components/carousal";
+import { usePathname } from "next/navigation";
 
 
 const DashboardLayout = ({
@@ -12,6 +13,11 @@ const DashboardLayout = ({
 }: {
   children: React.ReactNode;
 }) => {
+
+  const pathname = usePathname();
+  const showCarousel = pathname == '/';
+  const hideNavbar = pathname == '/teacher/courses' || pathname == '/teacher/users' || pathname == '/teacher/analytics'
+
   return (
     <ThemeProvider attribute='class' defaultTheme="system">
       <AnimatePresence>
@@ -22,16 +28,22 @@ const DashboardLayout = ({
           transition={{ type: 'easeInOut', duration: 0.8 }}
         >
           <div className="h-full w-full">
-            <div className="h-[80px] md:pl-56 fixed inset-y-0 w-full z-50">
-              <Navbar />
-            </div>
+            {
+              !hideNavbar ?
+                <div className="h-[80px] md:pl-56 fixed inset-y-0 w-full z-50">
+                  <Navbar />
+                </div> : null
+            }
             <div className="hidden md:flex h-full md:w-56 w-20 flex-col fixed inset-y-0 z-50">
               <Sidebar />
             </div>
             <main className="md:pl-56  h-full">
-              <div className={` md:mx-10 relative top-20 inset-y-0`}>
-                <Carousel />
-              </div>
+              {
+                showCarousel ?
+                  <div className={` md:mx-10 relative top-20 inset-y-0`}>
+                    <Carousel />
+                  </div> : null
+              }
               <div className="relative top-20">
                 {children}
               </div>
