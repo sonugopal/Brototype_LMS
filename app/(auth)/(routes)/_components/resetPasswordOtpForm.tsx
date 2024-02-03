@@ -87,7 +87,18 @@ const ResetPasswordOtpForm = ({ phoneNumber, setToggle }: any) => {
                         </div>
                     </div>
 
-                    <form>
+                    <form onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            const form = (e.target as HTMLInputElement).form;
+                            if (form) {
+                                const index = Array.prototype.indexOf.call(form, e.target);
+                                if (form.elements[index + 1]) {
+                                    (form.elements[index + 1] as HTMLInputElement).focus();
+                                }
+                            }
+                        }
+                    }}>
                         <div className="flex flex-col relative top-[-110px] space-y-8 ">
                             <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                                 {state.map((s, i) => (

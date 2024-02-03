@@ -40,11 +40,11 @@ const DashboardLayout = ({
             <main className="md:pl-56  h-full">
               {
                 showCarousel ?
-                  <div className={` mx-9 relative top-20 inset-y-0`}>
+                  <div className={` mx-9 relative top-20 inset-y-0 max-w-7xl`}>
                     <Carousel />
                   </div> : null
               }
-              <div className="relative top-20">
+              <div className="relative top-20 max-w-7xl">
                 {children}
               </div>
             </main>

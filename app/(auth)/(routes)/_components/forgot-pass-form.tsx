@@ -8,7 +8,7 @@ import { CustomToast } from "@/components/custom/custom-toast";
 import { SuccessToast } from "@/components/custom/success-toast";
 import SendToMobile from "./custom-hooks/forgot-pass-form/otpResetPassHook";
 import PhoneInput from "react-phone-input-2";
-import 'react-phone-input-2/lib/style.css';
+import "./inputField.css"
 import { FormLogo } from "@/components/ui/logo";
 import Image from "next/image";
 

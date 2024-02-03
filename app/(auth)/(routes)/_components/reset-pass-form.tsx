@@ -54,7 +54,18 @@ const ResetPasswordForm = ({
                         </div>
                         <div className="mt-7 relative top-10 md:mx-10 mx-14 rounded-xl shadow-lg  shadown-md  ">
                             <div className="p-4 sm:p-7">
-                                <form>
+                                <form onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        e.preventDefault();
+                                        const form = (e.target as HTMLInputElement).form;
+                                        if (form) {
+                                            const index = Array.prototype.indexOf.call(form, e.target);
+                                            if (form.elements[index + 1]) {
+                                                (form.elements[index + 1] as HTMLInputElement).focus();
+                                            }
+                                        }
+                                    }
+                                }}>
                                     <div className="grid gap-y-2">
                                         <div className="z-50">
                                             <label className="z-50 text-sm mb-1 font-medium leading-5  text-white/80">
