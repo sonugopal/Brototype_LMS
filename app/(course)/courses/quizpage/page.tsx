@@ -6,9 +6,8 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Logo from '@/public/logo-dark.png'
-// import CourseCertificate from "../[courseId]/_components/course-certificate";
 
-const QuizPage = (req: Request) => {
+const QuizPage = () => {
 
     const { data: session }: any = useSession()
 
