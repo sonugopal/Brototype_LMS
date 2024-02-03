@@ -9,7 +9,7 @@ import { FormLogo } from "@/components/ui/logo";
 import SendOtp from "./custom-hooks/sign-up-form/sendOtpHook";
 import { SuccessToast } from "@/components/custom/success-toast";
 import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import "./inputField.css"
 import Image from "next/image";
 
 export const SingUpForm = () => {
@@ -56,7 +56,20 @@ export const SingUpForm = () => {
                                         <FormLogo />
                                     </div>
                                 </div>
-                                <form className="z-50 mt-5 md:mx-5 mx-14" method="POST" action="#">
+                                <form
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            e.preventDefault();
+                                            const form = (e.target as HTMLInputElement).form;
+                                            if (form) {
+                                                const index = Array.prototype.indexOf.call(form, e.target);
+                                                if (form.elements[index + 1]) {
+                                                    (form.elements[index + 1] as HTMLInputElement).focus();
+                                                }
+                                            }
+                                        }
+                                    }}
+                                    className="z-50 mt-5 md:mx-5 mx-14" method="POST" action="#">
                                     <div className="z-50">
                                         <div className="mt-1 relative rounded-md shadow-sm">
                                             <label htmlFor="email" className="block text-sm my-1 font-medium leading-5  text-white/80">First Name</label>

@@ -33,7 +33,7 @@ export const SearchInput = () => {
     <>
       {
         !pathname.includes('/dashboard') ?
-          <div className="relative flex lg:ml-5">
+          <div className="relative mx-2 md:mx-0 flex lg:ml-5">
             <Input
               onChange={(e) => setValue(e.target.value)}
               value={value}

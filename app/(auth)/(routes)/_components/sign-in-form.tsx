@@ -6,8 +6,8 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { FormLogo } from "@/components/ui/logo";
 import PhoneInput from "react-phone-input-2";
-import 'react-phone-input-2/lib/style.css';
 import Image from "next/image";
+import "./inputField.css"
 
 
 type Props = {
@@ -33,11 +33,11 @@ export const SingInForm = (props: Props) => {
 
     return (
         <>
-            <div className="min-h-screen w-[100vw] max-w-screen  bg-black  flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <div className="min-h-screen w-[100vw] max-w-screen  bg-black relative left-5 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md shadow-lg  rounded-lg  flex flex-col">
                     <div className="relative h-full top-10 my-5 flex items-center justify-center w-full">
                         <div className="absolute min-w-[500px]">
-                            <Image  src="/Lamp1.svg" alt="Description of Image" width={500} height={120} />
+                            <Image src="/Lamp1.svg" alt="Description of Image" width={500} height={120} />
                         </div>
                     </div>
                     <div className="sm:mx-auto sm:w-full sm:max-w-md mt-3 z-50 pt-5">
@@ -49,14 +49,25 @@ export const SingInForm = (props: Props) => {
                         </div>
                     </div>
                     <div className=" py-8 px-4 z-50 sm:rounded-lg sm:px-10 md:mx-1 mx-10">
-                        <form className="z-50">
+                        <form className="z-50" onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                e.preventDefault();
+                                const form = (e.target as HTMLInputElement).form;
+                                if (form) {
+                                    const index = Array.prototype.indexOf.call(form, e.target);
+                                    if (form.elements[index + 1]) {
+                                        (form.elements[index + 1] as HTMLInputElement).focus();
+                                    }
+                                }
+                            }
+                        }}>
                             <div className="mt-6">
                                 <label htmlFor="mobile number" className="block text-xs font-medium leading-5 text-white/80">Mobile Number</label>
-                                <div style={{ boxShadow: '0 0 80px rgba(255, 255, 255, 0.5)' }} className="mt-1 flex rounded-md shadow-sm">
+                                <div style={{ boxShadow: '0 0 80px rgba(255, 255, 255, 0.5)' }} className="mt-1 w-full flex rounded-md shadow-sm">
                                     <PhoneInput
                                         buttonStyle={{ background: '#000000', color: '#fff' }}
                                         inputStyle={{ background: '#000000', color: '#fff' }}
-                                        inputClass="py-5 min-w-full w-full px-3 border rounded-md ease-in-out sm:text-sm sm:leading-5"
+                                        inputClass="py-5 w-full px-3 border rounded-md ease-in-out sm:text-sm sm:leading-5"
                                         country={'in'}
                                         value={phoneNumber}
                                         onChange={phoneNumber => setPhoneNumber(phoneNumber)}
@@ -79,9 +90,6 @@ export const SingInForm = (props: Props) => {
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <div className="mt-6">
                                 <span className="block w-full rounded-md shadow-sm">
                                     <Button onClick={onSubmit} className="w-full dark:text-white bg-gray-500 hover:bg-gray-600 ">
@@ -97,7 +105,6 @@ export const SingInForm = (props: Props) => {
                                 </span>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>

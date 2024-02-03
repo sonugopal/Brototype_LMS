@@ -23,7 +23,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 export const NavbarRoutes = () => {
 
-  const {data: session} : any = useSession()
+  const { data: session }: any = useSession()
 
   const userId = session?.user.userid;
   const pathname = usePathname();
@@ -61,23 +61,26 @@ export const NavbarRoutes = () => {
         ) : null}
         {
           session?.user ?
-          <DropdownMenu>
-          <DropdownMenuTrigger className="outline-none">
-            <Avatar className="h-10">
-              <AvatarImage
-                className="h-10 rounded-full"
-                src="https://github.com/shadcn.png"
-              />
-              <AvatarFallback>CN</AvatarFallback>
+            <div className="relative right-7">
+              <DropdownMenu>
+                <DropdownMenuTrigger className="outline-none">
+                  <Avatar className="h-10">
+                    <AvatarImage
+                      className="h-10 rounded-full"
+                      src="https://github.com/shadcn.png"
+                    />
+                    <AvatarFallback>CN</AvatarFallback>
 
-              <DropdownMenuContent>
-                <DropdownMenuLabel>{session?.user ? session?.user.firstName : 'Please Login'}</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => session?.user ? signOut() : signIn()} className="text-red-500">{session?.user ? 'Log-out' : 'Login'}</DropdownMenuItem>
-              </DropdownMenuContent>
-            </Avatar>
-          </DropdownMenuTrigger>
-        </DropdownMenu> : <LogIn onClick={() => signIn()} className='h-5 w-4 cursor-pointer mr-2 hover:text-red-400'/>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>{session?.user ? session?.user.firstName : 'Please Login'}</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => session?.user ? signOut() : signIn()} className="text-red-500">{session?.user ? 'Log-out' : 'Login'}</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </Avatar>
+                </DropdownMenuTrigger>
+              </DropdownMenu>
+            </div> :
+            <LogIn onClick={() => signIn()} className='h-5 w-4 cursor-pointer mr-2 hover:text-red-400' />
         }
       </div>
     </>
