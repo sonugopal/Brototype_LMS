@@ -53,9 +53,7 @@ export const CourseSidebar = async ({
       courseId: course.id
     }
   })
-
-  console.log('From the HaveQuiz page: ', HaveQuiz)
-
+  
   return (
     <div className="h-full border-r scrollbar-none flex flex-col overflow-y-auto shadow-sm ">
       <div className="p-8 flex flex-col border-b sticky top-0 bg-black">
