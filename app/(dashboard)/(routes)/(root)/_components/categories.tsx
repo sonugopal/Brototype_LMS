@@ -32,7 +32,7 @@ export const Categories = ({
   items,
 }: CategoriesProps) => {
   return (
-    <div className="flex items-center relative gap-x-2 overflow-x-auto pb-2 scrollbar-none mx-7">
+    <div className="flex items-center relative  gap-x-2 overflow-x-auto pb-2 scrollbar-none mx-2">
       {items?.map((item) => (
         <span key={item.id} className=" text-white/80 bg-[#282828] rounded-md">
           <CategoryItem

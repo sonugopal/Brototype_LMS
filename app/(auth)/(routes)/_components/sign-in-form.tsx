@@ -36,7 +36,7 @@ export const SingInForm = (props: Props) => {
             <div className="min-h-screen w-[100vw] max-w-screen  bg-black  flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md shadow-lg  rounded-lg  flex flex-col">
                     <div className="relative h-full top-10 my-5 flex items-center justify-center w-full">
-                        <div className="absolute ">
+                        <div className="absolute min-w-[500px]">
                             <Image  src="/Lamp1.svg" alt="Description of Image" width={500} height={120} />
                         </div>
                     </div>
@@ -48,11 +48,11 @@ export const SingInForm = (props: Props) => {
                             {!!props.error && <p className="text-xs text-red-500">Invalid Credentials</p>}
                         </div>
                     </div>
-                    <div className=" py-8 px-4 z-50 sm:rounded-lg sm:px-10">
+                    <div className=" py-8 px-4 z-50 sm:rounded-lg sm:px-10 md:mx-1 mx-10">
                         <form className="z-50">
                             <div className="mt-6">
                                 <label htmlFor="mobile number" className="block text-xs font-medium leading-5 text-white/80">Mobile Number</label>
-                                <div className="mt-1 flex rounded-md shadow-sm">
+                                <div style={{ boxShadow: '0 0 80px rgba(255, 255, 255, 0.5)' }} className="mt-1 flex rounded-md shadow-sm">
                                     <PhoneInput
                                         buttonStyle={{ background: '#000000', color: '#fff' }}
                                         inputStyle={{ background: '#000000', color: '#fff' }}
@@ -69,7 +69,7 @@ export const SingInForm = (props: Props) => {
                                     Password
                                 </label>
                                 <div className="mt-1 rounded-md shadow-sm z-50">
-                                    <input onChange={(e) => setPassword(e.target.value)} placeholder="*******" id="password" name="password" type="password" className="appearance-none text-white block w-full px-3 py-2 border bg-black rounded-md placeholder-white focus:outline-none transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
+                                    <input style={{ boxShadow: '0 0 80px rgba(255, 255, 255, 0.5)' }} onChange={(e) => setPassword(e.target.value)} placeholder="*******" id="password" name="password" type="password" className="appearance-none text-white block w-full px-3 py-2 border bg-black rounded-md placeholder-white focus:outline-none transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                     <div className="flex items-center justify-end w-full text-xs my-2 ">
                                         <Link href={'/forgot-pass'}>
                                             <p className="hover:text-white/80 text-white cursor-pointer">
