@@ -47,14 +47,14 @@ export const NavbarRoutes = () => {
       <div className="flex gap-x-2 items-center ml-auto">
         {isTeacherPage || isCoursePage ? (
           <Link href="/">
-            <Button size="sm" variant="ghost">
+            <Button className="relative right-8" size="sm" variant="ghost">
               <LogOut className="h-4 w-4 mr-2" />
               Home
             </Button>
           </Link>
         ) : teacher ? (
           <Link href="/teacher/courses">
-            <Button className="text-white/80 hover:bg-none border-1 " size="sm" variant="ghost">
+            <Button className="text-white/80 relative right-8 hover:bg-none border-1 " size="sm" variant="ghost">
               Admin mode
             </Button>
           </Link>
