@@ -86,9 +86,9 @@ export const OtpForm = ({
 
     return (
         <div className="relative flex  flex-col justify-center overflow-hidden bg-black py-28 px-24">
-            <div className="relative bg-black  dark:border-2 px-6 pt-10 pb-9 border-1 shadow-md mx-auto w-full max-w-lg rounded-2xl">
-                <div className="mx-auto flex w-full max-w-md flex-col space-y-16">
-                    <div className="relative h-full top-10 my-5 flex items-center justify-center w-full">
+            <div className="relative top-20 md:top-0 bg-black  dark:border-2 px-6 pt-10 pb-9 border-1 shadow-md mx-auto w-full max-w-lg rounded-2xl">
+                <div className="mx-auto  flex w-full max-w-md flex-col space-y-16">
+                    <div className="relative h-full top-20 my-5 flex items-center justify-center w-full">
                         <div className="absolute min-w-[500px] min-h-[320px]">
                             <Image src="/Lamp1.svg" alt="Description of Image" width={500} height={120} />
                         </div>
@@ -136,12 +136,11 @@ export const OtpForm = ({
                                 <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-white">
                                     <p>Didn&apos;t recieve code?</p><Otptimer text="" onResend={handleResendToken} seconds={60} />
                                 </div>
-                                <div className="flex items-center justify-center">
+                                <div className="flex items-center justify-center mt-5">
                                     <Link href={`sign-in`}>
-                                        <button className="text-white h-[30px]  flex items-center justify-center bg-[#55637B]/50 min-w-20 text-center rounded-md text-sm">
-                                            <div className="flex items-center  justify-between mx-2 w-full h-full">
-                                                <p>Cancel</p>
-                                                <Ban className="h-[15px] text-red-500 hover:text-red-600" />
+                                        <button className="text-white h-[30px]  flex items-center justify-center hover:bg-[#55637B]/20 bg-[#55637B]/40 min-w-[120px] text-center rounded-md text-sm">
+                                            <div className="flex items-center justify-center w-full h-full">
+                                                <p>Back To Home</p>
                                             </div>
                                         </button>
                                     </Link>

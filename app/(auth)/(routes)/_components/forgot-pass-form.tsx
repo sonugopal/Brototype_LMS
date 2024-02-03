@@ -35,14 +35,13 @@ const ForgotPasswordForm = () => {
                             <div className="p-4 sm:p-7">
                                 <div className="text-center">
                                     <h1 className="block text-2xl font-bold text-gray-800 ">Forgot password?</h1>
-
                                 </div>
 
                                 <div className="mt-5 z-50">
                                     <form>
                                         <div className="">
-                                            <div className="relative h-full top-0 my-5 flex items-center justify-center w-full">
-                                                <div className="absolute ">
+                                            <div className="relative h-full top-20 md:top-20 my-5 flex items-center justify-center w-full">
+                                                <div className="absolute min-w-[500px]">
                                                     <Image src="/Lamp1.svg" alt="Description of Image" width={500} height={120} />
                                                 </div>
                                             </div>
@@ -51,32 +50,36 @@ const ForgotPasswordForm = () => {
                                                     <FormLogo />
                                                 </div>
                                             </div>
-                                            <div className="mt-6 z-50">
-                                                <label htmlFor="username" className="block text-sm font-medium leading-5 text-white/80">Mobile Number</label>
-                                                <div className="mt-1 flex rounded-md shadow-sm">
-                                                    <PhoneInput
-                                                        buttonStyle={{ background: '#000000', color: '#fff' }}
-                                                        inputStyle={{ background: '#000000', color: '#fff' }}
-                                                        inputClass="py-5 min-w-full w-full px-3 border rounded-md ease-in-out sm:text-sm sm:leading-5"
-                                                        country={'in'}
-                                                        value={mobile}
-                                                        onChange={phoneNumber => setMobile(phoneNumber)}
-                                                    />
+                                            <div className="top-10 relative mx-10 md:mx-5">
+                                                <div className="mt-6 z-50">
+                                                    <div className="mt-1 flex flex-col rounded-md shadow-sm z-50">
+                                                        <label htmlFor="username" className="z-50 mb-1 text-sm font-medium leading-5 text-white/80">Mobile Number</label>
+                                                        <div style={{ boxShadow: '0 0 80px rgba(255, 255, 255, 0.5)' }}>
+                                                            <PhoneInput
+                                                                buttonStyle={{ background: '#000000', color: '#fff' }}
+                                                                inputStyle={{ background: '#000000', color: '#fff' }}
+                                                                inputClass="py-5 min-w-full w-full px-3 border rounded-md ease-in-out sm:text-sm sm:leading-5"
+                                                                country={'in'}
+                                                                value={mobile}
+                                                                onChange={phoneNumber => setMobile(phoneNumber)}
+                                                            />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="z-50">
-                                                <span className="block w-full my-3 rounded-md shadow-sm z-50">
-                                                    <Button onClick={(e) => handleSendToMobile(e)} className="w-full dark:text-white bg-[#55637B] hover:bg-[#5d6d88] dark:hover:bg-[#00264D]">
-                                                        Reset Password
-                                                    </Button>
-                                                </span>
-                                                <span className="w-full my-3 flex items-center justify-center rounded-md shadow-sm">
-                                                    <Link href='sign-in'>
-                                                        <h1 className="w-full text-xs text-white/80">
-                                                            Back To Login
-                                                        </h1>
-                                                    </Link>
-                                                </span>
+                                                <div className="z-50">
+                                                    <span className="w-full flex flex-col my-3 rounded-md shadow-sm z-50">
+                                                        <Button onClick={(e) => handleSendToMobile(e)} className="w-full z-50 dark:text-white bg-[#55637B] hover:bg-[#5d6d88] dark:hover:bg-[#00264D]">
+                                                            Reset Password
+                                                        </Button>
+                                                    </span>
+                                                    <span className="w-full my-3 flex items-center justify-center rounded-md shadow-sm">
+                                                        <Link href='sign-in'>
+                                                            <h1 className="w-full text-xs text-white/80">
+                                                                Back To Login
+                                                            </h1>
+                                                        </Link>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>

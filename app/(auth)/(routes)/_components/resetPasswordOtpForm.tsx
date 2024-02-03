@@ -78,11 +78,11 @@ const ResetPasswordOtpForm = ({ phoneNumber, setToggle }: any) => {
                             <FormLogo />
                         </div>
                     </div>
-                    <div className="flex flex-col relative top-[-100px] items-center z-50 justify-center text-center space-y-2">
+                    <div className="hidden md:block flex-col relative top-[-100px] items-center z-50 justify-center text-center space-y-2">
                         <div className="font-semibold text-3xl text-white">
                             <p>Mobile Verification</p>
                         </div>
-                        <div className="flex flex-row text-sm font-medium text-white/80">
+                        <div className="flex flex-row justify-center text-sm font-medium text-white/80">
                             <p>We have sent a code to your Mobile please check</p>
                         </div>
                     </div>
@@ -116,12 +116,11 @@ const ResetPasswordOtpForm = ({ phoneNumber, setToggle }: any) => {
                                 <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-white">
                                     <p>Didn&apos;t recieve code?</p><Otptimer text="" onResend={handleReset} seconds={60} />
                                 </div>
-                                <div className="flex items-center justify-center">
+                                <div className="flex items-center justify-center mt-5">
                                     <Link href={`sign-in`}>
-                                        <button className="text-white h-[30px]  flex items-center justify-center bg-[#55637B]/50 min-w-20 text-center rounded-md text-sm">
-                                            <div className="flex items-center  justify-between mx-2 w-full h-full">
-                                                <p>Cancel</p>
-                                                <Ban className="h-[15px] text-red-500 hover:text-red-600"/>
+                                        <button className="text-white h-[30px]  flex items-center justify-center hover:bg-[#55637B]/20 bg-[#55637B]/40 min-w-[120px] text-center rounded-md text-sm">
+                                            <div className="flex items-center justify-center w-full h-full">
+                                                <p>Back To Home</p>
                                             </div>
                                         </button>
                                     </Link>
