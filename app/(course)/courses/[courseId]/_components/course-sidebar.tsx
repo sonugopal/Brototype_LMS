@@ -48,6 +48,14 @@ export const CourseSidebar = async ({
     }
   })
 
+  const HaveQuiz = await db.quizAndOptions.findFirst({
+    where: {
+      courseId: course.id
+    }
+  })
+
+  console.log('From the HaveQuiz page: ', HaveQuiz)
+
   return (
     <div className="h-full border-r scrollbar-none flex flex-col overflow-y-auto shadow-sm ">
       <div className="p-8 flex flex-col border-b sticky top-0 bg-black">
@@ -62,9 +70,20 @@ export const CourseSidebar = async ({
             <div className="mt-4">
               <CourseSidebarProgress variant="success" value={progressCount} />
             </div>
-            <div>
-              {progressCount === 100 && Certificate ? <Button className="h-[30px] relative mt-3">Get Certificate</Button> : (progressCount === 100 ? <Link href={`/courses/quizpage/?courseId=${course.id}`}><Button className="h-[30px] relative mt-3">Take Quiz</Button></Link> : null) }
-            </div>
+            {
+              HaveQuiz ?
+                <div>
+                  {progressCount === 100 && Certificate ?
+                    <Button className="h-[30px] relative mt-3">Get Certificate</Button>
+                    :
+                    (progressCount === 100 ?
+                      <Link href={`/courses/quizpage/?courseId=${course.id}`}>
+                        <Button className="h-[30px] relative mt-3">Take Quiz</Button>
+                      </Link>
+                      :
+                      null)}
+                </div> : null
+            }
           </div>
         )}
       </div>
