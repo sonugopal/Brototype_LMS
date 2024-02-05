@@ -42,7 +42,7 @@ const ResetPasswordForm = ({
                     <ResetPasswordOtpForm phoneNumber={phoneNumber} setToggle={setToggle} />
                     :
                     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md shadow-lg  rounded-lg  flex flex-col">
-                        <div className="relative h-full top-40 my-5 flex items-center justify-center w-full">
+                        <div className="relative h-full my-5 flex items-center justify-center w-full">
                             <div className="absolute min-w-[550px]">
                                 <Image src="/Lamp1.svg" alt="Description of Image" width={550} height={120} />
                             </div>

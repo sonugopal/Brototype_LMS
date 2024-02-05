@@ -7,12 +7,15 @@ import React from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { Loader2, Lock } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 import ReactPlayer from "react-player";
 import YouTube, { YouTubeProps } from "react-youtube";
 import { cn } from "@/lib/utils";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
 import { headers } from "next/headers";
+import apiService from "@/service/apiService";
+import { UpdateWatchTime } from "@/service/axios-services/dataFetching";
 
 interface VideoPlayerProps {
   playbackId: string;
@@ -40,12 +43,63 @@ export const VideoPlayer = ({
   const confetti = useConfettiStore();
   const [domLoaded, setDomLoaded] = useState(false);
 
+  const [watchTime, setWatchTime] = useState(0);
+  const startTimeRef = useRef<number | null>(null);
+
+  const { data: session }: any = useSession()
+
+
+  const handlePlay = () => {
+    startTimeRef.current = Date.now();
+  };
+
+  const handleEnd = () => {
+    if (startTimeRef.current) {
+      const endTime = Date.now();
+      const watchedTime = (endTime - startTimeRef.current) / 1000;
+      setWatchTime(prevWatchTime => {
+        const newWatchTime = prevWatchTime + watchedTime;
+        localStorage.setItem('watchTime', JSON.stringify(newWatchTime));
+        return newWatchTime;
+      });
+    }
+  };
+
+  const handlePause = () => {
+    if (startTimeRef.current) {
+      const endTime = Date.now();
+      const watchedTime = (endTime - startTimeRef.current) / 1000;
+      setWatchTime(prevWatchTime => {
+        const newWatchTime = prevWatchTime + watchedTime;
+        localStorage.setItem('watchTime', JSON.stringify(newWatchTime));
+        return newWatchTime;
+      });
+    }
+  };
+
+  useEffect(() => {
+    const sendWatchTimeToServer = async () => {
+      let watchTime = JSON.parse(localStorage.getItem('watchTime') || '0');
+      watchTime = Math.floor(watchTime);
+      if (watchTime > 15) {
+        try{
+          await UpdateWatchTime(session.user.userid!, watchTime)
+          localStorage.removeItem('watchTime');
+        }catch(error){
+          console.log("ERror:", error)
+        }
+      }
+    };
+    sendWatchTimeToServer();
+  }, []);
+
   useEffect(() => {
     setDomLoaded(true);
   }, []);
 
   const onEnd = async () => {
     try {
+      await handleEnd()
       await axios.put(
         `/api/courses/${courseId}/chapters/${chapterId}/progress`,
         {
@@ -90,7 +144,13 @@ export const VideoPlayer = ({
       )}
       {!isLocked && domLoaded && (
         <div className="youtubePlayer w-full h-full">
-          {<YouTube videoId={videoUrl as string} opts={opts} onEnd={onEnd} />}
+          {<YouTube
+            videoId={videoUrl as string}
+            opts={opts}
+            onEnd={onEnd}
+            onPlay={handlePlay}
+            onPause={handlePause}
+          />}
         </div>
       )}
     </div>

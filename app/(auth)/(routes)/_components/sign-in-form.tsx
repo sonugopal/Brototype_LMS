@@ -33,11 +33,11 @@ export const SingInForm = (props: Props) => {
 
     return (
         <>
-            <div className="min-h-screen w-[100vw] max-w-screen  bg-black relative left-5 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <div className="min-h-screen w-full max-w-screen  bg-black relative flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md shadow-lg  rounded-lg  flex flex-col">
-                    <div className="relative h-full top-10 my-5 flex items-center justify-center w-full">
-                        <div className="absolute min-w-[500px]">
-                            <Image src="/Lamp1.svg" alt="Description of Image" width={500} height={120} />
+                    <div className="relative top-[-50px] h-full my-5 flex items-center justify-center w-full">
+                        <div className="absolute  justify-center flex items-center">
+                            <Image className="h-full md:w-full w-11/12" src="/Lamp1.svg" alt="Description of Image" width={0} height={0} />
                         </div>
                     </div>
                     <div className="sm:mx-auto sm:w-full sm:max-w-md mt-3 z-50 pt-5">
@@ -48,7 +48,7 @@ export const SingInForm = (props: Props) => {
                             {!!props.error && <p className="text-xs text-red-500">Invalid Credentials</p>}
                         </div>
                     </div>
-                    <div className=" py-8 px-4 z-50 sm:rounded-lg sm:px-10 md:mx-1 mx-10">
+                    <div className=" py-8 px-4 z-50 sm:rounded-lg sm:px-10 md:mx-1 sm:mx-10 mx-16">
                         <form className="z-50" onKeyDown={(e) => {
                             if (e.key === 'Enter') {
                                 e.preventDefault();

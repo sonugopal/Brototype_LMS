@@ -37,17 +37,19 @@ const DashboardLayout = ({
             <div className="hidden md:flex h-full md:w-56 w-20 flex-col fixed inset-y-0 z-50">
               <Sidebar />
             </div>
-            <main className="md:pl-56  h-full">
-              {
-                showCarousel ?
-                  <div className={` mx-9 relative top-20 inset-y-0 max-w-7xl`}>
-                    <Carousel />
-                  </div> : null
-              }
-              <div className="relative top-20 max-w-7xl">
-                {children}
-              </div>
-            </main>
+            <div className="flex flex-col justify-center 5xl:mx-[28rem]">
+              <main className="md:pl-56 h-full">
+                {
+                  showCarousel ?
+                    <div className={` mx-9 relative top-20 inset-y-0 `}>
+                      <Carousel />
+                    </div> : null
+                }
+                <div className="relative flex flex-col w-full justify-center top-20">
+                  {children}
+                </div>
+              </main>
+            </div>
           </div>
         </motion.div>
       </AnimatePresence>
