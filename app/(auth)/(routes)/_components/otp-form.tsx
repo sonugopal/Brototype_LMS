@@ -88,25 +88,16 @@ export const OtpForm = ({
         <div className="relative flex  flex-col justify-center overflow-hidden bg-black py-28 px-24">
             <div className="relative top-20 md:top-0 bg-black  dark:border-2 px-6 pt-10 pb-9 border-1 shadow-md mx-auto w-full max-w-lg rounded-2xl">
                 <div className="mx-auto  flex w-full max-w-md flex-col space-y-16">
-                    <div className="relative h-full top-20 my-5 flex items-center justify-center w-full">
+                    <div className="relative h-full top-[-100px] sm:top-[-100px] my-5 flex items-center justify-center w-full">
                         <div className="absolute min-w-[500px] min-h-[320px]">
                             <Image src="/Lamp1.svg" alt="Description of Image" width={500} height={120} />
                         </div>
                     </div>
-                    <div className="sm:mx-auto relative top-[-90px] sm:w-full sm:max-w-md  z-50 ">
+                    <div className="sm:mx-auto relative top-[-70px] sm:w-full sm:max-w-md  z-50 ">
                         <div className="flex items-center justify-center w-full h-full">
                             <FormLogo />
                         </div>
                     </div>
-                    <div className="flex flex-col relative top-[-100px] items-center z-50 justify-center text-center space-y-2">
-                        <div className="font-semibold text-3xl text-white">
-                            <p>Mobile Verification</p>
-                        </div>
-                        <div className="flex flex-row text-sm font-medium text-white/80">
-                            <p>We have sent a code to your Mobile please check</p>
-                        </div>
-                    </div>
-
                     <form>
                         <div className="flex flex-col relative top-[-110px] space-y-8 ">
                             <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">

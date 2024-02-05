@@ -47,6 +47,7 @@ model User {
   createdAt DateTime @default(now())
   certificates Certificate[]
   role Int @default(0)
+  watchTime Int @default(0)
 }
 
 model Attachment {

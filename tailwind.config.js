@@ -14,10 +14,18 @@ module.exports = withUt({
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1536px"
       },
     },
     extend: {
+      screens: {
+        "xs": "480px",
+        '3xl': '1600px',
+        '4xl': '1920px',
+        '5xl': '2240px',
+        '6xl': '2560px',
+        '7xl': '2880px',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

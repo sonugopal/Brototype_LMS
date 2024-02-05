@@ -33,19 +33,19 @@ const ForgotPasswordForm = () => {
                     <main id="content" role="main" className="w-full h-full bg-black max-w-md mx-auto p-6">
                         <div className="mt-7 bg-black  rounded-xl shadow-lg  shadown-md ">
                             <div className="p-4 sm:p-7">
-                                <div className="text-center">
-                                    <h1 className="block text-2xl font-bold text-gray-800 ">Forgot password?</h1>
+                                <div className="text-center z-50">
+                                    <h1 className="z-50 text-2xl font-bold text-gray-800 ">Forgot password?</h1>
                                 </div>
 
                                 <div className="mt-5 z-50">
                                     <form>
                                         <div className="">
-                                            <div className="relative h-full top-20 md:top-20 my-5 flex items-center justify-center w-full">
-                                                <div className="absolute min-w-[500px]">
-                                                    <Image src="/Lamp1.svg" alt="Description of Image" width={500} height={120} />
+                                            <div className="relative h-full  md:top-[-80px] my-5 flex items-center justify-center w-full">
+                                                <div className="absolute  justify-center flex items-center w-full">
+                                                    <Image className="h-full md:w-full w-11/12" src="/Lamp1.svg" alt="Description of Image" width={0} height={0} />
                                                 </div>
                                             </div>
-                                            <div className="sm:mx-auto sm:w-full sm:max-w-md mt-3 z-50 pt-5">
+                                            <div className="sm:mx-auto relative top-10 sm:top-0 sm:w-full sm:max-w-md mt-3 z-50 pt-5">
                                                 <div className="flex items-center justify-center w-full h-full">
                                                     <FormLogo />
                                                 </div>

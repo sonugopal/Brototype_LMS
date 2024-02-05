@@ -43,12 +43,12 @@ export const SingUpForm = () => {
                     <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
                         <OtpForm phoneNumber={phoneNumber} firstName={firstName} lastName={lastName} password={password} role={0} />
                     </div> :
-                    <div className="min-h-screen w-[100vw] max-w-screen  bg-black flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+                    <div className="min-h-screen w-[100vw] max-w-screen items-center  bg-black flex flex-col justify-center py-12 sm:px-6 lg:px-8">
                         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md rounded-lg ">
                             <div className="bg-black py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                                <div className="relative top-20 h-full my-5 flex items-center justify-center w-full">
-                                    <div className="absolute min-w-[600px]">
-                                        <Image className="w-full h-full" src="/Lamp1.svg" alt="Description of Image" width={600} height={200} />
+                                <div className="relative top-[-50px] h-full w-full my-5 flex items-center justify-center">
+                                    <div className="absolute  justify-center flex items-center">
+                                        <Image className="h-full md:w-full w-11/12" src="/Lamp1.svg" alt="Description of Image" width={0} height={0} />
                                     </div>
                                 </div>
                                 <div className="sm:mx-auto sm:w-full z-50 sm:max-w-md pt-3">
@@ -69,7 +69,7 @@ export const SingUpForm = () => {
                                             }
                                         }
                                     }}
-                                    className="z-50 mt-5 md:mx-5 mx-14" method="POST" action="#">
+                                    className="z-50 mt-5 md:mx-8 mx-14" method="POST" action="#">
                                     <div className="z-50">
                                         <div className="mt-1 relative rounded-md shadow-sm">
                                             <label htmlFor="email" className="block text-sm my-1 font-medium leading-5  text-white/80">First Name</label>

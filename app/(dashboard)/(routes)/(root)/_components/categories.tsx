@@ -35,8 +35,8 @@ export const Categories = ({
     <div className="flex items-center relative top-2 md:top-0 gap-x-2 overflow-x-auto pb-2 scrollbar-none mx-2">
       <span className=" text-white/80 bg-[#282828] rounded-md">
         <CategoryItem
-          label={'All'}
-          value={'All'}
+          label={"All"}
+          value={"All"}
         />
       </span>
       {items?.map((item) => (

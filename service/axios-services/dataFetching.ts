@@ -104,5 +104,14 @@ const SignUpValidation = async (phoneNumber: string) => {
     }
 }
 
+const UpdateWatchTime = async (userid: string, watchTime: Number) => {
+    try{
+        const response = await apiService.post('/api/courses/watchtime', {userid: userid, watchTime: watchTime})
+        return
+    }catch(error){
+        console.log("Error from the update Watchtime: ", error)
+    }
+}
 
-export { login, CreateUser, Sendotp, VerifyOtp, UpdatePassword, ForgotPassword, ValidatePhoneNumber, SignUpValidation };
+
+export { login, CreateUser, Sendotp, VerifyOtp, UpdatePassword, ForgotPassword, ValidatePhoneNumber, SignUpValidation, UpdateWatchTime };
