@@ -25,13 +25,14 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { downloadCSV } from "../../courses/_components/json-csv";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({
+export function DataTable<TData extends object, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -54,6 +55,24 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
   });
+
+  const tableData: TData[] = data;
+
+  const handleDownload = () => {
+    const filteredData = data.map(({ firstName, lastName, watchTime, phoneNumber }: any) => ({
+      firstName,
+      lastName,
+      watchTime: (watchTime / 60).toFixed(2) + ' mins',
+      phoneNumber,
+    }));
+  
+    const date = new Date();
+    const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  
+    downloadCSV(filteredData, `userDetails-${dateString}.csv`);
+  };
+  
+
 
   return (
     <div>
@@ -80,9 +99,9 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}
@@ -120,6 +139,13 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleDownload}
+        >
+          Download
+        </Button>
         <Button
           variant="outline"
           size="sm"
