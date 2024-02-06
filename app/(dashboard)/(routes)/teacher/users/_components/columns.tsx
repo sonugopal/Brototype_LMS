@@ -87,13 +87,13 @@ export const columns: ColumnDef<User>[] = [
       let statusColor = "";
       let statusText = "";
 
-      if (minutes < 10) {
+      if (minutes < Number(process.env.NEXT_PUBLIC_WEAK_LEAD_LIMIT!) ) {
         statusColor = process.env.NEXT_PUBLIC_WEAK_LEAD_COLOR!
         statusText = process.env.NEXT_PUBLIC_WEAK_LEAD_TEXT!
-      } else if (minutes >= 10 && minutes < 20) {
+      } else if (minutes >= Number(process.env.NEXT_PUBLIC_WEAK_LEAD_LIMIT!) && minutes < Number(process.env.NEXT_PUBLIC_STRONG_LEAD_LIMIT!)) {
         statusColor = process.env.NEXT_PUBLIC_MEDIUM_LEAD_COLOR!
         statusText = process.env.NEXT_PUBLIC_MEDIUM_LEAD_TEXT!;
-      } else if (minutes >= 20) {
+      } else if (minutes >= Number(process.env.NEXT_PUBLIC_STRONG_LEAD_LIMIT!)) {
         statusColor = process.env.NEXT_PUBLIC_STRONG_LEAD_COLOR!;
         statusText = process.env.NEXT_PUBLIC_STRONG_LEAD_TEXT!;
       }
