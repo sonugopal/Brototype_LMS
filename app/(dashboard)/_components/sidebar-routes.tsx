@@ -29,11 +29,11 @@ const teacherRoutes = [
     label: "Users",
     href: "/teacher/users",
   },
-  {
-    icon: BarChart,
-    label: "Analytics",
-    href: "/teacher/analytics",
-  },
+  // {
+  //   icon: BarChart,
+  //   label: "Analytics",
+  //   href: "/teacher/analytics",
+  // },
 ];
 
 export const SidebarRoutes = () => {

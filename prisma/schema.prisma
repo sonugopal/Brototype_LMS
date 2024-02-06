@@ -48,6 +48,7 @@ model User {
   certificates Certificate[]
   role Int @default(0)
   watchTime Int @default(0)
+  leadStatus String @default("Cold")
 }
 
 model Attachment {

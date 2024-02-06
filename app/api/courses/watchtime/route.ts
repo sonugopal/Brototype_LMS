@@ -7,7 +7,6 @@ export async function POST(req: Request) {
       const body = await req.json();
       const { userid, watchTime } = body;
   
-      // check if user already exists
       const existingUser = await db.user.findUnique({
         where: { userid: userid },
       });
@@ -25,11 +24,22 @@ export async function POST(req: Request) {
       const time = await db.user.findFirst({
         where: {userid: userid}
       })
-  
-      // update the watchtime
+
+      const newWatchTime = (time?.watchTime ?? 0) + watchTime;
+
+      let newLeadStatus = 'Cold';
+      if (newWatchTime >= 20 * 60) {
+        newLeadStatus = 'Hot';
+      } else if (newWatchTime >= 10 * 60) {
+        newLeadStatus = 'Warm';
+      }
+
       await db.user.update({
         where: { userid: userid },
-        data: { watchTime: time?.watchTime + watchTime},
+        data: { 
+          watchTime: newWatchTime,
+          leadStatus: newLeadStatus,
+        },
       });
   
       return NextResponse.json(
