@@ -2,18 +2,9 @@
 
 import { User } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, Pencil } from "lucide-react";
-import Link from "next/link";
-
+import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -80,13 +71,13 @@ export const columns: ColumnDef<User>[] = [
   },
 
   {
-    accessorKey: "status",
+    accessorKey: "leadStatus",
     header: ({ column }) => (
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        Status
+        Lead Status
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
@@ -96,20 +87,16 @@ export const columns: ColumnDef<User>[] = [
       let statusColor = "";
       let statusText = "";
 
-      if (minutes < 3) {
-        statusColor = "blue";
-        statusText = "blue";
-      } else if (minutes >= 3 && minutes < 10) {
-        statusColor = "red";
-        statusText = "Warm";
-      } else if (minutes >= 25 && minutes < 40) {
-        statusColor = "orange";
-        statusText = "Hot";
-      } else if (minutes >= 40) {
-        statusColor = "green";
-        statusText = "Scorching";
+      if (minutes < Number(process.env.NEXT_PUBLIC_WEAK_LEAD_LIMIT!) ) {
+        statusColor = process.env.NEXT_PUBLIC_WEAK_LEAD_COLOR!
+        statusText = process.env.NEXT_PUBLIC_WEAK_LEAD_TEXT!
+      } else if (minutes >= Number(process.env.NEXT_PUBLIC_WEAK_LEAD_LIMIT!) && minutes < Number(process.env.NEXT_PUBLIC_STRONG_LEAD_LIMIT!)) {
+        statusColor = process.env.NEXT_PUBLIC_MEDIUM_LEAD_COLOR!
+        statusText = process.env.NEXT_PUBLIC_MEDIUM_LEAD_TEXT!;
+      } else if (minutes >= Number(process.env.NEXT_PUBLIC_STRONG_LEAD_LIMIT!)) {
+        statusColor = process.env.NEXT_PUBLIC_STRONG_LEAD_COLOR!;
+        statusText = process.env.NEXT_PUBLIC_STRONG_LEAD_TEXT!;
       }
-
       return (
         <span style={{ color: statusColor }}>{statusText}</span>
       );

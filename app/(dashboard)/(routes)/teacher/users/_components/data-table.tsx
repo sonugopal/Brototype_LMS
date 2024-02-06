@@ -26,6 +26,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { downloadCSV } from "../../courses/_components/json-csv";
+import { SelectOptions } from "./data-table-components/selectoption";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -59,20 +60,23 @@ export function DataTable<TData extends object, TValue>({
   const tableData: TData[] = data;
 
   const handleDownload = () => {
-    const filteredData = data.map(({ firstName, lastName, watchTime, phoneNumber }: any) => ({
+    const filteredData = data.map(({ firstName, lastName, watchTime, phoneNumber, leadStatus }: any) => ({
       firstName,
       lastName,
       watchTime: (watchTime / 60).toFixed(2) + ' mins',
       phoneNumber,
+      leadStatus
     }));
-  
+
     const date = new Date();
     const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  
+
     downloadCSV(filteredData, `userDetails-${dateString}.csv`);
   };
-  
 
+  React.useEffect(() => {
+    console.log(columns, "from the search input")
+  }, [columns])
 
   return (
     <div>
@@ -83,10 +87,24 @@ export function DataTable<TData extends object, TValue>({
             (table.getColumn("firstName")?.getFilterValue() as string) ?? ""
           }
           onChange={(event) =>
-            table.getColumn("firNname")?.setFilterValue(event.target.value)
+            table.getColumn("firstName")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
+        <select
+          placeholder="Filter user..."
+          value={(table.getColumn("leadStatus")?.getFilterValue() as any) ?? ""}
+          onChange={(event) =>
+            table.getColumn("leadStatus")?.setFilterValue(event.target.value as any)
+          }
+          className="max-w-sm bg-black border-none focus:outline-none w-24 mx-5"
+        >
+          <option placeholder="Filter Leads" value="">Leads</option>
+          <option value="Cold">Cold</option>
+          <option value="Warm">Warm</option>
+          <option value="Hot">Hot</option>
+        </select>
+
       </div>
       <div className="rounded-md border">
         <Table>
