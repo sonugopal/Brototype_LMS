@@ -60,11 +60,12 @@ export function DataTable<TData extends object, TValue>({
   const tableData: TData[] = data;
 
   const handleDownload = () => {
-    const filteredData = data.map(({ firstName, lastName, watchTime, phoneNumber }: any) => ({
+    const filteredData = data.map(({ firstName, lastName, watchTime, phoneNumber, leadStatus }: any) => ({
       firstName,
       lastName,
       watchTime: (watchTime / 60).toFixed(2) + ' mins',
       phoneNumber,
+      leadStatus
     }));
 
     const date = new Date();
