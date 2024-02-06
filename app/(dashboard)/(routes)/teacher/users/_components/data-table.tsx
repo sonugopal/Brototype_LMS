@@ -26,7 +26,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { downloadCSV } from "../../courses/_components/json-csv";
-import { SelectOptions } from "./data-table-components/selectoption";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
