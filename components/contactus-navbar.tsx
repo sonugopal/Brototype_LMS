@@ -36,21 +36,36 @@ export function ContactUsForm() {
                                     <div className="h-full w-full border hover:bg-[#292524]/50">
                                         <div className="m-2">
                                             <h1 className="my-2">For Admission related queries</h1>
-                                            <h3>Email: admissions@brototype.com</h3>
+                                            <h3 className="line-clamp-3">Email:  <span
+                                                onClick={() => navigator.clipboard.writeText('admissions@brototype.com')}
+                                                style={{ cursor: 'pointer' }}
+                                            >
+                                                admissions@brototype.com
+                                            </span></h3>
                                             <h3>Contact: +91 7034 395 811</h3>
                                         </div>
                                     </div>
                                     <div className="h-full w-full border hover:bg-[#292524]/50">
                                         <div className="m-2">
                                             <h1 className="my-2">For Official queries</h1>
-                                            <h3>Email: talk@brototype.com</h3>
+                                            <h3 className="line-clamp-3">Email:  <span
+                                                onClick={() => navigator.clipboard.writeText('talk@brototype.com')}
+                                                style={{ cursor: 'pointer' }}
+                                            >
+                                                talk@brototype.com
+                                            </span></h3>
                                             <h3>Contact: +91 7034 395 811</h3>
                                         </div>
                                     </div>
                                     <div className="h-full w-full border hover:bg-[#292524]/50">
                                         <div className="m-2">
                                             <h1 className="my-2">For Job opportunities</h1>
-                                            <h3>Email: hr@brototype.com</h3>
+                                            <h3 className="line-clamp-3">Email:  <span
+                                                onClick={() => navigator.clipboard.writeText('hr@brototype.com')}
+                                                style={{ cursor: 'pointer' }}
+                                            >
+                                                hr@brototype.com
+                                            </span></h3>
                                             <h3>Contact: +91 7594 846 113</h3>
                                         </div>
                                     </div>

@@ -10,7 +10,7 @@ export const Sidebar = () => {
           <Logo />
         </Link>
       </div>
-      <div className="flex flex-col mt-5 w-full bg-black">
+      <div className="flex flex-col mt-5 w-full ">
         <SidebarRoutes />
       </div>
     </div>
