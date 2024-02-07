@@ -6,7 +6,6 @@ export interface Userid extends Session {
       email?: string | null;
       image?: string | null;
       userid: string | null
-      firstName: string | null
-      lastName: string | null
+      Name: string | null
     };
   }

@@ -14,10 +14,10 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { SearchInput } from "./search-input";
 import { isTeacher } from "@/lib/teacher";
-import { ModeToggle } from "./ui/toggle-theme";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { LogIn } from 'lucide-react'
+import { LogIn, Contact2Icon } from 'lucide-react'
 import { signIn, signOut, useSession } from "next-auth/react";
+import { ContactUsForm } from "./contactus-navbar";
 
 
 
@@ -35,13 +35,13 @@ export const NavbarRoutes = () => {
     });
   });
 
+  const [toggleSheet, setToggleSheet] = useState<boolean>(false)
+
   const isTeacherPage = pathname?.startsWith("/teacher");
   const isCoursePage = pathname?.includes("/courses");
-  const isSearchPage = pathname === "/search";
-  // const isTeacher = getIsteacher(userId as string);
   return (
-    <>
-      <div className="hidden md:block">
+    <div className="5xl:mx-[28rem] flex w-full">
+      <div className="hidden md:block ">
         <SearchInput />
       </div>
       <div className="flex gap-x-2 items-center ml-auto">
@@ -59,6 +59,7 @@ export const NavbarRoutes = () => {
             </Button>
           </Link>
         ) : null}
+        <ContactUsForm />
         {
           session?.user ?
             <div className="relative right-7">
@@ -72,7 +73,7 @@ export const NavbarRoutes = () => {
                     <AvatarFallback>CN</AvatarFallback>
 
                     <DropdownMenuContent>
-                      <DropdownMenuLabel>{session?.user ? session?.user.firstName : 'Please Login'}</DropdownMenuLabel>
+                      <DropdownMenuLabel>{session?.user ? session?.user.Name : 'Please Login'}</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={() => session?.user ? signOut() : signIn()} className="text-red-500">{session?.user ? 'Log-out' : 'Login'}</DropdownMenuItem>
                     </DropdownMenuContent>
@@ -83,6 +84,6 @@ export const NavbarRoutes = () => {
             <LogIn onClick={() => signIn()} className='h-5 w-4 cursor-pointer mr-2 hover:text-red-400' />
         }
       </div>
-    </>
+    </div>
   );
 };

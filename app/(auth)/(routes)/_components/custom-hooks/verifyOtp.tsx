@@ -1,15 +1,15 @@
 import { CreateUser, VerifyOtp } from '@/service/axios-services/dataFetching';
 
-const VerifyOtpFunction = (state: string[], phoneNumber: string, firstName: string, lastName: string, password: string, successToast: any, customToast: any, router: any) => {
+const VerifyOtpFunction = (state: string[], phoneNumber: string, firstName: string, lastName: string, email: string, qualification: string, password: string, successToast: any, customToast: any, router: any) => {
 
     const verifyOtp = async () => {
         try {
             const otp = state.join('')
             const response = await VerifyOtp(phoneNumber, otp)
             if (response.status == 200) {
-                const createUser = await CreateUser({ phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, password: password, role: 0 })
-                if (createUser.status == 201){
-                    await successToast({message: 'Your OTP has been verified'})
+                const createUser = await CreateUser({ phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, email: email, qualification: qualification, password: password, role: 0 })
+                if (createUser.status == 201) {
+                    await successToast({ message: 'Your OTP has been verified' })
                     return true
                 }
             } else {
@@ -27,7 +27,7 @@ const VerifyOtpFunction = (state: string[], phoneNumber: string, firstName: stri
             const verify = await verifyOtp()
             if (verify) {
                 router.push('sign-in')
-            }else{
+            } else {
                 customToast({ message: 'Something went wrong!!!' })
             }
         } else {

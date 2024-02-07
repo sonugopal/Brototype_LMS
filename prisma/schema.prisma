@@ -42,6 +42,8 @@ model User {
   userid String @unique
   firstName String?
   lastName String?
+  email String?
+  qualification String?
   phoneNumber String @unique
   password String
   createdAt DateTime @default(now())

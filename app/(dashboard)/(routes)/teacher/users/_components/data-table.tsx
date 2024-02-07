@@ -59,12 +59,14 @@ export function DataTable<TData extends object, TValue>({
   const tableData: TData[] = data;
 
   const handleDownload = () => {
-    const filteredData = data.map(({ firstName, lastName, watchTime, phoneNumber, leadStatus }: any) => ({
-      firstName,
-      lastName,
+    const filteredData = data.map(({ firstName, lastName, qualification, email, watchTime, phoneNumber, leadStatus, createdAt }: any) => ({
+      Name: firstName + ' ' + lastName,
+      email,
+      qualification,
       watchTime: (watchTime / 60).toFixed(2) + ' mins',
-      phoneNumber,
-      leadStatus
+      phoneNumber: '+' + phoneNumber,
+      leadStatus,
+      createdAt,
     }));
 
     const date = new Date();
@@ -72,10 +74,6 @@ export function DataTable<TData extends object, TValue>({
 
     downloadCSV(filteredData, `userDetails-${dateString}.csv`);
   };
-
-  React.useEffect(() => {
-    console.log(columns, "from the search input")
-  }, [columns])
 
   return (
     <div>
@@ -88,10 +86,9 @@ export function DataTable<TData extends object, TValue>({
           onChange={(event) =>
             table.getColumn("firstName")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-sm bg-black"
         />
         <select
-          placeholder="Filter user..."
           value={(table.getColumn("leadStatus")?.getFilterValue() as any) ?? ""}
           onChange={(event) =>
             table.getColumn("leadStatus")?.setFilterValue(event.target.value as any)
@@ -105,11 +102,11 @@ export function DataTable<TData extends object, TValue>({
         </select>
 
       </div>
-      <div className="rounded-md border">
-        <Table>
+      <div className="rounded-md border hover:bg-[#131313]">
+        <Table className="bg-black">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow className="hover:bg-[#000]" key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
@@ -133,7 +130,7 @@ export function DataTable<TData extends object, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell className="bg-black" key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -157,6 +154,7 @@ export function DataTable<TData extends object, TValue>({
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
+          className="bg-black text-white hover:text-white hover:bg-[#292524]"
           variant="outline"
           size="sm"
           onClick={handleDownload}
@@ -164,6 +162,7 @@ export function DataTable<TData extends object, TValue>({
           Download
         </Button>
         <Button
+          className="bg-black text-white"
           variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
@@ -172,6 +171,7 @@ export function DataTable<TData extends object, TValue>({
           Previous
         </Button>
         <Button
+          className="bg-black text-white"
           variant="outline"
           size="sm"
           onClick={() => table.nextPage()}

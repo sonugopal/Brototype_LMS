@@ -35,6 +35,7 @@ export const columns: ColumnDef<Course>[] = [
     header: ({ column }) => {
       return (
         <Button
+        className="hover:bg-[#292524]"
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
@@ -61,15 +62,15 @@ export const columns: ColumnDef<Course>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-4 w-8 p-0">
+            <Button variant="ghost" className="h-4 w-8 p-0 hover:bg-black">
               <span className="sr-only">Open menu</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent className="bg-black" align="end">
             <Link href={`/teacher/courses/${id}`}>
-              <DropdownMenuItem>
-                <Pencil className="h-4 w-4 mr-2" />
+              <DropdownMenuItem className=" hover:bg-black text-white">
+                <Pencil className="h-4 w-4 mr-2 hover:bg-black" />
                 Edit
               </DropdownMenuItem>
             </Link>

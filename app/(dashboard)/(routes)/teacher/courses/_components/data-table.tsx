@@ -53,7 +53,7 @@ export function DataTable<TData extends object, TValue>({
     },
   })
 
- 
+
 
   return (
     <div>
@@ -64,7 +64,7 @@ export function DataTable<TData extends object, TValue>({
           onChange={(event) =>
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-sm bg-black"
         />
         <Link href="/teacher/create">
           <Button>
@@ -74,13 +74,13 @@ export function DataTable<TData extends object, TValue>({
         </Link>
       </div>
       <div className="rounded-md border">
-        <Table>
+        <Table className="bg-black hover:bg-black">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow className="hover:bg-[#131313]" key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead className="hover:bg-[#131313]" key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -93,15 +93,16 @@ export function DataTable<TData extends object, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className="text-white">
+          <TableBody className="text-white hover:bg-[#000]">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
+                <TableRow 
+                className="bg-black"
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell className="bg-black" key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
@@ -119,6 +120,7 @@ export function DataTable<TData extends object, TValue>({
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
+          className="bg-black text-white"
           variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
@@ -127,6 +129,7 @@ export function DataTable<TData extends object, TValue>({
           Previous
         </Button>
         <Button
+          className="bg-black text-white"
           variant="outline"
           size="sm"
           onClick={() => table.nextPage()}
