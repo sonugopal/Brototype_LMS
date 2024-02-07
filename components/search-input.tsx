@@ -32,7 +32,7 @@ export const SearchInput = () => {
   return (
     <>
       {
-        !pathname.includes('/dashboard') && !pathname.includes('/teacher') ?
+        !pathname.includes('/dashboard') && !pathname.includes('/admin') ?
           <div className="relative mx-2 md:mx-0 flex lg:ml-5">
             <Input
               onChange={(e) => setValue(e.target.value)}

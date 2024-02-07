@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { db } from "@/lib/db";
-import { isTeacher } from "@/actions/get-isteacher";
+import { isAdmin } from "@/actions/get-isadmin";
 import { Userid } from "@/interfaces/UserInterface";
 import { getServerSession } from "next-auth";
 import { authOption } from "../auth/[...nextauth]/route";
@@ -14,7 +14,7 @@ export async function POST(
     const userId = await session?.user.userid;
     const { title } = await req.json();
 
-    if (!userId || !isTeacher(userId)) {
+    if (!userId || !isAdmin(userId)) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 

@@ -1,5 +1,4 @@
-//import { isTeacher } from "@/lib/teacher";
-import { isTeacher } from "@/actions/get-isteacher";
+import { isAdmin } from "@/actions/get-isadmin";
 import { authOption } from "@/app/api/auth/[...nextauth]/route";
 import { Userid } from "@/interfaces/UserInterface";
 import { getServerSession } from "next-auth";
@@ -11,7 +10,7 @@ const TeacherLayout = async ({ children }: { children: React.ReactNode }) => {
 
   const userId = await session?.user.userid;
 
-  if (!isTeacher(userId)) {
+  if (!isAdmin(userId)) {
     return redirect("/");
   }
 
