@@ -13,3 +13,8 @@ export function validateOtp(otp: string) {
     const otpRegex = /^\d{4}$/;
     return otpRegex.test(otp);
 }
+
+export function validateEmail(email: string) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+    return emailRegex.test(email);
+}

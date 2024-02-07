@@ -15,6 +15,8 @@ import Image from "next/image";
 interface OtpInterface {
     phoneNumber: string
     firstName: string
+    email: string
+    qualification: string
     lastName: string
     password: string
     role: number
@@ -24,6 +26,8 @@ export const OtpForm = ({
     phoneNumber,
     firstName,
     lastName,
+    email,
+    qualification,
     password,
 }: OtpInterface) => {
 
@@ -38,7 +42,7 @@ export const OtpForm = ({
     // for otp verification and resending
     const handleSubmit = async (e: any) => {
         e.preventDefault()
-        await VerifyOtpFunction(state, phoneNumber, firstName, lastName, password, success, failed, router)
+        await VerifyOtpFunction(state, phoneNumber, firstName, lastName, email, qualification, password, success, failed, router)
     }
 
 

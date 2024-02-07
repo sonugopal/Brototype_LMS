@@ -1,8 +1,8 @@
-import { validateMobile, validatePassword } from "@/components/validations";
+import { validateEmail, validateMobile, validatePassword } from "@/components/validations";
 
 
 
-const userInputValidation = (firstName: string, phoneNumber: string, password: string, confirmPassword: string, failed: any) => {
+const userInputValidation = (firstName: string, lastName: string, phoneNumber: string, email: string, qualification: string, password: string, confirmPassword: string, failed: any) => {
     const handleInputFields = () => {
         if (!firstName) {
             failed({ message: 'The first name field is empty.' });
@@ -14,6 +14,22 @@ const userInputValidation = (firstName: string, phoneNumber: string, password: s
         }
         if (password !== confirmPassword) {
             failed({ message: 'The passwords do not match.' });
+            return false;
+        }
+        if (!lastName) {
+            failed({ message: 'The lastName field is emtpy.' });
+            return false;
+        }
+        if (!email) {
+            failed({ message: 'The email field is emtpy.' });
+            return false;
+        }
+        if (!qualification) {
+            failed({ message: 'The qualification field is emtpy.' });
+            return false;
+        }
+        if (!validateEmail(email)) {
+            failed({ message: 'Only email ending with .gmail.com is supported.' });
             return false;
         }
         if (!validateMobile(phoneNumber)) {

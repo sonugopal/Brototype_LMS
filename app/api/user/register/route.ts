@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { phoneNumber, firstName, lastName, password, role } = body;
+    const { phoneNumber, firstName, lastName, email, qualification, password, role } = body;
 
     // check if phone number already exist
     const existingUserByMobile = await db.user.findUnique({
@@ -33,6 +33,8 @@ export async function POST(req: Request) {
         firstName,
         userid: "id" + Math.random().toString(16).slice(2),
         lastName,
+        email,
+        qualification,
         role,
         password: hashedPassword,
       },

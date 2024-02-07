@@ -21,14 +21,16 @@ interface createUserProps {
     phoneNumber: string
     firstName: string
     lastName: string
+    email:string
+    qualification: string
     password: string
     role: number
 }
 
 // for creating a new user
-const CreateUser = async ({ phoneNumber, firstName, lastName, password, role }: createUserProps) => {
+const CreateUser = async ({ phoneNumber, firstName, lastName, email, qualification, password, role }: createUserProps) => {
     try {
-        const response = await apiService.post('api/user/register', { phoneNumber: phoneNumber, firstName: firstName, lastName:lastName, password: password, role:role })
+        const response = await apiService.post('api/user/register', { phoneNumber: phoneNumber, firstName: firstName, lastName:lastName, email:email, qualification:qualification, password: password, role:role })
         return response
     } catch (error) {
         console.error(error);

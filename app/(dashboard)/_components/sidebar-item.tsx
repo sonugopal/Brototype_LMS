@@ -1,6 +1,6 @@
 "use client";
 
-import { LucideIcon, LogOut } from "lucide-react";
+import { LucideIcon, PowerIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -56,7 +56,7 @@ export const SidebarItem = ({
       <div className="flex flex-col col-span-1 absolute bottom-5 items-start justify-start  w-full">
         <div className="ms-7">
           <div onClick={() => session?.user ? signOut() : null} className="flex justify-between cursor-pointer hover:text-red-500 items-center w-full my-2 h-full">
-            <LogOut className="h-5 mx-2"/>
+            <PowerIcon className="h-5 mx-2"/>
             <h1 className="">Logout</h1>
           </div>
         </div>
