@@ -47,7 +47,7 @@ export const OtpForm = ({
 
 
     const handleResendToken = async () => {
-        await ResendOtp(phoneNumber, firstName, lastName, password, success, failed)
+        await ResendOtp(phoneNumber, firstName, lastName, email, qualification, password, success, failed)
     }
 
     const handleChange = (e: any, i: any) => {
