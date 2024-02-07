@@ -32,7 +32,7 @@ export const Categories = ({
   items,
 }: CategoriesProps) => {
   return (
-    <div className="sticky py-1 top-20 z-50 bg-black w-full">
+    <div className="sticky py-2 top-16 z-50 bg-black w-full">
       <div className="flex  items-center relative top-2 md:top-0 gap-x-2 overflow-x-auto pb-2 scrollbar-none mx-9">
         <span className=" text-white/80 bg-[#282828] rounded-md">
           <CategoryItem
