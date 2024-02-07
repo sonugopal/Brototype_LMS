@@ -5,7 +5,7 @@ const ResendOtp = (phoneNumber: string, firstName:string, lastName:string, email
         try {
             const request = await Sendotp({ phoneNumber: phoneNumber })
             if (request.status == 200) {
-                const createUser = await CreateUser({ phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, email:email, qualification:qualification, password: password, role: 0 })
+                const createUser = await CreateUser({ phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, email: email, qualification: qualification, password: password, role: 0 })
                 if (createUser.status == 201){
                     await success({ message: 'Your OTP has been resent. Please check your mobile.' })
                 }

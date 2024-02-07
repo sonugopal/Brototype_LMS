@@ -40,11 +40,11 @@ export const NavbarRoutes = () => {
   const isTeacherPage = pathname?.startsWith("/teacher");
   const isCoursePage = pathname?.includes("/courses");
   return (
-    <div className="5xl:mx-[28rem] flex w-full">
+    <div className={`${isTeacherPage ? 'flex w-full' : '5xl:mx-[28rem] flex w-full'}`}>
       <div className="hidden md:block ">
         <SearchInput />
       </div>
-      <div className="flex gap-x-2 items-center ml-auto">
+      <div className="flex gap-x-2 items-center  ml-auto">
         {isTeacherPage || isCoursePage ? (
           <Link href="/">
             <Button className="relative right-8" size="sm" variant="ghost">
