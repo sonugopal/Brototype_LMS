@@ -4,7 +4,7 @@ import { User } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
+import moment from 'moment';
 
 export const columns: ColumnDef<User>[] = [
   
@@ -57,7 +57,13 @@ export const columns: ColumnDef<User>[] = [
         </Button>
       );
     },
-  },
+    cell: ({ row }) => {
+      var localDate = moment.utc(row.original.createdAt).local().format('dddd, MMMM Do YYYY, h:mm:ss a');
+      return (
+        <span>{localDate}</span>
+      );
+    },
+  },  
   {
     accessorKey: "qualification",
     header: ({ column }) => {

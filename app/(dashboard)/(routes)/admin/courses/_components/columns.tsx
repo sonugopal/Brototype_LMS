@@ -68,7 +68,7 @@ export const columns: ColumnDef<Course>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg-black" align="end">
-            <Link href={`/teacher/courses/${id}`}>
+            <Link href={`/admin/courses/${id}`}>
               <DropdownMenuItem className=" hover:bg-black text-white">
                 <Pencil className="h-4 w-4 mr-2 hover:bg-black" />
                 Edit

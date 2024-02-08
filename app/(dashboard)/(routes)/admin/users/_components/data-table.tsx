@@ -26,6 +26,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { downloadCSV } from "../../courses/_components/json-csv";
+import moment from "moment";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -66,7 +67,7 @@ export function DataTable<TData extends object, TValue>({
       watchTime: (watchTime / 60).toFixed(2) + ' mins',
       phoneNumber: '+' + phoneNumber,
       leadStatus,
-      createdAt,
+      createdAt: moment.utc(createdAt).local().format('dddd, MMMM Do YYYY, h:mm:ss a'),
     }));
 
     const date = new Date();

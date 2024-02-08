@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { SearchInput } from "./search-input";
-import { isTeacher } from "@/lib/teacher";
+import { isAdmin } from "@/lib/admin";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { LogIn, Contact2Icon } from 'lucide-react'
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -27,33 +27,33 @@ export const NavbarRoutes = () => {
 
   const userId = session?.user.userid;
   const pathname = usePathname();
-  const [teacher, setTeacher] = useState<any>(null);
+  const [admin, setAdmin] = useState<any>(null);
 
   useEffect(() => {
-    isTeacher(userId).then((data: any) => {
-      setTeacher(data);
+    isAdmin(userId).then((data: any) => {
+      setAdmin(data);
     });
   });
 
   const [toggleSheet, setToggleSheet] = useState<boolean>(false)
 
-  const isTeacherPage = pathname?.startsWith("/teacher");
+  const isAdminPage = pathname?.startsWith("/admin");
   const isCoursePage = pathname?.includes("/courses");
   return (
-    <div className="5xl:mx-[28rem] flex w-full">
+    <div className={`${isAdminPage ? 'flex w-full' : '5xl:mx-[28rem] flex w-full'}`}>
       <div className="hidden md:block ">
         <SearchInput />
       </div>
-      <div className="flex gap-x-2 items-center ml-auto">
-        {isTeacherPage || isCoursePage ? (
+      <div className="flex gap-x-2 items-center  ml-auto">
+        {isAdminPage || isCoursePage ? (
           <Link href="/">
             <Button className="relative right-8" size="sm" variant="ghost">
               <LogOut className="h-4 w-4 mr-2" />
               Home
             </Button>
           </Link>
-        ) : teacher ? (
-          <Link href="/teacher/courses">
+        ) : admin ? (
+          <Link href="/admin/courses">
             <Button className="text-white/80 relative right-8 hover:bg-none border-1 " size="sm" variant="ghost">
               Admin mode
             </Button>
@@ -71,7 +71,6 @@ export const NavbarRoutes = () => {
                       src="https://github.com/shadcn.png"
                     />
                     <AvatarFallback>CN</AvatarFallback>
-
                     <DropdownMenuContent>
                       <DropdownMenuLabel>{session?.user ? session?.user.Name : 'Please Login'}</DropdownMenuLabel>
                       <DropdownMenuSeparator />

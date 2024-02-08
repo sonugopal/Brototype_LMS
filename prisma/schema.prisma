@@ -37,6 +37,7 @@ model Category {
   name String @unique
   courses Course[]
 }
+
 model User {
   id String @id @default(uuid())
   userid String @unique
@@ -46,7 +47,7 @@ model User {
   qualification String?
   phoneNumber String @unique
   password String
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
   certificates Certificate[]
   role Int @default(0)
   watchTime Int @default(0)

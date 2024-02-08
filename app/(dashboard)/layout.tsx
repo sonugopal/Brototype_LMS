@@ -16,7 +16,7 @@ const DashboardLayout = ({
 
   const pathname = usePathname();
   const showCarousel = pathname == '/';
-  const hideNavbar = pathname == '/teacher/courses' || pathname == '/teacher/users' || pathname == '/teacher/analytics'
+  const hideNavbar = pathname == '/admin/courses' || pathname == '/admin/users' || pathname == '/admin/analytics'
 
   return (
     <ThemeProvider attribute='class' defaultTheme="system">

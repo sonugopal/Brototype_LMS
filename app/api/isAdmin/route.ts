@@ -15,15 +15,15 @@ export async function POST(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const isTeacher = await db.user.findFirst({
+    const isAdmin = await db.user.findFirst({
       where: {
           userid: userId,
           role:1
       }
     });
-    return NextResponse.json(isTeacher!==null);
+    return NextResponse.json(isAdmin!==null);
   } catch (error) {
-    console.log("[ISTEACHER]", error);
+    console.log("[isAdmin]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

@@ -34,7 +34,6 @@ export const OtpForm = ({
     const inputRefs: { [key: number]: React.RefObject<HTMLInputElement> } = {};
     const [state, setState] = useState(Array(4).fill(''));
 
-
     const router = useRouter()
     const success = SuccessToast();
     const failed = CustomToast();
@@ -44,7 +43,6 @@ export const OtpForm = ({
         e.preventDefault()
         await VerifyOtpFunction(state, phoneNumber, firstName, lastName, email, qualification, password, success, failed, router)
     }
-
 
     const handleResendToken = async () => {
         await ResendOtp(phoneNumber, firstName, lastName, email, qualification, password, success, failed)

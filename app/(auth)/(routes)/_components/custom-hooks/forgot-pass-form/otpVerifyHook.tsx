@@ -10,17 +10,17 @@ const OtpVerifyHook = (state:any, phoneNumber: string, success: any, failed: any
                     const otp = state.join('')
                     const request =  await VerifyOtp(phoneNumber, otp)
                     if (request.status == 200) {
-                        await success({message: 'Your OTP has been verified'})
+                        await success({message: "Your OTP has been verified"})
                         setToggle(true)
                     }
                 }else{
                     failed({ message: "A User with this number doesn't exist" })
                 }
             } else {
-                failed({ message: 'There is something wrong with the given mobile number. Please try again' })
+                failed({ message: "There is something wrong with the given mobile number. Please try again" })
             }
         } catch (error) {
-            failed({ message: 'There is something wrong with your request. Please check again' })
+            failed({ message: "There is something wrong with your request. Please check again" })
         }
     }
 

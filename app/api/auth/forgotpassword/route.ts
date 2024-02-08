@@ -25,7 +25,7 @@ export async function POST(req: Request) {
         if (request.status == 200) {
             return NextResponse.json({
                 user: checkExistingUser.firstName,
-                message: 'The user really does exist!'
+                message: "The user really does exist!"
             }, { status: 200 })
         }
 
@@ -62,7 +62,7 @@ export async function PATCH(req: Request) {
         if (updatedUser) {
             return NextResponse.json({
                 user: checkExistingUser.firstName,
-                message: 'Password updated successfully!'
+                message: "Password updated successfully!"
             }, { status: 200 })
         }
 

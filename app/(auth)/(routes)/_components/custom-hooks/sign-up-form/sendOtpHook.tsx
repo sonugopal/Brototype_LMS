@@ -10,7 +10,7 @@ const SendOtp = (firstName: string, lastName: string, phoneNumber: string, email
               if (userValidation.status == 200){
                 const request = await Sendotp({ phoneNumber: phoneNumber })
                 if (request.status == 200) {
-                    await success({message: 'An otp has been send to your mobile number'})
+                    await success({message: "An otp has been send to your mobile number"})
                     setLoading(false)
                     verify && setToggle(!toggle)
                     return
@@ -20,11 +20,11 @@ const SendOtp = (firstName: string, lastName: string, phoneNumber: string, email
                 }
               }else{
                 setLoading(false)
-                failed({ message: 'A user with the given phone number already exists' })
+                failed({ message: "A user with the given phone number already exists" })
               }
             } catch (error) {
                 setLoading(false)
-                failed({ message: 'A user with the given phone number already exists' })
+                failed({ message: "A user with the given phone number already exists" })
             }
         }
     }

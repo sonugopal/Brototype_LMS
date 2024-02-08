@@ -31,12 +31,12 @@ export async function POST(req: Request) {
       data: {
         phoneNumber,
         firstName,
-        userid: "id" + Math.random().toString(16).slice(2),
         lastName,
         email,
         qualification,
         role,
         password: hashedPassword,
+        userid: "id" + Math.random().toString(16).slice(2),
       },
     });
 
