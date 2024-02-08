@@ -9,15 +9,15 @@ const VerifyOtpFunction = (state: string[], phoneNumber: string, firstName: stri
             if (response.status == 200) {
                 const createUser = await CreateUser({ phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, email: email, qualification: qualification, password: password, role: 0 })
                 if (createUser.status == 201) {
-                    await successToast({ message: 'Your OTP has been verified' })
+                    await successToast({ message: "Your OTP has been verified" })
                     return true
                 }
             } else {
-                await customToast({ message: 'Invalid OTP please try again!!' })
+                await customToast({ message: "Invalid OTP please try again!!" })
                 return false
             }
         } catch (error: any) {
-            await customToast({ message: 'Invalid OTP please try again!!' })
+            await customToast({ message: "Invalid OTP please try again!!" })
         }
     };
 
@@ -28,10 +28,10 @@ const VerifyOtpFunction = (state: string[], phoneNumber: string, firstName: stri
             if (verify) {
                 router.push('sign-in')
             } else {
-                customToast({ message: 'Something went wrong!!!' })
+                customToast({ message: "Something went wrong!!!" })
             }
         } else {
-            customToast({ message: 'Some field of the OTP seems to be missing' })
+            customToast({ message: "Some field of the OTP seems to be missing" })
         }
     }
     handleVerifyToken()

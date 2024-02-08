@@ -4,8 +4,8 @@ import { LucideIcon, PowerIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import { ModeToggle } from "@/components/ui/toggle-theme";
 import { signOut, useSession } from "next-auth/react";
+import { ContactUsForm } from "@/components/contactus-navbar";
 
 interface SidebarItemProps {
   icon: LucideIcon;
@@ -21,7 +21,7 @@ export const SidebarItem = ({
   const pathname = usePathname();
   const router = useRouter();
 
-  const {data: session} : any = useSession()
+  const { data: session }: any = useSession()
 
   const isActive =
     (pathname === "/" && href === "/") ||
@@ -50,14 +50,17 @@ export const SidebarItem = ({
               isActive && "text-white"
             )}
           />
-          <h1 className="">{label}</h1>
+          <h1>{label}</h1>
         </div>
       </button>
-      <div className="flex flex-col col-span-1 absolute bottom-5 items-start justify-start  w-full">
+      <div className="flex flex-col col-span-1 absolute bottom-5 items-start justify-start w-full">
+        <div className="my-3 ms-7">
+          <ContactUsForm text={'Contact Us'} />
+        </div>
         <div className="ms-7">
           <div onClick={() => session?.user ? signOut() : null} className="flex justify-between cursor-pointer hover:text-red-500 items-center w-full my-2 h-full">
-            <PowerIcon className="h-5 mx-2"/>
-            <h1 className="">Logout</h1>
+            <PowerIcon className="h-5 mx-2" />
+            <h1>Logout</h1>
           </div>
         </div>
       </div>

@@ -1,8 +1,6 @@
 "use client";
-
-import { BarChart, Compass, Layout, List, User } from "lucide-react";
+import { Compass, Layout, List, User } from "lucide-react";
 import { usePathname } from "next/navigation";
-
 import { SidebarItem } from "./sidebar-item";
 
 const guestRoutes = [
@@ -33,9 +31,7 @@ const adminRoutes = [
 
 export const SidebarRoutes = () => {
   const pathname = usePathname();
-
   const isAdmin = pathname?.includes("/admin");
-
   const routes = isAdmin ? adminRoutes : guestRoutes;
 
   return (

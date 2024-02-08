@@ -6,8 +6,6 @@ export async function POST(req: Request){
         const body = await req.json()
         const data = body.data
 
-        console.log(data, 'from the certificate api route')
-
         const verify = await db.certificate.findFirst({
             where: {
                 userId: await data.userId,
@@ -23,11 +21,9 @@ export async function POST(req: Request){
                     courseId: await data.courseId
                 }
             })
-            console.log(certificate, 'from the certificate api route')
-
             return NextResponse.json(certificate, {status: 201})
         }else{
-            return NextResponse.json({message: 'Already have the certificate', verify}, {status: 400})
+            return NextResponse.json({message: "Already have the certificate", verify}, {status: 400})
         }
 
     }catch(error){

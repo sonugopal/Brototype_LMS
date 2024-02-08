@@ -71,7 +71,6 @@ export const NavbarRoutes = () => {
                       src="https://github.com/shadcn.png"
                     />
                     <AvatarFallback>CN</AvatarFallback>
-
                     <DropdownMenuContent>
                       <DropdownMenuLabel>{session?.user ? session?.user.Name : 'Please Login'}</DropdownMenuLabel>
                       <DropdownMenuSeparator />

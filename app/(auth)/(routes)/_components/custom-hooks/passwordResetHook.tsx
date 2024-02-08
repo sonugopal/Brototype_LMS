@@ -17,7 +17,7 @@ const PasswordReset = (password: string, phoneNumber: string, confirmPassword: s
 
                 // If the password is updated successfully
                 if (update_password.status == 200) {
-                    await success({message: 'Your Password has been reset!!'});
+                    await success({message: "Your Password has been reset!!"});
                     await push('sign-in');
                     return;
                 }
@@ -25,7 +25,7 @@ const PasswordReset = (password: string, phoneNumber: string, confirmPassword: s
                 failed({ message: "The password should contain at least one uppercase letter, one lowercase letter, one number, and one special character." });
             }
         } else {
-            failed({ message: 'The passwords do not match. Please check.' });
+            failed({ message: "The passwords do not match. Please check." });
         }
     }
 
