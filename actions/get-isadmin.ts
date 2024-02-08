@@ -1,6 +1,5 @@
 import { db } from "@/lib/db";
 
-
 export const isAdmin = async (userId:any) => {
   try {
     const isAdmin = await db.user.findFirst({
@@ -11,7 +10,6 @@ export const isAdmin = async (userId:any) => {
     });
     return isAdmin!==null
   } catch (error) {
-    console.log("[GET_ISTEACHER]", error);
     return false
   }
 }
