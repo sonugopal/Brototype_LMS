@@ -18,7 +18,7 @@ export function WaitToast() {
 
         setTimeout(() => {
             toast.dismiss(toastId);
-        }, 8000);
+        }, 8000);   
     }
 
     return showWaitingToast;
