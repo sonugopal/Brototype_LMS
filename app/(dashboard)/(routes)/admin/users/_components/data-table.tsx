@@ -26,6 +26,7 @@ import { Input } from "@/components/ui/input";
 import { downloadCSV } from "../../courses/_components/json-csv";
 import moment from "moment";
 import apiService from "@/service/apiService";
+import { WaitToast } from "@/components/custom/wait-toast";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -59,8 +60,11 @@ export function DataTable<TData extends object, TValue>({
   const tableData: TData[] = data;
 
   const [disableButton, setDisableButton] = React.useState(false)
+  const waitToast = WaitToast()
+
   // for pushing the leads to the google sheet
   const handlePushToSheet = async () => {
+    waitToast({message: "Please wait the data is being pushed to the G-Sheet!!"})
     setDisableButton(true)
     const filteredData = data.map(({ firstName, lastName, qualification, email, watchTime, phoneNumber, leadStatus, createdAt }: any) => ({
       name: firstName + " " + lastName,
@@ -72,8 +76,6 @@ export function DataTable<TData extends object, TValue>({
       createdAt: moment.utc(createdAt).local().format("dddd, MMMM Do YYYY, h:mm:ss a"),
     }));
 
-    const date = new Date();
-    const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     try {
       const request = await apiService.post('/api/courses/google-sheet', { filteredData })
       setDisableButton(false)
