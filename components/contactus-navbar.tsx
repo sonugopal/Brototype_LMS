@@ -48,7 +48,7 @@ export function ContactUsForm({ text }: any) {
                                 <div className="m-2">
                                     <h1 className="my-2">For Official queries</h1>
                                     <h3 className="line-clamp-3">Email:  <span
-                                        onClick={() => navigator.clipboard.writeText('talk@brototype.com')}
+                                        onClick={() => navigator.clipboard.writeText("talk@brototype.com")}
                                         style={{ cursor: 'pointer' }}
                                     >
                                         talk@brototype.com
@@ -60,8 +60,8 @@ export function ContactUsForm({ text }: any) {
                                 <div className="m-2">
                                     <h1 className="my-2">For Job opportunities</h1>
                                     <h3 className="line-clamp-3">Email:  <span
-                                        onClick={() => navigator.clipboard.writeText('hr@brototype.com')}
-                                        style={{ cursor: 'pointer' }}
+                                        onClick={() => navigator.clipboard.writeText("hr@brototype.com")}
+                                        style={{ cursor: "pointer" }}
                                     >
                                         hr@brototype.com
                                     </span></h3>

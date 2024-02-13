@@ -61,13 +61,13 @@ export function DataTable<TData extends object, TValue>({
   // for pushing the leads to the google sheet
   const handlePushToSheet = async () => {
     const filteredData = data.map(({ firstName, lastName, qualification, email, watchTime, phoneNumber, leadStatus, createdAt }: any) => ({
-      name: firstName + ' ' + lastName,
+      name: firstName + " " + lastName,
       email,
       qualification,
-      watchTime: (watchTime / 60).toFixed(2) + ' mins',
-      phoneNumber: '+' + phoneNumber,
+      watchTime: (watchTime / 60).toFixed(2) + " mins",
+      phoneNumber: "+" + phoneNumber,
       leadStatus,
-      createdAt: moment.utc(createdAt).local().format('dddd, MMMM Do YYYY, h:mm:ss a'),
+      createdAt: moment.utc(createdAt).local().format("dddd, MMMM Do YYYY, h:mm:ss a"),
     }));
 
     const date = new Date();
@@ -83,13 +83,13 @@ export function DataTable<TData extends object, TValue>({
   // for downloading the leads as csv
   const handleDownload = () => {
     const filteredData = data.map(({ firstName, lastName, qualification, email, watchTime, phoneNumber, leadStatus, createdAt }: any) => ({
-      Name: firstName + ' ' + lastName,
+      Name: firstName + " " + lastName,
       email,
       qualification,
-      watchTime: (watchTime / 60).toFixed(2) + ' mins',
-      phoneNumber: '+' + phoneNumber,
+      watchTime: (watchTime / 60).toFixed(2) + " mins",
+      phoneNumber: "+" + phoneNumber,
       leadStatus,
-      createdAt: moment.utc(createdAt).local().format('dddd, MMMM Do YYYY, h:mm:ss a'),
+      createdAt: moment.utc(createdAt).local().format("dddd, MMMM Do YYYY, h:mm:ss a"),
     }));
 
     const date = new Date();
