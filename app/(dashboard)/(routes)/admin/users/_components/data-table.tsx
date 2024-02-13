@@ -100,30 +100,49 @@ export function DataTable<TData extends object, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4 justify-between">
-        <Input
-          placeholder="Filter user..."
-          value={
-            (table.getColumn("firstName")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("firstName")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm bg-black"
-        />
-        <select
-          value={(table.getColumn("leadStatus")?.getFilterValue() as any) ?? ""}
-          onChange={(event) =>
-            table.getColumn("leadStatus")?.setFilterValue(event.target.value as any)
-          }
-          className="max-w-sm bg-black border-none focus:outline-none w-24 mx-5"
-        >
-          <option placeholder="Filter Leads" value="">Leads</option>
-          <option value="Cold">Cold</option>
-          <option value="Warm">Warm</option>
-          <option value="Hot">Hot</option>
-        </select>
-
+      <div className="flex w-full items-center justify-between">
+        <div className="flex w-full items-center py-4 justify-start">
+          <Input
+            placeholder="Filter user..."
+            value={
+              (table.getColumn("firstName")?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn("firstName")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm bg-black"
+          />
+        </div>
+        <div className=" w-full flex justify-end">
+          <select
+            value={(table.getColumn("leadStatus")?.getFilterValue() as any) ?? ""}
+            onChange={(event) =>
+              table.getColumn("leadStatus")?.setFilterValue(event.target.value as any)
+            }
+            className="max-w-sm bg-black border-none focus:outline-none w-24 mx-5"
+          >
+            <option placeholder="Filter Leads" value="">Leads</option>
+            <option value="Cold">Cold</option>
+            <option value="Warm">Warm</option>
+            <option value="Hot">Hot</option>
+          </select>
+          <Button
+            className="bg-black text-white mx-2 hover:text-white hover:bg-[#292524]"
+            variant="outline"
+            size="sm"
+            onClick={handleDownload}
+          >
+            Download
+          </Button>
+          <Button
+            className="bg-black text-white hover:text-white hover:bg-[#292524]"
+            variant="outline"
+            size="sm"
+            onClick={handlePushToSheet}
+          >
+            Push to Google Sheet
+          </Button>
+        </div>
       </div>
       <div className="rounded-md border hover:bg-[#131313]">
         <Table className="bg-black">
@@ -176,22 +195,6 @@ export function DataTable<TData extends object, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          className="bg-black text-white hover:text-white hover:bg-[#292524]"
-          variant="outline"
-          size="sm"
-          onClick={handleDownload}
-        >
-          Download
-        </Button>
-        <Button
-          className="bg-black text-white hover:text-white hover:bg-[#292524]"
-          variant="outline"
-          size="sm"
-          onClick={handlePushToSheet}
-        >
-          Push to Google Sheet
-        </Button>
         <Button
           className="bg-black text-white"
           variant="outline"
