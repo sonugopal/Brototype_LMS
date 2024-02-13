@@ -12,8 +12,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import Link from "next/link";
-import { PlusCircle } from "lucide-react";
 
 import {
   Table,
@@ -27,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { downloadCSV } from "../../courses/_components/json-csv";
 import moment from "moment";
+import apiService from "@/service/apiService";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -59,6 +58,29 @@ export function DataTable<TData extends object, TValue>({
 
   const tableData: TData[] = data;
 
+  // for pushing the leads to the google sheet
+  const handlePushToSheet = async () => {
+    const filteredData = data.map(({ firstName, lastName, qualification, email, watchTime, phoneNumber, leadStatus, createdAt }: any) => ({
+      name: firstName + ' ' + lastName,
+      email,
+      qualification,
+      watchTime: (watchTime / 60).toFixed(2) + ' mins',
+      phoneNumber: '+' + phoneNumber,
+      leadStatus,
+      createdAt: moment.utc(createdAt).local().format('dddd, MMMM Do YYYY, h:mm:ss a'),
+    }));
+
+    const date = new Date();
+    const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    try {
+      const request = await apiService.post('/api/courses/google-sheet', { filteredData })
+      console.log(request)
+    } catch (error) {
+      console.error("Error sending data to Google Sheets:", error);
+    }
+  };
+
+  // for downloading the leads as csv
   const handleDownload = () => {
     const filteredData = data.map(({ firstName, lastName, qualification, email, watchTime, phoneNumber, leadStatus, createdAt }: any) => ({
       Name: firstName + ' ' + lastName,
@@ -161,6 +183,14 @@ export function DataTable<TData extends object, TValue>({
           onClick={handleDownload}
         >
           Download
+        </Button>
+        <Button
+          className="bg-black text-white hover:text-white hover:bg-[#292524]"
+          variant="outline"
+          size="sm"
+          onClick={handlePushToSheet}
+        >
+          Push to Google Sheet
         </Button>
         <Button
           className="bg-black text-white"
