@@ -1,7 +1,7 @@
 // Google Sheet script needed for lead generation
 
-const sheets = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/12zV47ujQm6G2_OGEBonJUCGyPhc4gHc06pV5wI7X-VQ/edit#gid=0");
-const sheet = sheets.getSheetByName("Sheet1");
+const sheets = SpreadsheetApp.openByUrl("https://docs.google.com/spreadsheets/d/12zV47ujQm6G2_OGEBonJUCGyPhc4gHc06pV5wI7X-VQ/edit#gid=0"); // the link of the sheet page (copy and paste it)
+const sheet = sheets.getSheetByName("Sheet1"); // this should be the name of the sheet (at the bottom of the google sheet page)
 
 function doPost(e){
   let data = JSON.parse(e.postData.contents);
