@@ -6,6 +6,14 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Logo from '@/public/logo-dark.png'
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
 
 const QuizPage = () => {
 
@@ -64,7 +72,7 @@ const QuizPage = () => {
         fetchData()
     }, []);
 
-
+    const [expandedQuestion, setExpandedQuestion] = useState<boolean>(false)
 
     return (
         <div>
@@ -83,10 +91,22 @@ const QuizPage = () => {
                                     {
                                         questions.map((item: any, index) => {
                                             return (
-                                                <div className="flex flex-col items-start" key={item.id}>
-                                                    <div className="p-2 rounded-md flex items-center w-full bg-[#55637B]">
-                                                        <h1>{index + 1}. {item.quizzQuestion}</h1>
-                                                    </div>
+                                                <div className="flex flex-col min-w-full items-start" key={item.id}>
+                                                    <Dialog>
+                                                        <DialogTrigger className="w-full">
+                                                            <div className="p-2 cursor-pointer rounded-md flex items-center  bg-[#55637B]">
+                                                                <h1 className="line-clamp-2">{index + 1}. {item.quizzQuestion}</h1>
+                                                            </div>
+                                                        </DialogTrigger>
+                                                        <DialogContent className="bg-black text-white">
+                                                            <DialogHeader>
+                                                                <DialogTitle>Are you absolutely sure?</DialogTitle>
+                                                                <DialogDescription>
+                                                                    {index + 1}. {item.quizzQuestion}
+                                                                </DialogDescription>
+                                                            </DialogHeader>
+                                                        </DialogContent>
+                                                    </Dialog>
                                                     <div className="grid mt-2 ms-3">
                                                         {[item.option1, item.option2].map((option, i) => (
                                                             <div className="flex my-1" key={i}>
@@ -115,7 +135,6 @@ const QuizPage = () => {
                     <div className="flex h-screen w-full items-center justify-center">
                         <div className="flex justify-center items-center">
                             <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500">
-                                <p className="font-bold t">Loading...</p>
                             </div>
                         </div>
                     </div>

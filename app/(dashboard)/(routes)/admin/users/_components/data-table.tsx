@@ -12,8 +12,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import Link from "next/link";
-import { PlusCircle } from "lucide-react";
 
 import {
   Table,
@@ -27,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { downloadCSV } from "../../courses/_components/json-csv";
 import moment from "moment";
+import apiService from "@/service/apiService";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -59,15 +58,38 @@ export function DataTable<TData extends object, TValue>({
 
   const tableData: TData[] = data;
 
-  const handleDownload = () => {
+  // for pushing the leads to the google sheet
+  const handlePushToSheet = async () => {
     const filteredData = data.map(({ firstName, lastName, qualification, email, watchTime, phoneNumber, leadStatus, createdAt }: any) => ({
-      Name: firstName + ' ' + lastName,
+      name: firstName + " " + lastName,
       email,
       qualification,
-      watchTime: (watchTime / 60).toFixed(2) + ' mins',
-      phoneNumber: '+' + phoneNumber,
+      watchTime: (watchTime / 60).toFixed(2) + " mins",
+      phoneNumber: "+" + phoneNumber,
       leadStatus,
-      createdAt: moment.utc(createdAt).local().format('dddd, MMMM Do YYYY, h:mm:ss a'),
+      createdAt: moment.utc(createdAt).local().format("dddd, MMMM Do YYYY, h:mm:ss a"),
+    }));
+
+    const date = new Date();
+    const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    try {
+      const request = await apiService.post('/api/courses/google-sheet', { filteredData })
+      console.log(request)
+    } catch (error) {
+      console.error("Error sending data to Google Sheets:", error);
+    }
+  };
+
+  // for downloading the leads as csv
+  const handleDownload = () => {
+    const filteredData = data.map(({ firstName, lastName, qualification, email, watchTime, phoneNumber, leadStatus, createdAt }: any) => ({
+      Name: firstName + " " + lastName,
+      email,
+      qualification,
+      watchTime: (watchTime / 60).toFixed(2) + " mins",
+      phoneNumber: "+" + phoneNumber,
+      leadStatus,
+      createdAt: moment.utc(createdAt).local().format("dddd, MMMM Do YYYY, h:mm:ss a"),
     }));
 
     const date = new Date();
@@ -78,30 +100,49 @@ export function DataTable<TData extends object, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4 justify-between">
-        <Input
-          placeholder="Filter user..."
-          value={
-            (table.getColumn("firstName")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("firstName")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm bg-black"
-        />
-        <select
-          value={(table.getColumn("leadStatus")?.getFilterValue() as any) ?? ""}
-          onChange={(event) =>
-            table.getColumn("leadStatus")?.setFilterValue(event.target.value as any)
-          }
-          className="max-w-sm bg-black border-none focus:outline-none w-24 mx-5"
-        >
-          <option placeholder="Filter Leads" value="">Leads</option>
-          <option value="Cold">Cold</option>
-          <option value="Warm">Warm</option>
-          <option value="Hot">Hot</option>
-        </select>
-
+      <div className="flex w-full items-center justify-between">
+        <div className="flex w-full items-center py-4 justify-start">
+          <Input
+            placeholder="Filter user..."
+            value={
+              (table.getColumn("firstName")?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn("firstName")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm bg-black"
+          />
+        </div>
+        <div className=" w-full flex justify-end">
+          <select
+            value={(table.getColumn("leadStatus")?.getFilterValue() as any) ?? ""}
+            onChange={(event) =>
+              table.getColumn("leadStatus")?.setFilterValue(event.target.value as any)
+            }
+            className="max-w-sm bg-black border-none focus:outline-none w-24 mx-5"
+          >
+            <option placeholder="Filter Leads" value="">Leads</option>
+            <option value="Cold">Cold</option>
+            <option value="Warm">Warm</option>
+            <option value="Hot">Hot</option>
+          </select>
+          <Button
+            className="bg-black text-white mx-2 hover:text-white hover:bg-[#292524]"
+            variant="outline"
+            size="sm"
+            onClick={handleDownload}
+          >
+            Download
+          </Button>
+          <Button
+            className="bg-black text-white hover:text-white hover:bg-[#292524]"
+            variant="outline"
+            size="sm"
+            onClick={handlePushToSheet}
+          >
+            Push to Google Sheet
+          </Button>
+        </div>
       </div>
       <div className="rounded-md border hover:bg-[#131313]">
         <Table className="bg-black">
@@ -154,14 +195,6 @@ export function DataTable<TData extends object, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          className="bg-black text-white hover:text-white hover:bg-[#292524]"
-          variant="outline"
-          size="sm"
-          onClick={handleDownload}
-        >
-          Download
-        </Button>
         <Button
           className="bg-black text-white"
           variant="outline"
