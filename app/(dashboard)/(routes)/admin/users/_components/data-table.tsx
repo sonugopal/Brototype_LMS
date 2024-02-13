@@ -58,8 +58,10 @@ export function DataTable<TData extends object, TValue>({
 
   const tableData: TData[] = data;
 
+  const [disableButton, setDisableButton] = React.useState(false)
   // for pushing the leads to the google sheet
   const handlePushToSheet = async () => {
+    setDisableButton(true)
     const filteredData = data.map(({ firstName, lastName, qualification, email, watchTime, phoneNumber, leadStatus, createdAt }: any) => ({
       name: firstName + " " + lastName,
       email,
@@ -74,9 +76,10 @@ export function DataTable<TData extends object, TValue>({
     const dateString = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     try {
       const request = await apiService.post('/api/courses/google-sheet', { filteredData })
-      console.log(request)
+      setDisableButton(false)
     } catch (error) {
       console.error("Error sending data to Google Sheets:", error);
+      setDisableButton(false)
     }
   };
 
@@ -97,6 +100,7 @@ export function DataTable<TData extends object, TValue>({
 
     downloadCSV(filteredData, `userDetails-${dateString}.csv`);
   };
+
 
   return (
     <div>
@@ -135,6 +139,7 @@ export function DataTable<TData extends object, TValue>({
             Download
           </Button>
           <Button
+            disabled={disableButton}
             className="bg-black text-white hover:text-white hover:bg-[#292524]"
             variant="outline"
             size="sm"

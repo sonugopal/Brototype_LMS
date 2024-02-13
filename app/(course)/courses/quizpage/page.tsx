@@ -72,8 +72,6 @@ const QuizPage = () => {
         fetchData()
     }, []);
 
-    const [expandedQuestion, setExpandedQuestion] = useState<boolean>(false)
-
     return (
         <div>
             {
