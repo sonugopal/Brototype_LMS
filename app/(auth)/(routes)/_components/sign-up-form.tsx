@@ -35,6 +35,7 @@ export const SingUpForm = () => {
             setLoading(true)
             await SendOtp(firstName, lastName, phoneNumber, email, qualification, password, confirmPassword, successToast, toast, toggle, setToggle, setLoading)
         } catch (error) {
+            setLoading(false)
             console.log("Error:", error)
         }
     }
