@@ -29,7 +29,7 @@ const userInputValidation = (firstName: string, lastName: string, phoneNumber: s
             return false;
         }
         if (!validateEmail(email)) {
-            failed({ message: "Only email ending with .gmail.com is supported." });
+            failed({ message: "Invalid email!!" });
             return false;
         }
         if (!validateMobile(phoneNumber)) {
