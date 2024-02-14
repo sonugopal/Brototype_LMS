@@ -13,7 +13,7 @@ export function ContactUsForm({ text }: any) {
     const [showMore, setShowMore] = useState(false);
 
     return (
-        <Dialog>
+        <Dialog >
             <DialogTrigger asChild>
                 <div className="flex items-center justify-center bg-transparent hover:text-yellow-300 cursor-pointer">
                     <div className={`cursor-pointer relative ${text ? null : 'right-8 mx-4'} h-10 w-10 flex items-center justify-center rounded-full bg-transparent hover:bg-[#292524]`}>
@@ -22,7 +22,7 @@ export function ContactUsForm({ text }: any) {
                     <p className="text-sm">{text ? text : null}</p>
                 </div>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-4xl bg-[#0C1017]">
+            <DialogContent className="md:max-w-4xl bg-[#0C1017] md:h-auto    h-[500px] flex flex-col overflow-auto">
                 <DialogHeader>
                     <DialogTitle>Contact Us</DialogTitle>
                     <DialogDescription>
@@ -31,7 +31,7 @@ export function ContactUsForm({ text }: any) {
                 </DialogHeader>
                 <div className="grid grid-cols-1">
                     <div className="grid">
-                        <div className="grid grid-cols-3 gap-y-5 gap-x-10 my-4">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-5 gap-x-10 my-4">
                             <div className="h-full bg-[#2727277D]/50 w-full border rounded-md hover:bg-[#292524]/50">
                                 <div className="m-2">
                                     <h1 className="my-2">For Admission related queries</h1>
@@ -70,8 +70,11 @@ export function ContactUsForm({ text }: any) {
                             </div>
                         </div>
                     </div>
+                    <div className='flex items-center w-full justify-center md:justify-start'>
+                        <h1 className='my-2 font-bold text-lg'>Locations</h1>
+                    </div>
                     <div className="grid">
-                        <div className="grid grid-cols-2 gap-y-5 gap-x-10 my-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-5 gap-x-10 my-4">
                             <div className="h-full w-full border rounded-md bg-[#2727277D]/50 hover:bg-[#292524]/50">
                                 <div className="m-2">
                                     <h1 className="my-2">Kochi (Headquarters)</h1>
@@ -94,7 +97,7 @@ export function ContactUsForm({ text }: any) {
                     {
                         showMore ?
                             <>
-                                <div className="grid grid-cols-2 gap-y-5 gap-x-10 my-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-5 gap-x-10 my-4">
                                     <div className="h-full w-full border rounded-md bg-[#2727277D]/50 hover:bg-[#292524]/50">
                                         <div className="m-2">
                                             <h1 className="my-2">Trivandrum</h1>
