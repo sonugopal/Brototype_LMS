@@ -52,7 +52,7 @@ const ForgotPasswordForm = () => {
                                             </div>
                                             <div className="top-10 relative mx-10 md:mx-5">
                                                 <div className="mt-6 z-50">
-                                                    <div className="mt-1 flex flex-col rounded-md shadow-sm z-50">
+                                                    <div className="mt-1 z-50 flex flex-col rounded-md shadow-sm">
                                                         <label htmlFor="username" className="z-50 mb-1 text-sm font-medium leading-5 text-white/80">Mobile Number</label>
                                                         <div style={{ boxShadow: '0 0 80px rgba(255, 255, 255, 0.5)' }}>
                                                             <PhoneInput
@@ -68,7 +68,7 @@ const ForgotPasswordForm = () => {
                                                 </div>
                                                 <div className="z-50">
                                                     <span className="w-full flex flex-col my-3 rounded-md shadow-sm z-50">
-                                                        <Button onClick={(e) => handleSendToMobile(e)} className="w-full z-50 dark:text-white bg-[#55637B] hover:bg-[#5d6d88] dark:hover:bg-[#00264D]">
+                                                        <Button onClick={(e) => handleSendToMobile(e)} className="w-full dark:text-white bg-[#55637B] hover:bg-[#5d6d88] dark:hover:bg-[#00264D]">
                                                             Reset Password
                                                         </Button>
                                                     </span>

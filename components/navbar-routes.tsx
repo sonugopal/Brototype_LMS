@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { SearchInput } from "./search-input";
 import { isAdmin } from "@/lib/admin";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { LogIn, Contact2Icon } from 'lucide-react'
+import { LogIn } from 'lucide-react'
 import { signIn, signOut, useSession } from "next-auth/react";
 import { ContactUsForm } from "./contactus-navbar";
 
@@ -34,8 +34,6 @@ export const NavbarRoutes = () => {
       setAdmin(data);
     });
   });
-
-  const [toggleSheet, setToggleSheet] = useState<boolean>(false)
 
   const isAdminPage = pathname?.startsWith("/admin");
   const isCoursePage = pathname?.includes("/courses");
