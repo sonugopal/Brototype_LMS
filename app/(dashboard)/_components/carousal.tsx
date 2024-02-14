@@ -10,9 +10,9 @@ import 'swiper/css/scrollbar';
 const Carousel = () => {
 
   const images = [
-    "https://i.postimg.cc/rsKbmSrz/Rectangle-34.png",
-    "https://i.postimg.cc/rsKbmSrz/Rectangle-34.png",
-    "https://i.postimg.cc/rsKbmSrz/Rectangle-34.png",
+    "https://i.postimg.cc/rmFFHkj7/Banner-image-5.png",
+    "https://i.postimg.cc/1tY9ZMQR/Banner-image-2.png",
+    "https://i.postimg.cc/kgcGpQBG/Banner-image-3.png",
   ];
 
   return (

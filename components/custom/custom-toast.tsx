@@ -1,7 +1,7 @@
 import { toast } from 'react-hot-toast';
 import { useTheme } from 'next-themes'; // replace with your actual theme provider
 
-interface ToastMessageProp {
+export interface ToastMessageProp {
     message: string
 }
 
