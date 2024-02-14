@@ -17,13 +17,15 @@ const ForgotPasswordForm = () => {
 
     const [mobile, setMobile] = useState<string>('')
     const [toggle, setToggle] = useState<boolean>(false)
+    const[disableButton, setDisableButton] = useState<boolean>(false)
 
     const customToast = CustomToast()
     const successToast = SuccessToast()
 
     const handleSendToMobile = async (e: any) => {
         e.preventDefault()
-        await SendToMobile(mobile, successToast, customToast, setToggle)
+        setDisableButton(true)
+        SendToMobile(mobile, successToast, customToast, setToggle, setDisableButton)
     }
 
     return (
@@ -68,7 +70,7 @@ const ForgotPasswordForm = () => {
                                                 </div>
                                                 <div className="z-50">
                                                     <span className="w-full flex flex-col my-3 rounded-md shadow-sm z-50">
-                                                        <Button onClick={(e) => handleSendToMobile(e)} className="w-full dark:text-white bg-[#55637B] hover:bg-[#5d6d88] dark:hover:bg-[#00264D]">
+                                                        <Button disabled={disableButton} onClick={(e) => handleSendToMobile(e)} className="w-full dark:text-white bg-[#55637B] hover:bg-[#5d6d88] dark:hover:bg-[#00264D]">
                                                             Reset Password
                                                         </Button>
                                                     </span>

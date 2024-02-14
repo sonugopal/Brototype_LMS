@@ -20,15 +20,18 @@ export const SingInForm = (props: Props) => {
 
     const [phoneNumber, setPhoneNumber] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const[disableButton, setDisableButton] = useState<boolean>(false)
 
     const onSubmit = async (e: any) => {
         e.preventDefault()
+        setDisableButton(true)
         await signIn('credentials', {
             phoneNumber: phoneNumber,
             password: password,
             redirect: true,
             callbackUrl: process.env.BASE_URL
         })
+        setDisableButton(false)
     }
 
     return (
@@ -92,7 +95,7 @@ export const SingInForm = (props: Props) => {
                             </div>
                             <div className="mt-6">
                                 <span className="block w-full rounded-md shadow-sm">
-                                    <Button onClick={onSubmit} className="w-full dark:text-white bg-gray-500 hover:bg-gray-600 ">
+                                    <Button disabled={disableButton} onClick={onSubmit} className="w-full dark:text-white bg-gray-500 hover:bg-gray-600 ">
                                         Login
                                     </Button>
                                 </span>

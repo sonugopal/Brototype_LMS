@@ -1,9 +1,9 @@
 import {Sendotp, SignUpValidation, ValidatePhoneNumber } from '@/service/axios-services/dataFetching';
 import userInputValidation from './input-validation';
 
-const SendOtp = (firstName: string, lastName: string, phoneNumber: string, email:string, qualification: string, password: string, confirmPassword: string, success: any, failed: any, toggle: boolean, setToggle: any, setLoading: any) => {
+const SendOtp = (firstName: string, lastName: string, phoneNumber: string, email:string, qualification: string, password: string, confirmPassword: string, success: any, failed: any, toggle: boolean, setToggle: any, setLoading: any, setDisableButton: any) => {
     const handleSendOTP = async () => {
-        const verify = await userInputValidation(firstName, lastName, phoneNumber, email, qualification, password, confirmPassword, failed)
+        const verify = userInputValidation(firstName, lastName, phoneNumber, email, qualification, password, confirmPassword, failed, setDisableButton, setLoading)
         if (verify) {
             try {
               const userValidation = await SignUpValidation(phoneNumber)
@@ -12,18 +12,22 @@ const SendOtp = (firstName: string, lastName: string, phoneNumber: string, email
                 if (request.status == 200) {
                     await success({message: "An otp has been send to your mobile number"})
                     setLoading(false)
+                    setDisableButton(false)
                     verify && setToggle(!toggle)
                     return
                 } else {
                     setLoading(false)
+                    setDisableButton(false)
                     failed({ message: "The OTP Service is down at the moment" })
                 }
               }else{
                 setLoading(false)
+                setDisableButton(false)
                 failed({ message: "A user with the given phone number already exists" })
               }
             } catch (error) {
                 setLoading(false)
+                setDisableButton(false)
                 failed({ message: "A user with the given phone number already exists" })
             }
         }

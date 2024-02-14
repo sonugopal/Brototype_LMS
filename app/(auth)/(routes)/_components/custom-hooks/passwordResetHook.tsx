@@ -3,7 +3,7 @@ import { validatePassword } from '@/components/validations';
 import { UpdatePassword } from '@/service/axios-services/dataFetching';
 
 // Define the PasswordReset function
-const PasswordReset = (password: string, phoneNumber: string, confirmPassword: string, success: any, failed: any, push: any, e:any) => {
+const PasswordReset = (password: string, phoneNumber: string, confirmPassword: string, success: any, failed: any, push: any, e:any, setDisableButton:any) => {
     // Define the handlePasswordReset function
     const handlePasswordReset = async (e:any) => {
         e.preventDefault();  // Prevent the default form submission behavior
@@ -18,13 +18,17 @@ const PasswordReset = (password: string, phoneNumber: string, confirmPassword: s
                 // If the password is updated successfully
                 if (update_password.status == 200) {
                     await success({message: "Your Password has been reset!!"});
+                    setDisableButton(false)
                     await push('sign-in');
                     return;
                 }
+                setDisableButton(false)
             } else {
+                setDisableButton(false)
                 failed({ message: "The password should contain at least one uppercase letter, one lowercase letter, one number, and one special character." });
             }
         } else {
+            setDisableButton(false)
             failed({ message: "The passwords do not match. Please check." });
         }
     }

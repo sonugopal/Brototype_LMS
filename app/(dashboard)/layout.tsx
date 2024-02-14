@@ -6,6 +6,8 @@ import { Sidebar } from "./_components/sidebar";
 import { motion, AnimatePresence } from "framer-motion"
 import Carousel from "./_components/carousal";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
+import carousalalt from '@/public/small-screen-image.png'
 
 
 const DashboardLayout = ({
@@ -41,8 +43,13 @@ const DashboardLayout = ({
               <main className="md:pl-56 h-full">
                 {
                   showCarousel ?
-                    <div className={` mx-9 relative top-20 inset-y-0 `}>
-                      <Carousel />
+                    <div>
+                      <div className={`hidden md:block mx-9 relative top-20 inset-y-0 `}>
+                        <Carousel />
+                      </div>
+                      <div className={`block md:hidden mx-9 relative top-20 inset-y-0 `}>
+                        <Image height={0} width={0} alt="carousal" src={carousalalt}/>
+                      </div>
                     </div> : null
                 }
                 <div className="relative flex flex-col w-full justify-center top-20">

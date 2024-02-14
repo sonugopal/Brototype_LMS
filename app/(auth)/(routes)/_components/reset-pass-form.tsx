@@ -29,10 +29,12 @@ const ResetPasswordForm = ({
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>('')
     const [toggle, setToggle] = useState<boolean>(false)
+    const[disableButton, setDisableButton] = useState<boolean>(false)
 
     const handlePasswordReset = async (e: any) => {
         e.preventDefault()
-        await PasswordReset(password, phoneNumber, confirmPassword, successToast, customToast, push, e)
+        setDisableButton(true)
+        PasswordReset(password, phoneNumber, confirmPassword, successToast, customToast, push, e, setDisableButton)
     }
 
     return (
@@ -83,7 +85,7 @@ const ResetPasswordForm = ({
                                                 <input onChange={(e) => setPassword(e.target.value)} placeholder="Confirm Password" type="password" className="appearance-none text-white block w-full px-3 py-2 mb-1 border bg-black rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                             </div>
                                             <span className="block w-full rounded-md mt-5 shadow-sm">
-                                                <Button onClick={(e) => handlePasswordReset(e)} className="w-full text-white/80 bg-[#42526C] hover:bg-[#42526C]/80">
+                                                <Button disabled={disableButton} onClick={(e) => handlePasswordReset(e)} className="w-full text-white/80 bg-[#42526C] hover:bg-[#42526C]/80">
                                                     Confirm Reset Password
                                                 </Button>
                                             </span>

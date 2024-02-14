@@ -1,14 +1,13 @@
 "use client"
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Otptimer } from "otp-timer-ts";
 import { CustomToast } from "@/components/custom/custom-toast";
 import { SuccessToast } from "@/components/custom/success-toast";
 import VerifyOtpFunction from "./custom-hooks/verifyOtp";
 import ResendOtp from "./custom-hooks/resendOtp";
-import { Ban } from "lucide-react";
 import { FormLogo } from "@/components/ui/logo";
 import Image from "next/image";
 
@@ -33,6 +32,7 @@ export const OtpForm = ({
 
     const inputRefs: { [key: number]: React.RefObject<HTMLInputElement> } = {};
     const [state, setState] = useState(Array(4).fill(''));
+    const[disableButton, setDisableButton] = useState<boolean>(false)
 
     const router = useRouter()
     const success = SuccessToast();
@@ -41,7 +41,8 @@ export const OtpForm = ({
     // for otp verification and resending
     const handleSubmit = async (e: any) => {
         e.preventDefault()
-        await VerifyOtpFunction(state, phoneNumber, firstName, lastName, email, qualification, password, success, failed, router)
+        setDisableButton(true)
+        VerifyOtpFunction(state, phoneNumber, firstName, lastName, email, qualification, password, success, failed, router, setDisableButton)
     }
 
     const handleResendToken = async () => {
@@ -121,7 +122,7 @@ export const OtpForm = ({
 
                             <div className="flex flex-col space-y-5">
                                 <div className="flex items-center justify-center h-full w-full">
-                                    <button onClick={(e) => handleSubmit(e)} className="flex flex-row w-[300px] items-center justify-center text-center border rounded-xl outline-none py-5 bg-[#55637B] text-white text-sm ">
+                                    <button disabled={disableButton} onClick={(e) => handleSubmit(e)} className="flex flex-row w-[300px] items-center justify-center text-center border rounded-xl outline-none py-5 bg-[#55637B] text-white text-sm ">
                                         Verify Account
                                     </button>
                                 </div>

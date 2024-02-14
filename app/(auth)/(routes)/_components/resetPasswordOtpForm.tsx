@@ -6,12 +6,12 @@ import { useState } from "react";
 import OtpVerifyHook from "./custom-hooks/forgot-pass-form/otpVerifyHook";
 import { FormLogo } from "@/components/ui/logo";
 import Image from "next/image";
-import { Ban } from "lucide-react";
 
 
 const ResetPasswordOtpForm = ({ phoneNumber, setToggle }: any) => {
     const inputRefs: { [key: number]: React.RefObject<HTMLInputElement> } = {};
     const [state, setState] = useState(Array(4).fill(''));
+    const[disableButton, setDisableButton] = useState<boolean>(false)
 
     const success = SuccessToast();
     const failed = CustomToast();
@@ -19,10 +19,11 @@ const ResetPasswordOtpForm = ({ phoneNumber, setToggle }: any) => {
     // for otp verification and resending
     const handleSubmit = async (e: any) => {
         e.preventDefault()
-        await OtpVerifyHook(state, phoneNumber, success, failed, setToggle)
+        setDisableButton(true)
+        OtpVerifyHook(state, phoneNumber, success, failed, setToggle, setDisableButton)
     }
     const handleReset = async () => {
-        await OtpVerifyHook(state, phoneNumber, success, failed, setToggle)
+        OtpVerifyHook(state, phoneNumber, success, failed, setToggle, setDisableButton)
     }
 
     const handleChange = (e: any, i: any) => {
@@ -111,7 +112,7 @@ const ResetPasswordOtpForm = ({ phoneNumber, setToggle }: any) => {
 
                             <div className="flex flex-col space-y-5">
                                 <div className="flex items-center justify-center h-full w-full">
-                                    <button onClick={(e) => handleSubmit(e)} className="flex flex-row w-[300px] items-center justify-center text-center border rounded-xl outline-none py-5 bg-[#55637B] text-white text-sm ">
+                                    <button disabled={disableButton} onClick={(e) => handleSubmit(e)} className="flex flex-row w-[300px] items-center justify-center text-center border rounded-xl outline-none py-5 bg-[#55637B] text-white text-sm ">
                                         Verify Account
                                     </button>
                                 </div>

@@ -1,6 +1,6 @@
 import { CreateUser, VerifyOtp } from '@/service/axios-services/dataFetching';
 
-const VerifyOtpFunction = (state: string[], phoneNumber: string, firstName: string, lastName: string, email: string, qualification: string, password: string, successToast: any, customToast: any, router: any) => {
+const VerifyOtpFunction = (state: string[], phoneNumber: string, firstName: string, lastName: string, email: string, qualification: string, password: string, successToast: any, customToast: any, router: any, setDisableButton: any) => {
 
     const verifyOtp = async () => {
         try {
@@ -10,13 +10,16 @@ const VerifyOtpFunction = (state: string[], phoneNumber: string, firstName: stri
                 const createUser = await CreateUser({ phoneNumber: phoneNumber, firstName: firstName, lastName: lastName, email: email, qualification: qualification, password: password, role: 0 })
                 if (createUser.status == 201) {
                     await successToast({ message: "Your OTP has been verified" })
+                    setDisableButton(false)
                     return true
                 }
             } else {
                 await customToast({ message: "Invalid OTP please try again!!" })
+                setDisableButton(false)
                 return false
             }
         } catch (error: any) {
+            setDisableButton(false)
             await customToast({ message: "Invalid OTP please try again!!" })
         }
     };
@@ -29,9 +32,11 @@ const VerifyOtpFunction = (state: string[], phoneNumber: string, firstName: stri
                 router.push('sign-in')
             } else {
                 customToast({ message: "Something went wrong!!!" })
+                setDisableButton(false)
             }
         } else {
             customToast({ message: "Some field of the OTP seems to be missing" })
+            setDisableButton(false)
         }
     }
     handleVerifyToken()
