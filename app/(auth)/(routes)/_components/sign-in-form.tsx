@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { FormLogo } from "@/components/ui/logo";
@@ -20,7 +20,7 @@ export const SingInForm = (props: Props) => {
   const [password, setPassword] = useState<string>("");
   const [disableButton, setDisableButton] = useState<boolean>(false);
 
-  const onSubmit = async (e: any) => {
+  const onSubmit = async (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     e.preventDefault();
     setDisableButton(true);
     await signIn("credentials", {

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { FormEvent, MouseEvent, useState } from "react";
 import ResetPasswordForm from "./reset-pass-form";
 import Link from "next/link";
 import { CustomToast } from "@/components/custom/custom-toast";
@@ -20,7 +20,7 @@ const ForgotPasswordForm = () => {
   const customToast = CustomToast();
   const successToast = SuccessToast();
 
-  const handleSendToMobile = async (e: any) => {
+  const handleSendToMobile = async (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     e.preventDefault();
     setDisableButton(true);
     SendToMobile(

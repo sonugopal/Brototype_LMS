@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, KeyboardEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Otptimer } from "otp-timer-ts";
 import { CustomToast } from "@/components/custom/custom-toast";
@@ -38,7 +38,7 @@ export const OtpForm = ({
   const failed = CustomToast();
 
   // for otp verification and resending
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setDisableButton(true);
     VerifyOtpFunction(
@@ -69,7 +69,7 @@ export const OtpForm = ({
     );
   };
 
-  const handleChange = (e: any, i: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>, i: any) => {
     const value = e.target.value;
 
     setState((prevState) => {
@@ -87,7 +87,7 @@ export const OtpForm = ({
     }
   };
 
-  const handleKeyDown = (e: any, i: any) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, i: any) => {
     if (
       (e.key === "Backspace" || e.key === "Delete") &&
       i > 0 &&

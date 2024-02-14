@@ -2,7 +2,7 @@ import { CustomToast } from "@/components/custom/custom-toast";
 import { SuccessToast } from "@/components/custom/success-toast";
 import Link from "next/link";
 import { Otptimer } from "otp-timer-ts";
-import { useState } from "react";
+import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from "react";
 import OtpVerifyHook from "./custom-hooks/forgot-pass-form/otpVerifyHook";
 import { FormLogo } from "@/components/ui/logo";
 import Image from "next/image";
@@ -16,7 +16,7 @@ const ResetPasswordOtpForm = ({ phoneNumber, setToggle }: any) => {
   const failed = CustomToast();
 
   // for otp verification and resending
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     e.preventDefault();
     setDisableButton(true);
     OtpVerifyHook(
@@ -39,7 +39,7 @@ const ResetPasswordOtpForm = ({ phoneNumber, setToggle }: any) => {
     );
   };
 
-  const handleChange = (e: any, i: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>, i: any) => {
     const value = e.target.value;
 
     setState((prevState) => {
@@ -57,7 +57,7 @@ const ResetPasswordOtpForm = ({ phoneNumber, setToggle }: any) => {
     }
   };
 
-  const handleKeyDown = (e: any, i: any) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, i: any) => {
     if (
       (e.key === "Backspace" || e.key === "Delete") &&
       i > 0 &&

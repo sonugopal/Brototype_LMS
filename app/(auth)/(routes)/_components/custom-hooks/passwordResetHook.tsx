@@ -12,12 +12,10 @@ const PasswordReset = (
   success: ({ message }: ToastMessageProp) => void,
   failed: ({ message }: ToastMessageProp) => void,
   push: any,
-  e: any,
   setDisableButton: Dispatch<SetStateAction<boolean>>
 ) => {
   // Define the handlePasswordReset function
-  const handlePasswordReset = async (e: any) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+  const handlePasswordReset = async () => {
 
     // Check if the password and confirmPassword are the same
     if (password === confirmPassword) {
@@ -48,7 +46,7 @@ const PasswordReset = (
   };
 
   // Call the handlePasswordReset function
-  handlePasswordReset(e);
+  handlePasswordReset();
 };
 
 // Export the PasswordReset function

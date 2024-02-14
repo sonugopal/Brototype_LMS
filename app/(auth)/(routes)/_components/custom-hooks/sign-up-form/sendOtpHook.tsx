@@ -1,7 +1,6 @@
 import {
   Sendotp,
   SignUpValidation,
-  ValidatePhoneNumber,
 } from "@/service/axios-services/dataFetching";
 import userInputValidation from "./input-validation";
 import { Dispatch, SetStateAction } from "react";

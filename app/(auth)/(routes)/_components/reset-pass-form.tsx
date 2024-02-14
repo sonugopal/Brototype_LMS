@@ -3,7 +3,7 @@
 import { CustomToast } from "@/components/custom/custom-toast";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import PasswordReset from "./custom-hooks/passwordResetHook";
 import { SuccessToast } from "@/components/custom/success-toast";
 import ResetPasswordOtpForm from "./resetPasswordOtpForm";
@@ -27,7 +27,7 @@ const ResetPasswordForm = ({ phoneNumber }: ResetPasswrodProps) => {
   const [toggle, setToggle] = useState<boolean>(false);
   const [disableButton, setDisableButton] = useState<boolean>(false);
 
-  const handlePasswordReset = async (e: any) => {
+  const handlePasswordReset = async (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     e.preventDefault();
     setDisableButton(true);
     PasswordReset(
@@ -37,7 +37,6 @@ const ResetPasswordForm = ({ phoneNumber }: ResetPasswrodProps) => {
       successToast,
       customToast,
       push,
-      e,
       setDisableButton
     );
   };

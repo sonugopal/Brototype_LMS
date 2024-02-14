@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { OtpForm } from "./otp-form";
 import Link from "next/link";
 import { CustomToast } from "@/components/custom/custom-toast";
@@ -29,7 +29,7 @@ export const SingUpForm = () => {
   const [toggle, setToggle] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSendOTP = async (e: any) => {
+  const handleSendOTP = async (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
     e.preventDefault();
     await setDisableButton(true);
     try {
