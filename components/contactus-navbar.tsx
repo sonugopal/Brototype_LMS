@@ -22,7 +22,7 @@ export function ContactUsForm({ text }: any) {
                     <p className="text-sm">{text ? text : null}</p>
                 </div>
             </DialogTrigger>
-            <DialogContent className="md:max-w-4xl bg-[#0C1017] md:h-auto    h-[500px] flex flex-col overflow-auto">
+            <DialogContent className="md:max-w-4xl bg-[#0C1017] md:h-auto  h-[500px] flex flex-col overflow-auto">
                 <DialogHeader>
                     <DialogTitle>Contact Us</DialogTitle>
                     <DialogDescription>
