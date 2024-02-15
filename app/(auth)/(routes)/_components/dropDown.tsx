@@ -13,7 +13,7 @@ export function DropDown({ setQualification }: any) {
   return (
     <Select onValueChange={(value) => setQualification(value)}>
       <SelectTrigger className="bg-black z-50 focus:outline-none outline-none">
-        <SelectValue placeholder="Highest Qualification" />
+        <SelectValue placeholder="Highest Qualification (optional)" />
       </SelectTrigger>
       <SelectContent className="bg-black outline-none">
         <SelectGroup className="bg-black  text-white">
