@@ -11,7 +11,9 @@ const Carousel = () => {
 
   const images = [
     "https://i.postimg.cc/1tY9ZMQR/Banner-image-2.png",
-    "https://i.postimg.cc/kgcGpQBG/Banner-image-3.png"
+    "https://i.postimg.cc/kgcGpQBG/Banner-image-3.png",
+    "https://i.postimg.cc/HWFP5Jwh/Banner-image-11.png",
+    "https://i.postimg.cc/QCjCnN1G/Banner-image-10.png",
   ];
 
   return (
