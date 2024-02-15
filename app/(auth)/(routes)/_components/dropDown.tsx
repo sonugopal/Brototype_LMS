@@ -17,11 +17,10 @@ export function DropDown({ setQualification }: any) {
       </SelectTrigger>
       <SelectContent className="bg-black outline-none">
         <SelectGroup className="bg-black  text-white">
-          <SelectItem value="+2">+2 Graduate</SelectItem>
-          <SelectItem value="degree">Degree Graduate</SelectItem>
-          <SelectItem value="Post Graduate">Post Graduate</SelectItem>
-          <SelectItem value="employed">Employed</SelectItem>
-          <SelectItem value="unemployed">Unemployed</SelectItem>
+          <SelectItem value="Student">Student</SelectItem>
+          <SelectItem value="Fresher">Fresher</SelectItem>
+          <SelectItem value="Working">Working</SelectItem>
+          <SelectItem value="Unemployed">Unemployed</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
