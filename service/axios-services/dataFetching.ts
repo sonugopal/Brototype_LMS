@@ -114,6 +114,15 @@ const UpdateWatchTime = async (userid: string, watchTime: Number) => {
         console.log("Error from the update Watchtime: ", error)
     }
 }
+const uploadCsv= async(data:any)=>{
+    try{
+        console.log("upload csv axios")
+        const response= await apiService.post('/api/admin/bde/upload_csv',{csvData:data})
+        return response
+    }catch(error){
+        throw error
+    }
+}
 
 
-export { login, CreateUser, Sendotp, VerifyOtp, UpdatePassword, ForgotPassword, ValidatePhoneNumber, SignUpValidation, UpdateWatchTime };
+export { login, CreateUser, Sendotp, VerifyOtp, UpdatePassword, ForgotPassword, ValidatePhoneNumber, SignUpValidation, UpdateWatchTime,uploadCsv };

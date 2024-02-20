@@ -53,6 +53,12 @@ model User {
   watchTime Int @default(0)
   leadStatus String @default("Cold")
 }
+model BDE{
+  id String @id @default(uuid())
+  name String
+  phoneNumber String @unique
+  createdAt DateTime @default(now()) 
+}
 
 model Attachment {
   id String @id @default(uuid())
