@@ -46,6 +46,7 @@ const ResetPasswordForm = ({ phoneNumber }: ResetPasswrodProps) => {
   return (
     <>
       {!toggle ? (
+        // justifies the form to the center
         <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
           <ResetPasswordOtpForm
             phoneNumber={phoneNumber}
