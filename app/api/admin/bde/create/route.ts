@@ -12,7 +12,7 @@ export async function POST(
   try {
     const session: Userid | null = await getServerSession(authOption);
     const userId = await session?.user.userid;
-    const { name,mobile } = await req.json();
+    const { firstName,lastName,mobile } = await req.json();
 
     if (!userId || !isAdmin(userId)) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -28,7 +28,8 @@ export async function POST(
     }
     const admin = await db.bDE.create({
       data: {
-        name,
+        firstName,
+        lastName,
         phoneNumber:mobile
       }
     });

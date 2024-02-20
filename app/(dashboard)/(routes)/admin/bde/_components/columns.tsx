@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 export const columns: ColumnDef<any>[] = [
   {
-    accessorKey: "name",
+    accessorKey: "firstName",
     header: ({ column }) => {
       return (
         <Button
@@ -20,6 +20,11 @@ export const columns: ColumnDef<any>[] = [
           Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
+      );
+    },
+    cell: ({ row }) => {
+      return (
+        <span>{`${row.original.firstName} ${row.original.lastName}`}</span>
       );
     },
   },

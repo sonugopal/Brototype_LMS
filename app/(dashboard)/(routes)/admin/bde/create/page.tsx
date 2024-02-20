@@ -23,8 +23,11 @@ import { Input } from "@/components/ui/input";
 import { color } from "framer-motion";
 
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Name is required",
+  firstName: z.string().min(1, {
+    message: "Enter first name",
+  }),
+  lastName: z.string().min(1, {
+    message: "Enter last name",
   }),
   mobile: z.string().min(1, {
     message: "Mobile is required",
@@ -35,9 +38,6 @@ const CreatePage = () => {
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-    },
   });
   const { isSubmitting, isValid } = form.formState;
 
@@ -53,64 +53,86 @@ const CreatePage = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
-      <div>
-        <h1 className="text-2xl">Add Admin</h1>
+    <div className="w-full">
+      <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
+        <div>
+          <h1 className="text-2xl">Add Admin</h1>
 
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 mt-8"
-          >
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Admin Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="John'"
-                      {...field}
-                    />
-                  </FormControl>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-8 mt-8"
+            >
+              <FormField
+                control={form.control}
+                name="firstName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>First Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="text-black"
+                        disabled={isSubmitting}
+                        placeholder="John'"
+                        {...field}
+                      />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="mobile"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Mobile</FormLabel>
-                  <FormControl>
-                    <Input
-                      disabled={isSubmitting}
-                      placeholder="919999999999"
-                      {...field}
-                    />
-                  </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="lastName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={isSubmitting}
+                        {...field}
+                        className="text-black"
+                      />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="mobile"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Mobile</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="text-black"
+                        disabled={isSubmitting}
+                        placeholder="919999999999"
+                        {...field}
+                      />
+                    </FormControl>
 
-            <div className="flex items-center gap-x-2">
-              <Link href="/admin/admin_users">
-                <Button type="button" variant="ghost">
-                  Cancel
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="flex items-center gap-x-2">
+                <Link href="/admin/admin_users">
+                  <Button type="button" variant="ghost">
+                    Cancel
+                  </Button>
+                </Link>
+                <Button type="submit" disabled={!isValid || isSubmitting}>
+                  Submit
                 </Button>
-              </Link>
-              <Button type="submit" disabled={!isValid || isSubmitting}>
-                Submit
-              </Button>
-            </div>
-          </form>
-        </Form>
+              </div>
+            </form>
+          </Form>
+        </div>
       </div>
     </div>
   );

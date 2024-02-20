@@ -19,10 +19,6 @@ const UsersPage = async () => {
   }
 
   const users = await db.bDE.findMany({
-    select: {
-      name: true,
-      phoneNumber: true,
-    },
     orderBy: {
       createdAt: "desc",
     },

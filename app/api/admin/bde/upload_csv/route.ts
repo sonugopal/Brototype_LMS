@@ -21,7 +21,8 @@ export async function POST(
     const insertData= data.map(async(item:any)=>{
       await db.bDE.create({
         data: {
-          name:item.name,
+          firstName:item.firstName,
+          lastName:item.lastName,
           phoneNumber:item.phoneNumber
         }
     })

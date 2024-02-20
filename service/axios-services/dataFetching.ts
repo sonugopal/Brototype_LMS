@@ -116,13 +116,21 @@ const UpdateWatchTime = async (userid: string, watchTime: Number) => {
 }
 const uploadCsv= async(data:any)=>{
     try{
-        console.log("upload csv axios")
+        
         const response= await apiService.post('/api/admin/bde/upload_csv',{csvData:data})
         return response
     }catch(error){
         throw error
     }
 }
+const verifyAdminMobile= async(mobile:string)=>{
+    try{
+        const response= await apiService.post('/api/admin/bde/verify-mobile',{mobile:mobile})
+        console.log('data:',response.data)
+        return response.data
+    }catch(error){
+        throw error
+    }
+}
 
-
-export { login, CreateUser, Sendotp, VerifyOtp, UpdatePassword, ForgotPassword, ValidatePhoneNumber, SignUpValidation, UpdateWatchTime,uploadCsv };
+export { login, CreateUser, Sendotp, VerifyOtp, UpdatePassword, ForgotPassword, ValidatePhoneNumber, SignUpValidation, UpdateWatchTime,uploadCsv,verifyAdminMobile };

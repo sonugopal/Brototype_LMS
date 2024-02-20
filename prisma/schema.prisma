@@ -55,7 +55,8 @@ model User {
 }
 model BDE{
   id String @id @default(uuid())
-  name String
+  firstName String
+  lastName String
   phoneNumber String @unique
   createdAt DateTime @default(now()) 
 }
