@@ -118,7 +118,7 @@ const ResetPasswordOtpForm = ({ phoneNumber, setToggle }: any) => {
             <div className="flex flex-col relative top-[-110px] space-y-8 ">
               <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                 {state.map((s, i) => (
-                  <div key={i} className="w-14 h-14 mx-2">
+                  <div key={i} className="zw-14 h-14 mx-2">
                     <input
                       ref={(ref) => (inputRefs[i] = { current: ref })} // Assign the ref to the corresponding property in the object
                       maxLength={1}
