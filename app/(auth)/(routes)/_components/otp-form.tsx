@@ -28,6 +28,7 @@ export const OtpForm = ({
   email,
   qualification,
   password,
+  role,
 }: OtpInterface) => {
   const inputRefs: { [key: number]: React.RefObject<HTMLInputElement> } = {};
   const [state, setState] = useState(Array(4).fill(""));
@@ -49,6 +50,7 @@ export const OtpForm = ({
       email,
       qualification,
       password,
+      role,
       success,
       failed,
       router,

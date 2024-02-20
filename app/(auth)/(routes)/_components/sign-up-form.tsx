@@ -35,15 +35,19 @@ export const SingUpForm = () => {
   // Check whether the user is already added as BDE
   const verifyMobile = async () => {
     try {
-      const admin = await verifyAdmin(
-        phoneNumber,
-        toast,
-        setMobile,
-        setPhoneNumber,
-        setFirstName,
-        setLastName,
-        setIsAdmin
-      );
+      if (!phoneNumber) {
+        toast({ message: "Enter Mobile Number" });
+      } else {
+        const admin = await verifyAdmin(
+          phoneNumber,
+          toast,
+          setMobile,
+          setPhoneNumber,
+          setFirstName,
+          setLastName,
+          setIsAdmin
+        );
+      }
     } catch (error) {
       toast({ message: "Something went wrong. Please try again" });
     }
@@ -88,7 +92,7 @@ export const SingUpForm = () => {
             qualification={qualification}
             lastName={lastName}
             password={password}
-            role={0}
+            role={isAdmin ? 2 : 0}
           />
         </div>
       ) : (
@@ -286,14 +290,48 @@ export const SingUpForm = () => {
                   </div>
                 </form>
               ) : (
-                <form
-                  className="z-50 mt-5 md:mx-8 mx-14"
-                  method="POST"
-                  action="#"
-                >
-                  <div className="mt-10 z-50 ">
-                    <div className="mt-1 flex flex-col place-items-end rounded-md shadow-sm ">
+                <div className="z-50 mt-5 md:mx-8 mx-14">
+                  <div className="mt-6 z-50 w-full">
+                    <div className="mt-1 flex flex-col rounded-md shadow-sm">
                       <PhoneInput
+                        buttonStyle={{ background: "#000000", color: "#fff" }}
+                        inputStyle={{ background: "#000000", color: "#fff" }}
+                        inputClass="py-5 min-w-full w-full px-3 border rounded-md ease-in-out sm:text-sm sm:leading-5"
+                        country={"in"}
+                        value={phoneNumber}
+                        onChange={(phoneNumber) => setPhoneNumber(phoneNumber)}
+                        disabled={isAdmin}
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-6">
+                    <span className="block w-full rounded-md shadow-sm">
+                      <Button
+                        disabled={disableButton}
+                        onClick={verifyMobile}
+                        className="w-full bg-[#55637B] hover:bg-[#5a6a85] text-white/80"
+                      >
+                        Next
+                      </Button>
+                    </span>
+                    <span className="block text-xs text-white/80 w-full text-center rounded-md shadow-sm mt-2">
+                      <Link href={`sign-in`}>
+                        Already have an account? Login
+                      </Link>
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+{
+  /* <PhoneInput
                         buttonStyle={{ background: "#000000", color: "#fff" }}
                         inputStyle={{ background: "#000000", color: "#fff" }}
                         inputClass="py-5 min-w-full w-full px-3 border rounded-md ease-in-out sm:text-sm sm:leading-5"
@@ -304,17 +342,5 @@ export const SingUpForm = () => {
                       <Button
                         onClick={verifyMobile}
                         className="w-4/12  bg-[#55637B] hover:bg-[#5a6a85] text-white/80 "
-                      >
-                        Next
-                      </Button>
-                    </div>
-                  </div>
-                </form>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
-};
+                      ></Button> */
+}

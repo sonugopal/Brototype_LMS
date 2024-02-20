@@ -8,6 +8,7 @@ const VerifyOtpFunction = (
   email: string,
   qualification: string,
   password: string,
+  role: number,
   successToast: any,
   customToast: any,
   router: any,
@@ -25,7 +26,7 @@ const VerifyOtpFunction = (
           email: email,
           qualification: qualification,
           password: password,
-          role: 0,
+          role: role,
         });
         if (createUser.status == 201) {
           await successToast({ message: "Your OTP has been verified" });
