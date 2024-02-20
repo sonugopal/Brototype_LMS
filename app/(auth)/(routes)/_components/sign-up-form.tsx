@@ -286,24 +286,30 @@ export const SingUpForm = () => {
                   </div>
                 </form>
               ) : (
-                <div className="mt-10 z-50">
-                  <div className="mt-1 flex flex-col place-items-end rounded-md shadow-sm">
-                    <PhoneInput
-                      buttonStyle={{ background: "#000000", color: "#fff" }}
-                      inputStyle={{ background: "#000000", color: "#fff" }}
-                      inputClass="py-5 min-w-full w-full px-3 border rounded-md ease-in-out sm:text-sm sm:leading-5"
-                      country={"in"}
-                      value={phoneNumber}
-                      onChange={(phoneNumber) => setPhoneNumber(phoneNumber)}
-                    />
-                    <Button
-                      onClick={verifyMobile}
-                      className="w-4/12  bg-[#55637B] hover:bg-[#5a6a85] text-white/80 mt-10"
-                    >
-                      Next
-                    </Button>
+                <form
+                  className="z-50 mt-5 md:mx-8 mx-14"
+                  method="POST"
+                  action="#"
+                >
+                  <div className="mt-10 z-50 ">
+                    <div className="mt-1 flex flex-col place-items-end rounded-md shadow-sm ">
+                      <PhoneInput
+                        buttonStyle={{ background: "#000000", color: "#fff" }}
+                        inputStyle={{ background: "#000000", color: "#fff" }}
+                        inputClass="py-5 min-w-full w-full px-3 border rounded-md ease-in-out sm:text-sm sm:leading-5"
+                        country={"in"}
+                        value={phoneNumber}
+                        onChange={(phoneNumber) => setPhoneNumber(phoneNumber)}
+                      />
+                      <Button
+                        onClick={verifyMobile}
+                        className="w-4/12  bg-[#55637B] hover:bg-[#5a6a85] text-white/80 "
+                      >
+                        Next
+                      </Button>
+                    </div>
                   </div>
-                </div>
+                </form>
               )}
             </div>
           </div>

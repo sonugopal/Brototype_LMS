@@ -126,7 +126,6 @@ const uploadCsv= async(data:any)=>{
 const verifyAdminMobile= async(mobile:string)=>{
     try{
         const response= await apiService.post('/api/admin/bde/verify-mobile',{mobile:mobile})
-        console.log('data:',response.data)
         return response.data
     }catch(error){
         throw error
