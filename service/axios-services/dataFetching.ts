@@ -131,5 +131,14 @@ const verifyAdminMobile= async(mobile:string)=>{
         throw error
     }
 }
+const verifyPhoneNumber= async(phoneNumber:string)=>{
+    try{
+        const response= await apiService.post('/api/user/verify-phone',{phoneNumber})
+        return response.data
+    }catch(error){
+        console.log('Verify phone number error:',error)
+        throw error
+    }
+}
 
-export { login, CreateUser, Sendotp, VerifyOtp, UpdatePassword, ForgotPassword, ValidatePhoneNumber, SignUpValidation, UpdateWatchTime,uploadCsv,verifyAdminMobile };
+export { login, CreateUser, Sendotp, VerifyOtp, UpdatePassword, ForgotPassword, ValidatePhoneNumber, SignUpValidation, UpdateWatchTime,uploadCsv,verifyAdminMobile,verifyPhoneNumber };
