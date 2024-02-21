@@ -47,7 +47,7 @@ const ChapterIdPage = async ({
   const completeOnEnd = !!purchase && !userProgress?.isCompleted;
 
   return (
-    <div className="relative z-50">
+    <div className="relative bg-black z-50">
       {isLocked && (
         <Banner
           variant="warning"

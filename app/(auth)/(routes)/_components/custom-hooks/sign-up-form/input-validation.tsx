@@ -11,7 +11,6 @@ const userInputValidation = (
   lastName: string,
   phoneNumber: string,
   email: string,
-  qualification: string,
   password: string,
   confirmPassword: string,
   failed: ({ message }: ToastMessageProp) => void,
@@ -45,12 +44,6 @@ const userInputValidation = (
     }
     if (!email) {
       failed({ message: "The email field is emtpy." });
-      setDisableButton(false);
-      setLoading(false);
-      return false;
-    }
-    if (!qualification) {
-      failed({ message: "The qualification field is emtpy." });
       setDisableButton(false);
       setLoading(false);
       return false;

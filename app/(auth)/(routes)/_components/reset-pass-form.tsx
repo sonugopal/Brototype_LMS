@@ -27,7 +27,9 @@ const ResetPasswordForm = ({ phoneNumber }: ResetPasswrodProps) => {
   const [toggle, setToggle] = useState<boolean>(false);
   const [disableButton, setDisableButton] = useState<boolean>(false);
 
-  const handlePasswordReset = async (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+  const handlePasswordReset = async (
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => {
     e.preventDefault();
     setDisableButton(true);
     PasswordReset(
@@ -42,9 +44,15 @@ const ResetPasswordForm = ({ phoneNumber }: ResetPasswrodProps) => {
   };
 
   return (
-    <div className="bg-black h-full w-full">
+    <>
       {!toggle ? (
-        <ResetPasswordOtpForm phoneNumber={phoneNumber} setToggle={setToggle} />
+        // justifies the form to the center
+        <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+          <ResetPasswordOtpForm
+            phoneNumber={phoneNumber}
+            setToggle={setToggle}
+          />
+        </div>
       ) : (
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md shadow-lg  rounded-lg  flex flex-col">
           <div className="relative h-full my-5 flex items-center justify-center w-full">
@@ -136,7 +144,7 @@ const ResetPasswordForm = ({ phoneNumber }: ResetPasswrodProps) => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
