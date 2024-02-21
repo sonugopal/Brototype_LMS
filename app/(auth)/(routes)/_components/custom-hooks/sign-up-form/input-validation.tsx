@@ -49,12 +49,6 @@ const userInputValidation = (
       setLoading(false);
       return false;
     }
-    if (!qualification) {
-      failed({ message: "The qualification field is emtpy." });
-      setDisableButton(false);
-      setLoading(false);
-      return false;
-    }
     if (!validateEmail(email)) {
       failed({ message: "Invalid email!!" });
       setDisableButton(false);
