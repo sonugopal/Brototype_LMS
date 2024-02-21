@@ -23,12 +23,11 @@ import { authOption } from "@/app/api/auth/[...nextauth]/route";
 import { Userid } from "@/interfaces/UserInterface";
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
+  const session: Userid | null = await getServerSession(authOption);
 
-  const session: Userid | null = await getServerSession(authOption)
-
-  const userId = session?.user.userid
-
-  if (!userId) {
+  const userId = session?.user.userid;
+  const isAdmin = session?.user.role == process.env.ADMIN_ROLE;
+  if (!userId || !isAdmin) {
     return redirect("/");
   }
 

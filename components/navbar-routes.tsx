@@ -52,7 +52,13 @@ export const NavbarRoutes = () => {
             </Button>
           </Link>
         ) : admin ? (
-          <Link href="/admin/courses">
+          <Link
+            href={
+              admin == process.env.ADMIN_ROLE
+                ? "/admin/courses"
+                : "/admin/users"
+            }
+          >
             <Button
               className="text-white/80 relative right-8 hover:bg-none border-1 "
               size="sm"

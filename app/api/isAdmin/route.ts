@@ -18,10 +18,10 @@ export async function POST(
     const isAdmin = await db.user.findFirst({
       where: {
           userid: userId,
-          role:1
+          role:{gt:0}
       }
     });
-    return NextResponse.json(isAdmin!==null);
+    return NextResponse.json(isAdmin?.role);
   } catch (error) {
     console.log("[isAdmin]", error);
     return new NextResponse("Internal Error", { status: 500 });

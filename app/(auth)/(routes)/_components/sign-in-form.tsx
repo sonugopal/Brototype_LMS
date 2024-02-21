@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import "./inputField.css";
 import { verifyPhoneNumber } from "@/service/axios-services/dataFetching";
 import toast from "react-hot-toast";
+import { Transition } from "@headlessui/react";
 type Props = {
   className?: string;
   callbackUrl?: string;
@@ -43,7 +44,7 @@ export const SingInForm = (props: Props) => {
           setPhoneVerified(true);
           setDisableButton(false);
         } else {
-          router.push(`/sign-up`);
+          router.push(`/sign-up?phoneNumber=${phoneNumber}`);
         }
       } catch (error) {
         toast("Something went wrong. Please try again");
@@ -98,13 +99,15 @@ export const SingInForm = (props: Props) => {
                       onChange={(phoneNumber) => setPhoneNumber(phoneNumber)}
                       onEnterKeyPress={checkPhoneNumber}
                     />
+                  </div>
+                  <div className="mt-6">
                     <span className="block w-full rounded-md shadow-sm">
                       <Button
                         disabled={disableButton}
                         onClick={checkPhoneNumber}
                         className="w-full dark:text-white bg-gray-500 hover:bg-gray-600 "
                       >
-                        Login
+                        Next
                       </Button>
                     </span>
                   </div>
@@ -152,13 +155,6 @@ export const SingInForm = (props: Props) => {
                         Login
                       </Button>
                     </span>
-                    {/* <span className="flex justify-center items-center w-full rounded-md shadow-sm my-3">
-                      <Link href="sign-up">
-                        <h1 className="w-full text-white text-sm hover:text-white/80">
-                          Register Now
-                        </h1>
-                      </Link>
-                    </span> */}
                   </div>
                 </div>
               )}

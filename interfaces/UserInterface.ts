@@ -5,7 +5,8 @@ export interface Userid extends Session {
       name?: string | null;
       email?: string | null;
       image?: string | null;
-      userid: string | null
-      Name: string | null
+      userid: string | null;
+      Name: string | null;
+      role:number |null
     };
   }

@@ -10,28 +10,27 @@ import { Userid } from "@/interfaces/UserInterface";
 import { Navbar } from "@/app/(dashboard)/_components/navbar";
 
 const CoursesPage = async () => {
+  const session: Userid | null = await getServerSession(authOption);
 
-  const session: Userid | null = await getServerSession(authOption)
+  const userId = session?.user.userid;
+  const isAdmin = session?.user.role == process.env.ADMIN_ROLE;
 
-  const userId = session?.user.userid
-
-  if (!userId) {
+  if (!userId || !isAdmin) {
     return redirect("/");
   }
 
   const courses = await db.course.findMany({
-
     orderBy: {
       createdAt: "desc",
     },
   });
 
-  return ( 
+  return (
     <div className="p-6 relative top-[-90px]">
       <Navbar />
       <DataTable columns={columns} data={courses} />
     </div>
-   );
-}
- 
+  );
+};
+
 export default CoursesPage;

@@ -13,8 +13,8 @@ const UsersPage = async () => {
   const session: Userid | null = await getServerSession(authOption);
 
   const userId = await session?.user.userid;
-
-  if (!userId) {
+  const isAdmin = session?.user.role == process.env.ADMIN_ROLE;
+  if (!userId || !isAdmin) {
     return redirect("/");
   }
 

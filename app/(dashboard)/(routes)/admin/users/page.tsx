@@ -10,12 +10,10 @@ import { Userid } from "@/interfaces/UserInterface";
 import { Navbar } from "@/app/(dashboard)/_components/navbar";
 
 const UsersPage = async () => {
-
-  const session: Userid | null = await getServerSession(authOption)
-
-  const userId = await session?.user.userid
-
-  if (!userId) {
+  const session: Userid | null = await getServerSession(authOption);
+  const isAdmin = session?.user.role != 0;
+  const userId = await session?.user.userid;
+  if (!userId || !isAdmin) {
     return redirect("/");
   }
 
