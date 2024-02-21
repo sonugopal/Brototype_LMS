@@ -11,7 +11,6 @@ const userInputValidation = (
   lastName: string,
   phoneNumber: string,
   email: string,
-  qualification: string,
   password: string,
   confirmPassword: string,
   failed: ({ message }: ToastMessageProp) => void,

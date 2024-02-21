@@ -27,7 +27,6 @@ const SendOtp = (
       lastName,
       phoneNumber,
       email,
-      qualification,
       password,
       confirmPassword,
       failed,
