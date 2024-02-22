@@ -69,7 +69,7 @@ export const SingInForm = (props: Props) => {
               )}
             </div>
           </div>
-          <div className=" py-8 px-4 z-50 sm:rounded-lg sm:px-10 md:mx-1 sm:mx-10 mx-16">
+          <div className=" py-8 px-4 z-50 sm:rounded-lg sm:px-10 md:mx-1 sm:mx-10 mx-4">
             <form className="z-50">
               {!phoneVerified ? (
                 <div className="mt-6">

@@ -97,7 +97,7 @@ export const SingUpForm = (props: any) => {
       ) : (
         <div className="min-h-screen w-[100vw] max-w-screen items-center  bg-black flex flex-col justify-center py-12 sm:px-6 lg:px-8">
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md rounded-lg ">
-            <div className="bg-black py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <div className="bg-black py-8 shadow sm:rounded-lg sm:px-10">
               <div className="relative top-[-80px] h-full w-full my-5 flex items-center justify-center">
                 <div className="absolute  justify-center flex items-center"></div>
               </div>
