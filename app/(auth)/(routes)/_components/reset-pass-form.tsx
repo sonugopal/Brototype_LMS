@@ -56,14 +56,7 @@ const ResetPasswordForm = ({ phoneNumber }: ResetPasswrodProps) => {
       ) : (
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md shadow-lg  rounded-lg  flex flex-col">
           <div className="relative h-full my-5 flex items-center justify-center w-full">
-            <div className="absolute min-w-[550px]">
-              <Image
-                src="/Lamp1.svg"
-                alt="Description of Image"
-                width={550}
-                height={120}
-              />
-            </div>
+            <div className="absolute min-w-[550px]"></div>
           </div>
           <div className="sm:mx-auto  relative top-10 sm:w-full sm:max-w-md mt-3 z-50 pt-5">
             <div className="flex items-center justify-center w-full h-full">
@@ -91,39 +84,29 @@ const ResetPasswordForm = ({ phoneNumber }: ResetPasswrodProps) => {
               >
                 <div className="grid gap-y-2">
                   <div className="z-50">
-                    <label className="z-50 text-sm mb-1 font-medium leading-5  text-white/80">
-                      Password
-                    </label>
-                    <div
-                      style={{ boxShadow: "0 0 80px rgba(255, 255, 255, 0.5)" }}
-                    >
+                    <div>
                       <input
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         placeholder="New Password"
                         type="password"
-                        className="appearance-none text-white block w-full px-3 py-2 border bg-black rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                        className="appearance-none !border-stone-800  text-white block w-full px-3 py-2 border bg-black rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                       />
                     </div>
                   </div>
                   <div className="my-2 z-50">
-                    <label className="z-50 text-sm mb-1 font-medium leading-5 text-white/80">
-                      Confirm Password
-                    </label>
-                    <div
-                      style={{ boxShadow: "0 0 80px rgba(255, 255, 255, 0.5)" }}
-                    >
+                    <div>
                       <input
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Confirm Password"
                         type="password"
-                        className="appearance-none text-white block w-full px-3 py-2 mb-1 border bg-black rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                        className="appearance-none text-white block w-full px-3 py-2 mb-1 border bg-black rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 !border-stone-800"
                       />
                     </div>
                     <span className="block w-full rounded-md mt-5 shadow-sm">
                       <Button
                         disabled={disableButton}
                         onClick={(e) => handlePasswordReset(e)}
-                        className="w-full text-white/80 bg-[#42526C] hover:bg-[#42526C]/80"
+                        className="w-full text-white/80 bg-zinc-900 hover:bg-zinc-800 !border-stone-800 "
                       >
                         Confirm Reset Password
                       </Button>

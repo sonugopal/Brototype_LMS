@@ -118,14 +118,7 @@ export const OtpForm = ({
       <div className="relative top-20 md:top-0 bg-black  dark:border-2 px-6 pt-10 pb-9 border-1 shadow-md mx-auto w-full max-w-lg rounded-2xl">
         <div className="mx-auto  flex w-full max-w-md flex-col space-y-16">
           <div className="relative h-full top-[-100px] sm:top-[-100px] my-5 flex items-center justify-center w-full">
-            <div className="absolute min-w-[500px] min-h-[320px]">
-              <Image
-                src="/Lamp1.svg"
-                alt="Description of Image"
-                width={500}
-                height={120}
-              />
-            </div>
+            <div className="absolute min-w-[500px] min-h-[320px]"></div>
           </div>
           <div className="sm:mx-auto relative top-[-70px] sm:w-full sm:max-w-md  z-50 ">
             <div className="flex items-center justify-center w-full h-full">
@@ -143,8 +136,7 @@ export const OtpForm = ({
                       value={s}
                       onChange={(e) => handleChange(e, i)}
                       onKeyDown={(e) => handleKeyDown(e, i)}
-                      className="w-full h-full flex flex-col items-center justify-center text-center outline-none rounded-xl border border-gray-200 text-lg bg-black text-white focus:ring-1 ring-blue-700"
-                      style={{ boxShadow: "0 0 80px rgba(255, 255, 255, 0.5)" }}
+                      className="w-full h-full flex flex-col items-center justify-center text-center outline-none rounded-xl border !border-stone-800 text-lg bg-black text-white focus:ring-1 ring-white"
                       type="text"
                     />
                   </div>
@@ -156,9 +148,9 @@ export const OtpForm = ({
                   <button
                     disabled={disableButton}
                     onClick={(e) => handleSubmit(e)}
-                    className="flex flex-row w-[300px] items-center justify-center text-center border rounded-xl outline-none py-5 bg-[#55637B] text-white text-sm "
+                    className="flex flex-row w-[300px] items-center justify-center text-center border rounded-xl outline-none py-5 bg-zinc-900 hover:bg-zinc-800 !border-stone-800 text-white text-sm "
                   >
-                    Verify Account
+                    Verify OTP
                   </button>
                 </div>
 
