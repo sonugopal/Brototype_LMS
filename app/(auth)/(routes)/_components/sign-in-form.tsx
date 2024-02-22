@@ -53,23 +53,16 @@ export const SingInForm = (props: Props) => {
   };
   return (
     <>
-      <div className="min-h-screen w-full max-w-screen  bg-black relative flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md shadow-lg  rounded-lg  flex flex-col">
+      <div className="min-h-screen w-full max-w-screen  bg-black relative flex flex-col justify-center py-12 sm:px-6 px-8">
+        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md shadow-lg  rounded-lg  flex flex-col border-stone-800 border ">
           <div className="relative top-[-50px] h-full my-5 flex items-center justify-center w-full">
-            <div className="absolute  justify-center flex items-center">
-              <Image
-                className="h-full md:w-full w-11/12"
-                src="/Lamp1.svg"
-                alt="Description of Image"
-                width={0}
-                height={0}
-              />
-            </div>
+            <div className="absolute  justify-center flex items-center"></div>
           </div>
           <div className="sm:mx-auto sm:w-full sm:max-w-md mt-3 z-50 pt-5">
             <div className="flex items-center justify-center w-full h-full">
               <FormLogo />
             </div>
+
             <div className="flex justify-center items-center">
               {!!props.error && (
                 <p className="text-xs text-red-500">Invalid Credentials</p>
@@ -80,20 +73,12 @@ export const SingInForm = (props: Props) => {
             <form className="z-50">
               {!phoneVerified ? (
                 <div className="mt-6">
-                  <label
-                    htmlFor="mobile number"
-                    className="block text-xs font-medium leading-5 text-white/80"
-                  >
-                    Mobile Number
-                  </label>
-                  <div
-                    style={{ boxShadow: "0 0 80px rgba(255, 255, 255, 0.5)" }}
-                    className="mt-1 w-full flex rounded-md shadow-sm"
-                  >
+                  <div className="mt-1 w-full flex rounded-md shadow-sm">
                     <PhoneInput
                       buttonStyle={{ background: "#000000", color: "#fff" }}
                       inputStyle={{ background: "#000000", color: "#fff" }}
-                      inputClass="py-5 w-full px-3 border rounded-md ease-in-out sm:text-sm sm:leading-5"
+                      inputClass="py-5 w-full px-3 border rounded-md ease-in-out sm:text-sm sm:leading-5 !border-stone-800 "
+                      buttonClass="!border-stone-800 "
                       country={"in"}
                       value={phoneNumber}
                       onChange={(phoneNumber) => setPhoneNumber(phoneNumber)}
@@ -105,7 +90,7 @@ export const SingInForm = (props: Props) => {
                       <Button
                         disabled={disableButton}
                         onClick={checkPhoneNumber}
-                        className="w-full dark:text-white bg-gray-500 hover:bg-gray-600 "
+                        className="w-full dark:text-white bg-zinc-900 hover:bg-zinc-800 !border-stone-800 "
                       >
                         Next
                       </Button>
@@ -115,30 +100,22 @@ export const SingInForm = (props: Props) => {
               ) : (
                 <div>
                   <div className="mt-6">
-                    <label
-                      htmlFor="password"
-                      className="block text-xs font-medium  leading-5 text-white"
-                    >
-                      Password
-                    </label>
                     <div className="mt-1 rounded-md shadow-sm z-50">
                       <input
-                        style={{
-                          boxShadow: "0 0 80px rgba(255, 255, 255, 0.5)",
-                        }}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="*******"
+                        placeholder="Password"
                         id="password"
                         name="password"
                         type="password"
                         onKeyDown={(e) => {
                           e.key == "Enter" ?? verifyPhoneNumber;
                         }}
-                        className="appearance-none text-white block w-full px-3 py-2 border bg-black rounded-md placeholder-white focus:outline-none transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                        className="appearance-none text-white block w-full px-3 py-2 border bg-black rounded-md placeholder-stone-400 focus:outline-none transition duration-150 ease-in-out sm:text-sm sm:leading-5 border-stone-800"
                       />
+
                       <div className="flex items-center justify-end w-full text-xs my-2 ">
                         <Link href={"/forgot-pass"}>
-                          <p className="hover:text-white/80 text-white cursor-pointer">
+                          <p className="cursor-pointer text-stone-400 hover:text-stone-200">
                             Forgot Password ?
                           </p>
                         </Link>
@@ -150,7 +127,7 @@ export const SingInForm = (props: Props) => {
                       <Button
                         disabled={disableButton}
                         onClick={onSubmit}
-                        className="w-full dark:text-white bg-gray-500 hover:bg-gray-600 "
+                        className="w-full dark:text-white bg-zinc-900 hover:bg-zinc-800 !border-stone-800 "
                       >
                         Login
                       </Button>
