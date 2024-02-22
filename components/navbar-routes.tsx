@@ -21,16 +21,8 @@ import { ContactUsForm } from "./contactus-navbar";
 
 export const NavbarRoutes = () => {
   const { data: session }: any = useSession();
-
-  const userId = session?.user.userid;
+  const adminRole = session?.user.role != 0;
   const pathname = usePathname();
-  const [admin, setAdmin] = useState<any>(null);
-
-  useEffect(() => {
-    isAdmin(userId).then((data: any) => {
-      setAdmin(data);
-    });
-  });
 
   const isAdminPage = pathname?.startsWith("/admin");
   const isCoursePage = pathname?.includes("/courses");
@@ -51,14 +43,8 @@ export const NavbarRoutes = () => {
               Home
             </Button>
           </Link>
-        ) : admin ? (
-          <Link
-            href={
-              admin == process.env.ADMIN_ROLE
-                ? "/admin/courses"
-                : "/admin/users"
-            }
-          >
+        ) : adminRole ? (
+          <Link href={"/admin/users"}>
             <Button
               className="text-white/80 relative right-8 hover:bg-none border-1 "
               size="sm"

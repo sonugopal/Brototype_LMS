@@ -2,7 +2,8 @@
 import { Compass, Layout, List, User, User2 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { SidebarItem } from "./sidebar-item";
-
+import { signIn, signOut, useSession } from "next-auth/react";
+const ADMIN_ROLE = process.env.ADMIN_ROLE;
 const guestRoutes = [
   {
     icon: Layout,
@@ -38,12 +39,20 @@ const adminRoutes = [
     href: "/admin/bde",
   },
 ];
-
+const bdeRoutes = [
+  {
+    icon: User,
+    label: "Users",
+    href: "/admin/users",
+  },
+];
 export const SidebarRoutes = () => {
+  const { data: session }: any = useSession();
+
+  const adminRole = session?.user.role == 1;
   const pathname = usePathname();
   const isAdmin = pathname?.includes("/admin");
-  const routes = isAdmin ? adminRoutes : guestRoutes;
-
+  let routes = isAdmin ? (adminRole ? adminRoutes : bdeRoutes) : guestRoutes;
   return (
     <div className="flex text-white flex-col w-full">
       {routes.map((route) => (
