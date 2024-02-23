@@ -35,7 +35,7 @@ const PasswordReset = (
         setDisableButton(false);
         failed({
           message:
-            "The password should contain at least one number, and one special character.\nMinumum length shoud be 6",
+            "The password should contain at least one number and one special character.\nMinimum length shoud be 6",
         });
       }
     } else {

@@ -66,7 +66,7 @@ const userInputValidation = (
     if (!validatePassword(password)) {
       failed({
         message:
-          "Your password does not follow the required pattern.\nIt should contain at least one number, and one special character.\nMinumum length shoud be 6.",
+          "Your password does not follow the required pattern.\nIt should contain at least one number, and one special character.\nMinimum length should be 6.",
       });
       setDisableButton(false);
       setLoading(false);
