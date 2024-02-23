@@ -16,7 +16,6 @@ const PasswordReset = (
 ) => {
   // Define the handlePasswordReset function
   const handlePasswordReset = async () => {
-
     // Check if the password and confirmPassword are the same
     if (password === confirmPassword) {
       // Validate the password
@@ -36,7 +35,7 @@ const PasswordReset = (
         setDisableButton(false);
         failed({
           message:
-            "The password should contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+            "The password should contain at least one number, and one special character.\nMinumum length shoud be 6",
         });
       }
     } else {
