@@ -4,12 +4,9 @@ import { getServerSession } from "next-auth/next";
 import { authOption } from "../auth/[...nextauth]/route";
 import { Userid } from "@/interfaces/UserInterface";
 
-export async function POST(
-  req: Request,
-) {
+export async function POST(req: Request) {
   try {
-
-    const session: Userid | null = await getServerSession(authOption)
+    const session: Userid | null = await getServerSession(authOption);
     const userId = await session?.user?.userid;
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -17,9 +14,9 @@ export async function POST(
 
     const isAdmin = await db.user.findFirst({
       where: {
-          userid: userId,
-          role:{gt:0}
-      }
+        userid: userId,
+        role: { gt: 0 },
+      },
     });
     return NextResponse.json(isAdmin?.role);
   } catch (error) {

@@ -7,17 +7,17 @@ import { Button } from "@/components/ui/button";
 import moment from "moment";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { deleteBDE } from "@/service/axios-services/dataFetching";
+import { deleteStudent } from "@/service/axios-services/dataFetching";
 import { ConfirmModal } from "@/components/modals/confirm-modal";
 import { Trash } from "lucide-react";
 import toast from "react-hot-toast";
 const handleDelete = async (id: any) => {
   try {
-    await deleteBDE(id);
-    toast.success("BDE Deleted");
+    await deleteStudent(id);
+    toast.success("Student Deleted");
     window.location.reload();
   } catch (error) {
-    console.log("Delete BDE Error:", error);
+    console.log("Delete Student Error:", error);
   }
 };
 export const columns: ColumnDef<any>[] = [
@@ -54,6 +54,52 @@ export const columns: ColumnDef<any>[] = [
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
+    },
+  },
+  {
+    accessorKey: "status",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="hover:bg-[#292524] text-white/80 hover:text-white"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Status
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      return (
+        <Badge
+          className={cn(
+            "bg-slate-500 hover:bg-slate-500",
+            row.original.status && "bg-sky-700"
+          )}
+        >
+          {row.original.status ? "Joined" : "Pending"}
+        </Badge>
+      );
+    },
+  },
+  {
+    accessorKey: "bde",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="hover:bg-[#292524] text-white/80 hover:text-white"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Created By
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const bde = row.original.bde;
+      return <span>{bde?.firstName + " " + bde?.lastName}</span>;
     },
   },
   {

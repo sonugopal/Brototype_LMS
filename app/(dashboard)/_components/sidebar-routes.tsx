@@ -38,12 +38,22 @@ const adminRoutes = [
     label: "New BDE List",
     href: "/admin/bde",
   },
+  {
+    icon: User,
+    label: "Users (Added by BDE)",
+    href: "/admin/bde_users",
+  },
 ];
 const bdeRoutes = [
   {
     icon: User,
     label: "Users",
-    href: "/admin/users",
+    href: "/admin/bde/users",
+  },
+  {
+    icon: User,
+    label: "Users (Added by BDE)",
+    href: "/admin/bde_users",
   },
 ];
 export const SidebarRoutes = () => {

@@ -186,32 +186,4 @@ export const columns: ColumnDef<any>[] = [
       }
     },
   },
-  {
-    accessorKey: "id",
-    header: ({ column }) => {
-      return (
-        <Button
-          className="hover:bg-[#292524] text-white/80 hover:text-white"
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Action
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      return (
-        <div>
-          {row.original.role != 1 && (
-            <ConfirmModal onConfirm={() => handleAction(row.original.id)}>
-              <Button size="sm" className="bg-blue-500 hover:bg-blue-700">
-                {row.original.role == 0 ? "Make BDE" : "Make Student"}
-              </Button>
-            </ConfirmModal>
-          )}
-        </div>
-      );
-    },
-  },
 ];

@@ -8,29 +8,28 @@ import { getServerSession } from "next-auth";
 import { authOption } from "@/app/api/auth/[...nextauth]/route";
 import { Userid } from "@/interfaces/UserInterface";
 import { Navbar } from "@/app/(dashboard)/_components/navbar";
-const ADMIN_ROLE = process.env.ADMIN_ROLE;
-const UsersPage = async () => {
+
+const BDEUsersPage = async () => {
   const session: Userid | null = await getServerSession(authOption);
-  const isAdmin = session?.user.role == ADMIN_ROLE;
+
   const userId = await session?.user.userid;
-  if (!userId || !isAdmin) {
+  if (!userId) {
     return redirect("/");
   }
 
-  const users = await db.user.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
+  const users = await db.student.findMany({
     include: {
-      createdBy: {
+      bde: {
         select: {
           firstName: true,
           lastName: true,
         },
       },
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
-
   return (
     <div className="p-6 relative top-[-90px]">
       <Navbar />
@@ -39,4 +38,4 @@ const UsersPage = async () => {
   );
 };
 
-export default UsersPage;
+export default BDEUsersPage;

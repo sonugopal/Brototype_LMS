@@ -6,7 +6,7 @@ import { authOption } from "../../../auth/[...nextauth]/route";
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { bdeId: string } }
+  { params }: { params: { userId: string } }
 ) {
   try {
     const session: Userid | null = await getServerSession(authOption);
@@ -15,15 +15,16 @@ export async function DELETE(
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-    const deletedBDE = await db.bDE.delete({
+
+    const deletedUser = await db.student.delete({
       where: {
-        id: params.bdeId,
+        id: params.userId,
       },
     });
 
     return NextResponse.json({ status: true });
   } catch (error) {
-    console.log("[BDE_ID_DELETE]", error);
+    console.log("[BDE_USER_ID_DELETE]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }

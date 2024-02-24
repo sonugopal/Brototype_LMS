@@ -166,6 +166,16 @@ const verifyAdminMobile = async (mobile: string) => {
     throw error;
   }
 };
+const verifyBDEUserMobile = async (phoneNumber: string) => {
+  try {
+    const response = await apiService.post("/api/bde-user/verify-mobile", {
+      phoneNumber,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 const verifyPhoneNumber = async (phoneNumber: string) => {
   try {
     const response = await apiService.post("/api/user/verify-phone", {
@@ -180,6 +190,26 @@ const verifyPhoneNumber = async (phoneNumber: string) => {
 const deleteBDE = async (id: any) => {
   try {
     const response = await apiService.delete(`/api/admin/bde/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log("Delete BDE Error: ", error);
+    throw error;
+  }
+};
+const updateUserRole = async (id: any) => {
+  try {
+    const response = await apiService.patch(
+      `/api/admin/user/change-role/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Delete BDE Error: ", error);
+    throw error;
+  }
+};
+const deleteStudent = async (id: any) => {
+  try {
+    const response = await apiService.delete(`/api/admin/bde_user/${id}`);
     return response.data;
   } catch (error) {
     console.log("Delete BDE Error: ", error);
@@ -201,4 +231,7 @@ export {
   verifyAdminMobile,
   verifyPhoneNumber,
   deleteBDE,
+  updateUserRole,
+  deleteStudent,
+  verifyBDEUserMobile,
 };

@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { downloadCSV } from "../../courses/_components/json-csv";
+import { downloadCSV } from "../../../courses/_components/json-csv";
 import moment from "moment";
 import apiService from "@/service/apiService";
 import { WaitToast } from "@/components/custom/wait-toast";

@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
 
+import { validatePassword } from "@/components/validations";
 import {
   Form,
   FormControl,
@@ -21,6 +22,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { color } from "framer-motion";
+import { useState } from "react";
 
 const formSchema = z.object({
   firstName: z.string().min(1, {
@@ -29,7 +31,7 @@ const formSchema = z.object({
   lastName: z.string().min(1, {
     message: "Enter last name",
   }),
-  mobile: z.string().min(1, {
+  phoneNumber: z.string().min(1, {
     message: "Mobile is required",
   }),
 });
@@ -40,13 +42,12 @@ const CreatePage = () => {
     resolver: zodResolver(formSchema),
   });
   const { isSubmitting, isValid } = form.formState;
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      const response = await axios.post("/api/admin/bde/create", values);
-      router.push(`/admin/bde`);
+      const response = await axios.post("/api/admin/bde_user", values);
+      router.push(`/admin/bde_users`);
+      toast.success("User Added Successfully");
       router.refresh();
-      toast.success("BDE Added");
     } catch (error) {
       let err = error as AxiosError;
       toast.error(err?.response?.data as string);
@@ -57,7 +58,7 @@ const CreatePage = () => {
     <div className="w-full">
       <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
         <div>
-          <h1 className="text-2xl">Add BDE</h1>
+          <h1 className="text-2xl">Add New User</h1>
 
           <Form {...form}>
             <form
@@ -103,7 +104,7 @@ const CreatePage = () => {
               />
               <FormField
                 control={form.control}
-                name="mobile"
+                name="phoneNumber"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Mobile</FormLabel>

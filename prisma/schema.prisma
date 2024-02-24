@@ -52,6 +52,10 @@ model User {
   role Int @default(0)
   watchTime Int @default(0)
   leadStatus String @default("Cold")
+  createdById String?
+  bde Student[]
+  createdBy User? @relation("UserCreatedBy", fields: [createdById], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  createdUsers User[] @relation("UserCreatedBy")
 }
 model BDE{
   id String @id @default(uuid())
@@ -60,7 +64,16 @@ model BDE{
   phoneNumber String @unique
   createdAt DateTime @default(now()) 
 }
-
+model Student {
+  id String @id @default(uuid())
+  firstName String?
+  lastName String?
+  phoneNumber String @unique
+  status Boolean @default(false)
+  createdBy String?
+  bde User ?@relation(fields: [createdBy], references: [id])
+  createdAt DateTime @default(now()) 
+}
 model Attachment {
   id String @id @default(uuid())
   name String

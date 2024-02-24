@@ -8,6 +8,7 @@ import { CustomToast } from "@/components/custom/custom-toast";
 import { FormLogo } from "@/components/ui/logo";
 import SendOtp from "./custom-hooks/sign-up-form/sendOtpHook";
 import verifyAdmin from "./custom-hooks/sign-up-form/verifyAdmin";
+import verifyBDEUser from "./custom-hooks/sign-up-form/verifyBDEUser";
 import { SuccessToast } from "@/components/custom/success-toast";
 import PhoneInput from "react-phone-input-2";
 import "./inputField.css";
@@ -34,7 +35,7 @@ export const SingUpForm = (props: any) => {
 
   const [toggle, setToggle] = useState<boolean>(false);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
-  const [mobile, setMobile] = useState<boolean>(false);
+  const [isAddedUser, setIsAddedUser] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const searchParams = useSearchParams();
   useEffect(() => {
@@ -46,6 +47,16 @@ export const SingUpForm = (props: any) => {
           setFirstName(result.firstName);
           setLastName(result.lastName);
           setIsAdmin(true);
+          setIsAddedUser(true);
+          console.log("Is BDE");
+        } else {
+          verifyBDEUser(phone, toast, (result: any) => {
+            if (result) {
+              setFirstName(result.firstName);
+              setLastName(result.lastName);
+              setIsAddedUser(true);
+            }
+          });
         }
       });
     }
@@ -130,7 +141,7 @@ export const SingUpForm = (props: any) => {
                   <div className="mt-1 relative rounded-md shadow-sm">
                     <input
                       onChange={(e) => setFirstName(e.target.value)}
-                      disabled={isAdmin}
+                      disabled={isAddedUser}
                       placeholder="John"
                       type="text"
                       value={firstName}
@@ -159,7 +170,7 @@ export const SingUpForm = (props: any) => {
                         name="last-name"
                         placeholder="Doe"
                         type="text"
-                        disabled={isAdmin}
+                        disabled={isAddedUser}
                         className="appearance-none bg-black text-white focus:border-blue-300 block w-full px-3 py-2 border  rounded-md  focus:outline-none focus:shadow-outline-blue transition duration-150 ease-in-out sm:text-sm sm:leading-5 border-stone-800"
                       />
                       <div className="hidden absolute inset-y-0 right-0 pr-3  items-center pointer-events-none">
@@ -221,7 +232,7 @@ export const SingUpForm = (props: any) => {
                       country={"in"}
                       value={phoneNumber}
                       onChange={(phoneNumber) => setPhoneNumber(phoneNumber)}
-                      disabled={isAdmin}
+                      disabled={true}
                     />
                   </div>
                 </div>
