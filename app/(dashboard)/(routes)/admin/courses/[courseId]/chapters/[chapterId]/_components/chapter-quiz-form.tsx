@@ -26,7 +26,7 @@ interface ChapterQuizFormProps {
   };
   courseId: string;
   chapterId: string;
-};
+}
 
 const formSchema = z.object({
   title: z.string().min(1),
@@ -42,7 +42,7 @@ export const ChapterQuizForm = ({
   const toggleEdit = () => setIsEditing((current) => !current);
 
   return (
-    <div className="mt-6 border rounded-md p-4">
+    <div className="mt-6 border rounded-md p-4 dark">
       <div className="font-medium flex items-center justify-between">
         Add Quiz
         <Button onClick={toggleEdit} variant="ghost">
@@ -56,9 +56,7 @@ export const ChapterQuizForm = ({
           )}
         </Button>
       </div>
-      {isEditing && (
-         <AddQuiz chapterId={chapterId} courseId={courseId}/>
-      )}
+      {isEditing && <AddQuiz chapterId={chapterId} courseId={courseId} />}
     </div>
-  )
-}
+  );
+};

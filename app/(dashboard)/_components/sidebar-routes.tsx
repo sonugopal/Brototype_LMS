@@ -60,6 +60,18 @@ export const SidebarRoutes = () => {
   const { data: session }: any = useSession();
 
   const adminRole = session?.user.role == 1;
+  const addedByAdmin = session?.user.createdById;
+  if (addedByAdmin || adminRole) {
+    let index = guestRoutes.findIndex((item) => item.label === "Brocamp");
+    if (index === -1) {
+      const newRoute = {
+        icon: Compass,
+        label: "Brocamp",
+        href: "/brocamp",
+      };
+      guestRoutes.push(newRoute);
+    }
+  }
   const pathname = usePathname();
   const isAdmin = pathname?.includes("/admin");
   let routes = isAdmin ? (adminRole ? adminRoutes : bdeRoutes) : guestRoutes;

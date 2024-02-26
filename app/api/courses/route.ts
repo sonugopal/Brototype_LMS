@@ -5,14 +5,11 @@ import { isAdmin } from "@/actions/get-isadmin";
 import { Userid } from "@/interfaces/UserInterface";
 import { getServerSession } from "next-auth";
 import { authOption } from "../auth/[...nextauth]/route";
-export async function POST(
-  req: Request,
-) {
+export async function POST(req: Request) {
   try {
-    
     const session: Userid | null = await getServerSession(authOption);
     const userId = await session?.user.userid;
-    const { title } = await req.json();
+    const { title, isBrocamp } = await req.json();
 
     if (!userId || !isAdmin(userId)) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -22,7 +19,8 @@ export async function POST(
       data: {
         userId,
         title,
-      }
+        isBrocamp,
+      },
     });
 
     return NextResponse.json(course);

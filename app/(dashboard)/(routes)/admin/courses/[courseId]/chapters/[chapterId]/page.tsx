@@ -21,8 +21,7 @@ const ChapterIdPage = async ({
 }: {
   params: { courseId: string; chapterId: string };
 }) => {
-
-  const session: Userid | null = await getServerSession(authOption)
+  const session: Userid | null = await getServerSession(authOption);
 
   const userId = session?.user.userid;
 
@@ -58,7 +57,7 @@ const ChapterIdPage = async ({
           label="This chapter is unpublished. It will not be visible in the course"
         />
       )}
-      <div className="p-6">
+      <div className="p-6 dark">
         <div className="flex items-center justify-between">
           <div className="w-full">
             <Link
@@ -84,7 +83,7 @@ const ChapterIdPage = async ({
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-16 dark">
           <div className="space-y-4">
             <div>
               <div className="flex items-center gap-x-2">

@@ -35,7 +35,7 @@ export const columns: ColumnDef<Course>[] = [
     header: ({ column }) => {
       return (
         <Button
-        className="hover:bg-[#292524]"
+          className="hover:bg-[#292524]"
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
@@ -52,6 +52,26 @@ export const columns: ColumnDef<Course>[] = [
           {isPublished ? "Published" : "Draft"}
         </Badge>
       );
+    },
+  },
+  {
+    accessorKey: "isBrocamp",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="hover:bg-[#292524]"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Type
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const isBrocamp = row.getValue("isBrocamp") || false;
+
+      return <span>{isBrocamp ? "Brocamp" : "Public"}</span>;
     },
   },
   {
