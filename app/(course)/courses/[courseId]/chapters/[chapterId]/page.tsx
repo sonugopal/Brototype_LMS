@@ -18,8 +18,8 @@ const ChapterIdPage = async ({
 }: {
   params: { courseId: string; chapterId: string };
 }) => {
-  const session: Userid | null = await getServerSession(authOption)
-  const userId = await session?.user.userid
+  const session: Userid | null = await getServerSession(authOption);
+  const userId = await session?.user.userid;
 
   if (!userId) {
     return redirect("/");
@@ -55,7 +55,7 @@ const ChapterIdPage = async ({
         />
       )}
       <div className="flex flex-col max-w-6xl mx-5 pb-20">
-        <div className="p-4 border my-5">
+        <div className="p-4 my-5">
           <VideoPlayer
             chapterId={params.chapterId}
             title={chapter.title}

@@ -24,8 +24,7 @@ export const CourseSidebar = async ({
   course,
   progressCount,
 }: CourseSidebarProps) => {
-
-  const session: Userid | null = await getServerSession(authOption)
+  const session: Userid | null = await getServerSession(authOption);
   const userId = await session?.user?.userid;
 
   if (!userId) {
@@ -44,19 +43,19 @@ export const CourseSidebar = async ({
   const Certificate = await db.certificate.findFirst({
     where: {
       courseId: course.id,
-      userId
-    }
-  })
+      userId,
+    },
+  });
 
   const HaveQuiz = await db.quizAndOptions.findFirst({
     where: {
-      courseId: course.id
-    }
-  })
-  
+      courseId: course.id,
+    },
+  });
+
   return (
-    <div className="h-full border-r scrollbar-none flex flex-col overflow-y-auto shadow-sm ">
-      <div className="p-8 flex flex-col border-b sticky top-0 bg-black">
+    <div className="h-full border-r border-stone-600 scrollbar-none flex flex-col overflow-y-auto shadow-sm ">
+      <div className="p-8 flex flex-col border-b border-stone-600 sticky top-0 bg-black">
         <div className="p-x-6 pb-3">
           <Link href={"/"}>
             <Logo />
@@ -68,20 +67,21 @@ export const CourseSidebar = async ({
             <div className="mt-4">
               <CourseSidebarProgress variant="success" value={progressCount} />
             </div>
-            {
-              HaveQuiz ?
-                <div>
-                  {progressCount === 100 && Certificate ?
-                    <Button className="h-[30px] relative mt-3">Get Certificate</Button>
-                    :
-                    (progressCount === 100 ?
-                      <Link href={`/courses/quizpage/?courseId=${course.id}`}>
-                        <Button className="h-[30px] relative mt-3">Take Quiz</Button>
-                      </Link>
-                      :
-                      null)}
-                </div> : null
-            }
+            {HaveQuiz ? (
+              <div>
+                {progressCount === 100 && Certificate ? (
+                  <Button className="h-[30px] relative mt-3">
+                    Get Certificate
+                  </Button>
+                ) : progressCount === 100 ? (
+                  <Link href={`/courses/quizpage/?courseId=${course.id}`}>
+                    <Button className="h-[30px] relative mt-3">
+                      Take Quiz
+                    </Button>
+                  </Link>
+                ) : null}
+              </div>
+            ) : null}
           </div>
         )}
       </div>
